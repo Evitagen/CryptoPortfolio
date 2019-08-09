@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Crypto.API.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Crypto.API.Controllers
 {
+    [Authorize] // authorise so have to be logged in
     [Route("api/[controller]")]
     [ApiController]
     public class CoinsController : ControllerBase
@@ -18,21 +21,26 @@ namespace Crypto.API.Controllers
             _context = context;
         }
 
-        // GET api/values
+
+          // GET api/values
+        [AllowAnonymous]
         [HttpGet]
-        public IActionResult GetCoins()
+        public async Task<IActionResult> GetCoins()
         {
-           var coins = _context.Coins.ToList();
+           var coins = await _context.Coins.ToListAsync();
 
            return Ok(coins);
         }
 
         // GET api/values/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public async Task<IActionResult> GetValue(int id)
         {
-            return "value";
-        }
+            var value = await _context.Coins.FirstOrDefaultAsync(x => x.Id == id);
 
+            return Ok(value);
+        }
+        
     }
 }

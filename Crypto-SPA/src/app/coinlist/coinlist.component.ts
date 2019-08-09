@@ -16,7 +16,7 @@ export class CoinlistComponent implements OnInit {
   }
   
   getValues() {
-    this.http.get('http://localhost:5000/api/values').subscribe(Response => {
+    this.http.get('http://localhost:5000/api/coins').subscribe(Response => {
       this.coins = Response;
     }, error => {
       console.log(error);
