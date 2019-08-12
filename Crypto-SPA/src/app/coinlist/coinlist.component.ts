@@ -9,12 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class CoinlistComponent implements OnInit {
   coins: any;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.getValues();
   }
-  
+
   getValues() {
     this.http.get('http://localhost:5000/api/coins').subscribe(Response => {
       this.coins = Response;
