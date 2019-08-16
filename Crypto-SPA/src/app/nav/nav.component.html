@@ -1,16 +1,16 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Coin Market</a>
+  <a class="navbar-brand text-light">Coin Market</a>
 
 
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Price</a>
+        <a class="nav-link" [routerLink]="['/coin']" routerLinkActive="router-link-active" >Price</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/register']" routerLinkActive="router-link-active" >PortFolio</a>
+        <a class="nav-link">PortFolio</a>
       </li>
       <li *ngIf="loggedIn()" class="nav-item">
-          <a class="nav-link" (click)="logout()" href="#">Logout</a>
+          <a class="nav-link" (click)="logout()">Logout</a>
         </li>
     </ul>
 

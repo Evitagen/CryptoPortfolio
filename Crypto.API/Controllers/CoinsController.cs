@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Crypto.API.Data;
+using Crypto.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -27,9 +28,20 @@ namespace Crypto.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCoins()
         {
-           var coins = await _context.Coins.ToListAsync();
+           var coinsdb = await _context.Coins.ToListAsync();
 
-           return Ok(coins);
+
+          CoinList coinmcap = new CoinList();
+
+          // this must not be done for each client call but on a seperate thread and just value read
+          coinmcap.loadcoinMCapData();
+          
+
+
+
+
+
+           return Ok(coinmcap);
         }
 
         // GET api/values/5
