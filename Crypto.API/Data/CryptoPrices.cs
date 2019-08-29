@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Crypto.API.Models;
+using System.Threading;
 
 namespace Crypto.API.Data
 {
@@ -13,7 +14,7 @@ namespace Crypto.API.Data
         public string strCoinMcap { get; set; }
         public List<coins> coins = new List<coins>();
         public List<int> indexOfCoinPrice = new List<int>();
-
+        public List<int> indexOfCirculatingSup = new List<int>();
 
         internal async Task LoadData()
         {
@@ -26,32 +27,121 @@ namespace Crypto.API.Data
            char c;
            int count = -1;
              
-           indexOfCoinPrice = StringManipulation.AllIndexesOf(strCoinMcap,@"/#markets"" class=""price"" data-usd=");
-           
-           foreach (var item in indexOfCoinPrice)
+           try
            {
-                coins coinToAdd = new coins("", 0);
+                indexOfCoinPrice = StringManipulation.AllIndexesOf(strCoinMcap,@"/#markets"" class=""price"" data-usd=");
+                indexOfCirculatingSup = StringManipulation.AllIndexesOf(strCoinMcap,@"circulating-supply");
 
-                c = strCoinMcap[item + count];
-                    while(c != '/')
-                    {    
-                        strcoin += c;
-                        count --;
+                foreach (var item in indexOfCoinPrice)
+                    {
+                          coins coinToAdd = new coins("", 0);
+
                         c = strCoinMcap[item + count];
+                                    while(c != '/')
+                                    {    
+                                        strcoin += c;
+                                        count --;
+                                        c = strCoinMcap[item + count];
+                                    }
+                        strcoin = StringManipulation.Reverse(strcoin);
+                        coinToAdd.Name = strcoin;
+                        Task.Run(() => coinToAdd.Volume = getVolume(strcoin));            
+                         coinToAdd.Price = GetPrice(strcoin);   
+                        coinToAdd.circulating = getCirculatingSuply(strcoin);  
+                        //coinToAdd.Marketcap = GetCoinMCap(coinToAdd);                   
+                        strcoin = "";
+                        count = -1;
+                        coins.Add(coinToAdd);
                     }
-                coinToAdd.Name = StringManipulation.Reverse(strcoin);
-                coinToAdd.Price = GetPrice(StringManipulation.Reverse(strcoin));
-                strcoin = "";
-                count = -1;
-                coins.Add(coinToAdd);
-           }
 
-            return coins;
+                return coins;
+           }
+           catch (Exception ex)
+           {
+               return null;
+           }
+        
         }
 
         internal decimal GetPrice(string strCoin)
         {
-            return Math.Ceiling(decimal.Parse(StringManipulation.getBetween(strCoinMcap, @"<a href=""/currencies/" + strCoin + @"/#markets"" class=""price"" data-usd=""", @""" data-")) * 100) / 100;
+            try
+            {
+                return Math.Ceiling(decimal.Parse(StringManipulation.getBetween(strCoinMcap, @"<a href=""/currencies/" + strCoin + @"/#markets"" class=""price"" data-usd=""", @""" data-")) * 100) / 100;
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.ToString());
+                return 0;
+            }   
+        }
+
+        internal decimal getVolume(string strCoin)
+        {    
+            string strvolume = "";
+            int count = 0;
+            int index1 = strCoinMcap.IndexOf(strCoin + @"/#markets"" class=""volume"" data-usd=""");
+            int intCoinLength = strCoin.Length;
+            index1 = index1 + 36 + intCoinLength;
+            char c = strCoinMcap[index1];
+                while(c != '"')
+                {    
+                    strvolume += c;
+                    count ++;
+                    c = strCoinMcap[index1 + count];
+                }
+            return decimal.Parse(strvolume);
+        }
+
+
+        
+        internal decimal getCirculatingSuply(string strCoin)
+        {
+            try
+            {
+                 StringBuilder strCirculating = new StringBuilder();
+            int count = 0;
+            int indexCoinCirculating = 0;
+            int indexCoin = strCoinMcap.IndexOf(strCoin + @"/#markets"" class=""volume"" data-usd=""");
+
+              foreach (int item in indexOfCirculatingSup)
+              {
+                  if (item > indexCoin)
+                  {
+                      indexCoinCirculating = item;
+                      break;
+                  }
+              }
+              
+              indexCoinCirculating += 31;
+              char c = strCoinMcap[indexCoinCirculating];
+              while(c != '"')
+              {
+               strCirculating.Append(c);   
+               count ++;
+               c = strCoinMcap[indexCoinCirculating + count];
+               
+              }
+               return decimal.Parse(strCirculating.ToString());
+
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+           
+        }
+
+        internal decimal GetCoinMCap(coins coinToAdd)
+        {
+            decimal decReturn = 0;
+
+            if (coinToAdd.circulating > 0 && coinToAdd.Price > 0)
+            {
+                decReturn = coinToAdd.circulating * coinToAdd.Price;
+            }
+
+            return decReturn;
         }
 
         internal async Task<String> GetCoinMarketCapData()
@@ -69,14 +159,10 @@ namespace Crypto.API.Data
             }
         }
 
-
-
         private static async Task<string> FetchWebPage(string url)
         {
             HttpClient httpClient = new HttpClient();
             return await httpClient.GetStringAsync(url);
-        }
-
-       
+        }    
     }
 }

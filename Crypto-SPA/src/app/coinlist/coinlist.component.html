@@ -1,13 +1,57 @@
 <br>
   <h1 align="center">
-    Coin Marketcap Plus
+    Coin MarketCap Plus
   </h1>
+  <h5 align="center">
+    Top 100 Cryptocurrencies by Market Capitalization
+  </h5>
+<br>
+<br>
 <br>
 
-<div *ngFor="let coin of coins">
+<div class="container">
+    <div class="row">   
+      <div class="col-lg-2 col-md-3 col-sm-6 cos-xs-24">
+        <h4>Coin</h4>
+      </div>
+      <div class="col-lg-2 col-md-3 col-sm-6 cos-xs-24">
+        <h4>Price</h4>
+      </div>
+      <div class="col-lg-2 col-md-3 col-sm-6 cos-xs-24">
+          <h4>Volume</h4>
+      </div>
+      <div class="col-lg-2 col-md-3 col-sm-6 cos-xs-24">
+        <h4>Circulating Supply</h4>
+      </div>
+      <div class="col-lg-2 col-md-3 col-sm-6 cos-xs-24">
+        <h4>Marketcap</h4>
+      </div>
+       
+    </div>
+    
+    </div>
 <hr>
-<p class="coin">
-   {{coin.name}}   Price {{coin.price}}
-</p>
+
+<div *ngFor="let coin of coins">
+<div class="container">
+<div class="row">
+  <div class="col-lg-2 col-md-3 col-sm-6 cos-xs-24">
+      {{coin.name | titlecase}}
+  </div>
+  <div class="col-lg-2 col-md-3 col-sm-6 cos-xs-24">
+      {{coin.price | number}}
+  </div>
+  <div class="col-lg-2 col-md-3 col-sm-6 cos-xs-24">
+      {{coin.volume | number}}
+  </div>  
+  <div class="col-lg-2 col-md-3 col-sm-6 cos-xs-24">
+    {{coin.circulating | number}}
+  </div>  
+  <div class="col-lg-2 col-md-3 col-sm-6 cos-xs-24">
+    {{ coin.circulating * coin.price | number }}
+  </div>  
+</div>
+
+</div>
 <hr>
 </div>

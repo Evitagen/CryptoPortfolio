@@ -1,45 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Crypto.API.Data;
 
 namespace Crypto.API.Models
 {
     public class CoinList : IEnumerable
     {
-
         public static List<coins> coinlist = new List<coins>();
-
+        public string CoinListName { get; set; }    // used for different user or different portfolios
+        public int CoinListID { get; set; }
 
         public async void loadcoinMCapData()
         {
             CryptoPrices Prices = new CryptoPrices();
-
             await Prices.LoadData();
-
-            coinlist = Prices.getPrices();
-
-      
-            //coinlist.Clear();
-
-            // if (Prices.strCoinMcap.Length > 0)
-            // {
-            //     var dblBTCPrice = Prices.GetPrice("bitcoin");
-            //     var dblEtherPrice = Prices.GetPrice("ethereum");
-            //     var dblLiteCoin = Prices.GetPrice("litecoin");
-
-        
-            //     coinlist.Clear();
-
-            //     coins b = new coins("Bitcoin", dblBTCPrice);
-            //     coins l = new coins("Litecoin", dblLiteCoin);
-            //     coins e = new coins("Ethereum", dblEtherPrice);
-
-            //     coinlist.Add(b);
-            //     coinlist.Add(l);
-            //     coinlist.Add(e);
-            // }
+            coinlist = await Task.Run(() => Prices.getPrices());
         }
-
 
         public IEnumerator GetEnumerator()
         {
@@ -50,7 +27,6 @@ namespace Crypto.API.Models
         }
     }
 
-
     public class coins
     {
         public coins(string name, decimal price)
@@ -60,5 +36,9 @@ namespace Crypto.API.Models
         }
         public string Name { get; set; }
         public decimal Price { get; set; }
+        public decimal Volume { get; set; }
+        public decimal circulating { get; set; }
+        public decimal Marketcap { get; set; }
+
     }
 }

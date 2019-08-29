@@ -19,7 +19,6 @@ namespace Crypto.API.Data
                 }
         }
 
-
         internal static string getBetween(string strSource, string strStart, string strEnd)
         {
             int Start, End;

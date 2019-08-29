@@ -28,18 +28,15 @@ namespace Crypto.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCoins()
         {
-           var coinsdb = await _context.Coins.ToListAsync();
-
-
           CoinList coinmcap = new CoinList();
+          
+          var coinsdb = await _context.Coins.ToListAsync();
 
-          // this must not be done for each client call but on a seperate thread and just value read
-          coinmcap.loadcoinMCapData();
           
 
-
-
-
+          // this must not be done for each client call but on a seperate thread and just value read
+          await Task.Run(() => coinmcap.loadcoinMCapData());
+          
 
            return Ok(coinmcap);
         }
