@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { interval } from 'rxjs';
 
 @Component({
@@ -7,26 +7,34 @@ import { interval } from 'rxjs';
   templateUrl: './coinlist.component.html',
   styleUrls: ['./coinlist.component.css']
 })
-export class CoinlistComponent implements OnInit {
+export class CoinlistComponent implements OnInit, OnDestroy {
   coins: any;
-
+  getprice = true;
+  subscription: any;
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.getValues();
-    interval(100 * 60).subscribe(x => {
-      this.getValues();
-    });
+    this.pageRefresh();
+  }
+
+  ngOnDestroy() {
+    console.log('destroy');
+    this.subscription.unsubscribe();
   }
 
   getValues() {
     this.http.get('http://localhost:5000/api/coins').subscribe(Response => {
       this.coins = Response;
-      // const cir = this.coins.circulatin;
-      // const pri = this.coins.price;
-      // this.coins.marketCap = cir + pri;
     }, error => {
       console.log(error);
+    });
+  }
+
+  pageRefresh() {
+   this.subscription = interval(100 * 60).subscribe(x => {
+      this.getValues();
+      console.log('heyheyhey');
     });
   }
 

@@ -1,35 +1,48 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <a class="navbar-brand text-light">Coin Market</a>
+<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+  <!-- <div class="container"> -->
+      <a class="navbar-brand text-light">Coin Market</a>
 
 
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link" [routerLink]="['/coin']" routerLinkActive="router-link-active" >Price</a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="loggedIn()" class="nav-item">
         <a class="nav-link">PortFolio</a>
       </li>
-      <li *ngIf="loggedIn()" class="nav-item">
+      <!-- <li *ngIf="loggedIn()" class="nav-item">
           <a class="nav-link" (click)="logout()">Logout</a>
-        </li>
+        </li> -->
     </ul>
 
       
 
-       <div *ngIf="loggedIn()" class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle text-light">Welcome User</a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#"><i class="fa fa-cogs"></i>Settings</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#"><i class="fa fa-sign-out"></i>Logout</a>
-        </div>
-      </div> 
+    <div *ngIf="loggedIn()" class="dropdown" dropdown>
+      <!-- <span>
+        <img src="{{photoUrl || '../../assets/user.png'}}" alt="">
+      </span> -->
+      <a class="dropdown-toggle text-light" dropdownToggle>
+        Welcome {{authService.decodedToken?.unique_name | titlecase}}
+      </a>
+    
+      <div class="dropdown-menu mt-3" *dropdownMenu>
+        <a class="dropdown-item" [routerLink]="['/member/edit']"><i class='fa fa-user'></i>Edit Profile</a>
+        <div class='dropdown-divider'></div>
+        <a class="dropdown-item" (click)="logout()"><i class='fa fa-sign-out'></i>Logout</a>
+      </div>
+    </div>
 
     <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
       <input class="form-control mr-sm-2" type="text" placeholder="Username" name="username" required [(ngModel)]="model.username">
       <input class="form-control mr-sm-2" type="password" placeholder="Password" name="password" required [(ngModel)]="model.password">
-      <button [disabled]="!loginForm.valid" class="btn btn-success my-2 mr-sm-2" type="submit">Login</button>    
+      <div>
+          <button [disabled]="!loginForm.valid" class="btn btn-success my-2 mr-sm-2" type="submit">Login</button>   
+         
+      </div>
     </form>
+    <button *ngIf="!loggedIn()" class="btn btn-info my-3 my-sm-0" [routerLink]="['/register']" >Register</button> 
 
-    <button *ngIf="!loggedIn()" class="btn btn-info my-3 my-sm-0" [routerLink]="['/register']" >Register</button>
-</nav>
+   
+  <!-- </div> -->
+
+  </nav>
