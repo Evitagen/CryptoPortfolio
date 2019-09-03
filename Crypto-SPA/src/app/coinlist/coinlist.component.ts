@@ -34,7 +34,7 @@ export class CoinlistComponent implements OnInit, OnDestroy {
   pageRefresh() {
    this.subscription = interval(100 * 60).subscribe(x => {
       this.getValues();
-      console.log('heyheyhey');
+      //console.log('heyheyhey');
     });
   }
 

@@ -8,7 +8,7 @@
         <a class="nav-link" [routerLink]="['/coin']" routerLinkActive="router-link-active" >Price</a>
       </li>
       <li *ngIf="loggedIn()" class="nav-item">
-        <a class="nav-link">PortFolio</a>
+        <a class="nav-link" [routerLink]="['/coinportfolio']" routerLinkActive="router-link-active">PortFolio</a>
       </li>
       <!-- <li *ngIf="loggedIn()" class="nav-item">
           <a class="nav-link" (click)="logout()">Logout</a>

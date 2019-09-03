@@ -11,19 +11,19 @@
 
 <div class="container">
     <div class="row">   
-      <div class="col-lg-2 col-md-3 col-sm-6 cos-xs-24">
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
         <h4>Coin</h4>
       </div>
-      <div class="col-lg-2 col-md-3 col-sm-6 cos-xs-24">
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
         <h4>Price</h4>
       </div>
-      <div class="col-lg-2 col-md-3 col-sm-6 cos-xs-24">
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
           <h4>Volume</h4>
       </div>
-      <div class="col-lg-2 col-md-3 col-sm-6 cos-xs-24">
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
         <h4>Circulating Supply</h4>
       </div>
-      <div class="col-lg-2 col-md-3 col-sm-6 cos-xs-24">
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
         <h4>Marketcap</h4>
       </div>
        
@@ -35,20 +35,20 @@
 <div *ngFor="let coin of coins">
 <div class="container">
 <div class="row">
-  <div class="col-lg-2 col-md-3 col-sm-6 cos-xs-24">
+  <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
       {{coin.name | titlecase}}
   </div>
-  <div class="col-lg-2 col-md-3 col-sm-6 cos-xs-24">
-      {{coin.price | number}}
+  <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+      {{coin.price | currency}}
   </div>
-  <div class="col-lg-2 col-md-3 col-sm-6 cos-xs-24">
-      {{coin.volume | number}}
+  <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+      {{coin.volume | currency}}
   </div>  
-  <div class="col-lg-2 col-md-3 col-sm-6 cos-xs-24">
+  <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
     {{coin.circulating | number}}
   </div>  
-  <div class="col-lg-2 col-md-3 col-sm-6 cos-xs-24">
-    {{ coin.circulating * coin.price | number }}
+  <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+    {{ coin.circulating * coin.price | currency }}
   </div>  
 </div>
 

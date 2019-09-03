@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Crypto.API.Models
 {
     public class User
@@ -6,5 +8,7 @@ namespace Crypto.API.Models
         public string Username { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
+        
+       // public ICollection<coins> coins { get; set; } 
     }
 }
