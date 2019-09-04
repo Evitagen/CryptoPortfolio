@@ -63,7 +63,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
       }
     }
 
-    console.log(this.coinSelected.name);
+   // console.log(this.coinSelected.name);
   }
 
     // loadUsers() {

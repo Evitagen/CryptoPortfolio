@@ -30,7 +30,7 @@ namespace Crypto.API.Controllers
         {
           CoinList coinmcap = new CoinList();
           
-          var coinsdb = await _context.Coins.ToListAsync();
+       //   var CoinsHodle = await _context.CoinsHodle.ToListAsync();
 
           
 
@@ -46,7 +46,7 @@ namespace Crypto.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetValue(int id)
         {
-            var value = await _context.Coins.FirstOrDefaultAsync(x => x.Id == id);
+            var value = await _context.CoinsHodle.FirstOrDefaultAsync(x => x.Id == id);
 
             return Ok(value);
         }

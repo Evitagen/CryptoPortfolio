@@ -1,6 +1,6 @@
 namespace Crypto.API.Models
 {
-    public class Coin
+    public class CoinsHodle
     {
         public int Id { get; set; }
         public string Name { get; set; }
