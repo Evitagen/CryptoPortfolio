@@ -30,7 +30,7 @@ namespace Crypto.API.Controllers
         {
           CoinList coinmcap = new CoinList();
           
-       //   var CoinsHodle = await _context.CoinsHodle.ToListAsync();
+          var CoinsHodle = await _context.CoinsHodle.ToListAsync();
 
           
 

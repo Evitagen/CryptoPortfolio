@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Crypto.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190813110555_extendedcoin")]
-    partial class extendedcoin
+    [Migration("20190904162155_newfieldsCoinHodleUser")]
+    partial class newfieldsCoinHodleUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,7 +18,7 @@ namespace Crypto.API.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
-            modelBuilder.Entity("Crypto.API.Models.Coin", b =>
+            modelBuilder.Entity("Crypto.API.Models.CoinsHodle", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -27,9 +27,13 @@ namespace Crypto.API.Migrations
 
                     b.Property<decimal>("Quantity");
 
+                    b.Property<int>("UserId");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Coins");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CoinsHodle");
                 });
 
             modelBuilder.Entity("Crypto.API.Models.User", b =>
@@ -46,6 +50,14 @@ namespace Crypto.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Crypto.API.Models.CoinsHodle", b =>
+                {
+                    b.HasOne("Crypto.API.Models.User", "user")
+                        .WithMany("coinHodles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

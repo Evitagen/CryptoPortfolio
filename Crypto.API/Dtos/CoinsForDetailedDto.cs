@@ -1,11 +1,9 @@
-namespace Crypto.API.Models
+namespace Crypto.API.Dtos
 {
-    public class CoinsHodle
+    public class CoinsForDetailedDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public decimal Quantity { get; set; }   
-        public User User { get; set; }
-        public int UserId { get; set; }
     }
 }
