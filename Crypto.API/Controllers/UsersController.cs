@@ -22,14 +22,12 @@ namespace Crypto.API.Controllers
         }
 
 
-
-
         [HttpGet("{id}", Name = "GetUser")]
         public async Task<IActionResult> GetUser(int id)
         {
             var user = await _repo.GetUser(id);
 
-              var userToReturn = _mapper.Map<CoinsForUsersDto>(user);
+            var userToReturn = _mapper.Map<UserForDetaiedDto>(user);
 
             return Ok(userToReturn);
         }

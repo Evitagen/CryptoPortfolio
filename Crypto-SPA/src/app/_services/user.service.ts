@@ -29,4 +29,10 @@ export class UserService {
   updateUser(id: number, user: User) {
     return this.http.put(this.baseUrl + 'users/' + id, user);
   }
+
+  getCoinPrices() {
+    return this.http.get('http://localhost:5000/api/coins');
+  }
+
+
 }

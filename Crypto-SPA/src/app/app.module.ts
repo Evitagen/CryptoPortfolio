@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { RegisterComponent } from './register/register.component';
 import { CoindetailComponent } from './coindetail/coindetail.component';
 import { appRoutes } from './routes';
-import { CoinPortfolioComponent } from './coinPortfolio/coinPortfolio.component';
+import { CoinPortfolioComponent } from './members/coinPortfolio/coinPortfolio.component';
 
 
 export function tokenGetter() {

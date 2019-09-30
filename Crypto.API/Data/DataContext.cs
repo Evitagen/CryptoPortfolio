@@ -7,7 +7,11 @@ namespace Crypto.API.Data
     {
         public DataContext(DbContextOptions<DataContext> options) : base (options) {}
         
-        public DbSet<CoinsHodle> CoinsHodle {get; set;}
+
         public DbSet<User> Users { get; set; }
+        public DbSet<Portfolio> Portfolio { get; set; }
+        public DbSet<CoinsHodle> CoinsHodle {get; set;}
+        public DbSet<Transactions> Transactions { get; set; }
+      
     }
 }

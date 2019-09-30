@@ -29,27 +29,15 @@ namespace Crypto.API.Controllers
         public async Task<IActionResult> GetCoins()
         {
           CoinList coinmcap = new CoinList();
-          
-          var CoinsHodle = await _context.CoinsHodle.ToListAsync();
-
-          
-
-          // this must not be done for each client call but on a seperate thread and just value read
+  
           await Task.Run(() => coinmcap.loadcoinMCapData());
-          
 
-           return Ok(coinmcap);
+          return Ok(coinmcap);
         }
 
-        // GET api/values/5
-        [AllowAnonymous]
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetValue(int id)
-        {
-            var value = await _context.CoinsHodle.FirstOrDefaultAsync(x => x.Id == id);
+        // get coin / {id} detailed description
 
-            return Ok(value);
-        }
-        
+        // get coin price history
+
     }
 }

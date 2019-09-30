@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Crypto.API.Models
 {
     public class CoinsHodle
@@ -5,7 +7,7 @@ namespace Crypto.API.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public decimal Quantity { get; set; }   
-        public User User { get; set; }
-        public int UserId { get; set; }
+        public Portfolio Portfolio { get; set; }
+        public virtual ICollection<Transactions> Transactions { get; set; }
     }
 }

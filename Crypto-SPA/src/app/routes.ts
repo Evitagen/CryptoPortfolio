@@ -2,7 +2,7 @@ import {Routes} from '@angular/router';
 
 import { CoinlistComponent } from './coinlist/coinlist.component';
 import { RegisterComponent } from './register/register.component';
-import { CoinPortfolioComponent } from './coinPortfolio/coinPortfolio.component';
+import { CoinPortfolioComponent } from './members/coinPortfolio/coinPortfolio.component';
 import { AuthGuard } from './_guards/auth.guard';
 
 export const appRoutes: Routes = [

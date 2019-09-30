@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { interval } from 'rxjs';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-coinlist',
@@ -11,7 +11,7 @@ export class CoinlistComponent implements OnInit, OnDestroy {
   coins: any;
   getprice = true;
   subscription: any;
-  constructor(private http: HttpClient) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.getValues();
@@ -24,7 +24,7 @@ export class CoinlistComponent implements OnInit, OnDestroy {
   }
 
   getValues() {
-    this.http.get('http://localhost:5000/api/coins').subscribe(Response => {
+    this.userService.getCoinPrices().subscribe(Response => {
       this.coins = Response;
     }, error => {
       console.log(error);
@@ -34,7 +34,6 @@ export class CoinlistComponent implements OnInit, OnDestroy {
   pageRefresh() {
    this.subscription = interval(100 * 60).subscribe(x => {
       this.getValues();
-      //console.log('heyheyhey');
     });
   }
 

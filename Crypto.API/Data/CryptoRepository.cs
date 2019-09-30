@@ -30,9 +30,20 @@ namespace Crypto.API.Data
 
         public async Task<User> GetUser(int id)
         {
-            var user = await _context.Users.Include(c => c.coinHodles).FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _context.Users
+            .Include(c => c.Portfolio)
+            .FirstOrDefaultAsync(u => u.Id == id);
 
             return user;
+        }
+
+        public async Task<Portfolio> GetPortfolio(int id)
+        {
+            var Portfolio = await _context.Portfolio
+            .Include(c => c.coinsHodle)
+            .FirstOrDefaultAsync(p => p.PortfolioID == id);
+
+            return Portfolio;
         }
 
         public Task GetUser(object userid)

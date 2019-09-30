@@ -5,7 +5,7 @@ namespace Crypto.API.Models
 {
     public class others
     {
-            public class Portfolio
+    public class Portfolio
     {
         public int PortfolioID { get; set; }
         public string PortfolioName { get; set; }

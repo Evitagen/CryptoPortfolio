@@ -1,0 +1,113 @@
+<br><br><br>
+  
+<div style="margin: auto; width: 50%; border: 3px solid green; padding: 10px">
+  <select [(ngModel)]="coinSelected">
+      <option *ngFor="let coin of coins" [value]="coin.name">
+        {{coin.name}}
+      </option>
+  </select>
+  <button (click)="onBtnAdd()">Add Coin</button>
+
+  <br>
+  selected value is {{coinSelected}}
+</div>
+
+<!-- <div class="row">
+  <div class="col-lg-2 col-md-3 col-sm-6">
+    <p *ngFor="let user of users">{{user.username}}</p>
+  </div>
+</div> -->
+
+<br><br><br>
+
+<div class="container">
+    <div class="row">   
+      <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24">
+        <h4>Coin</h4>
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+        <h4>Price</h4>
+      </div>
+
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+          <h4>Holdings</h4>
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+          <h4>Total</h4>
+      </div> 
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+        <h4>Transactions</h4>
+      </div> 
+    </div>
+</div>
+<hr>
+
+
+<div *ngFor="let coin of user.coinHodles">
+  <div class="container">
+  <div class="row">
+      <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24">    
+       {{coin.name | titlecase}}
+     </div>
+     <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
+        {{coin.price | currency }}
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
+        {{coin.quantity}}
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
+        {{coin.price * coin.quantity | currency }}
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
+        <td><button class="btn btn-info" (click)="addTransaction()">Add</button></td>
+      </div>
+  </div>
+  </div> 
+  <hr>
+</div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24">    
+       
+     </div>
+     <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
+      
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
+        
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
+        {{total | currency}}
+      </div>
+  </div>
+  </div> 
+
+
+
+<div *ngFor="let coin of coins">
+<div class="container">
+
+<!-- <div class="row">
+  {{user.id}}
+</div> -->
+
+  <!-- <div class="row">
+    <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+        {{coin.name | titlecase}}
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+        {{coin.price | currency}}
+    </div>
+  
+    <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24">
+        <textarea name="" rows="1" class="form-control" [(ngModel)]="users"></textarea>
+    </div> 
+  </div> -->
+
+</div>
+<hr>
+</div>
+
+
+

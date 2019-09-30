@@ -8,7 +8,8 @@ namespace Crypto.API.Helpers
     {
         public AutoMapperProfiles()
         {
-           CreateMap<User, CoinsForUsersDto>(); 
+           CreateMap<User, UserForDetaiedDto>();
+           CreateMap<Portfolio, PortFoliosForDetailedDto>();
            CreateMap<CoinsHodle, CoinsForDetailedDto>();
         }
     }
