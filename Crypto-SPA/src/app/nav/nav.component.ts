@@ -25,7 +25,7 @@ export class NavComponent implements OnInit {
     }, error => {
        this.alertify.error(error);
     }, () => {
-       this.router.navigate(['/coinportfolio']);
+       this.router.navigate(['/selectportfolio']);
     });
   }
 

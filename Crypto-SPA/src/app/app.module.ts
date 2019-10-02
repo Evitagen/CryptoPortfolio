@@ -14,6 +14,7 @@ import { RegisterComponent } from './register/register.component';
 import { CoindetailComponent } from './coindetail/coindetail.component';
 import { appRoutes } from './routes';
 import { CoinPortfolioComponent } from './members/coinPortfolio/coinPortfolio.component';
+import { SelectPortfolioComponent } from './members/SelectPortfolio/SelectPortfolio.component';
 
 
 export function tokenGetter() {
@@ -27,7 +28,8 @@ export function tokenGetter() {
       NavComponent,
       RegisterComponent,
       CoindetailComponent,
-      CoinPortfolioComponent
+      CoinPortfolioComponent,
+      SelectPortfolioComponent
    ],
    imports: [
       BrowserModule,

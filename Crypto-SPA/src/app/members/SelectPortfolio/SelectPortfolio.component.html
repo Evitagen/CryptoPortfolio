@@ -1,0 +1,39 @@
+<hr>
+<hr>
+<hr>
+<h1 align="center">
+    Portfolios
+  </h1>
+  <h5 align="center">
+    add a new or view existing portfolio
+  </h5>
+
+<div class="container">
+  <div class="row">   
+    <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24">
+      <h4></h4>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24">
+      <h4></h4>
+    </div>
+  </div>
+</div>
+
+<hr>
+<hr>
+
+<div *ngIf="user && user.portfolio.length > 0">
+<div *ngFor="let portfo of user.portfolio">
+  <div class="container">
+  <div class="row">
+      <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24">
+       {{portfo.portfolioName | titlecase}}
+     </div> 
+     <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24"> 
+        <td><button class="btn btn-info" (click)="viewPortfolio(portfo.portfolioID)">View</button></td>   
+       </div> 
+  </div>
+  </div> 
+  <hr>
+</div>
+</div>

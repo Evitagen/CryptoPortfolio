@@ -1,9 +1,8 @@
-import { CoinsU } from './coinsU';
+import { Portfolio } from './portfolio';
 
 export interface User {
-  coinHodles: any;
     id: number;
     username: string;
     price: number;
-    coins?: CoinsU[];
+    portfolio?: Portfolio[];
 }

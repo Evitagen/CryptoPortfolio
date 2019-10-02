@@ -34,5 +34,9 @@ export class UserService {
     return this.http.get('http://localhost:5000/api/coins');
   }
 
+  getPortfolioCoins(id: number) {
+    return this.http.get('http://localhost:5000/api/portfolio/' + id);
+  }
+
 
 }
