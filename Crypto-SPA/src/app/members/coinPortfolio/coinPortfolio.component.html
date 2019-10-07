@@ -1,21 +1,18 @@
 <br><br><br>
   
-<div style="margin: auto; width: 50%; border: 3px solid green; padding: 10px">
-  <select [(ngModel)]="coinSelected">
+<div style="margin: auto; width: 50%;">
+  <select class="select" [(ngModel)]="coinSelected">
       <option *ngFor="let coin of coins" [value]="coin.name">
         {{coin.name}}
       </option>
   </select>
-  <button (click)="onBtnAdd()">Add Coin</button>
-
-  <br>
-  selected value is {{coinSelected}}
+  <!-- <button (click)="onBtnAdd()">Add Coin</button> -->
+  <button class="btn btn-success" (click)="onBtnAdd()">Add Coin</button>
+  <!-- selected value is {{coinSelected}} -->
 </div>
 
-<!-- <div class="row">
-  <div class="col-lg-2 col-md-3 col-sm-6">
-    <p *ngFor="let user of users">{{user.username}}</p>
-  </div>
+<!-- <div style="margin: auto; width: 50%; padding: 10px">
+  <td><button class="btn btn-info" (click)="addTransaction()">Add New</button></td>
 </div> -->
 
 <br><br><br>
@@ -42,28 +39,29 @@
 </div>
 <hr>
 
-
-<div *ngFor="let coin of portfolio.coinsHodle">
-  <div class="container">
-  <div class="row">
-      <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24">    
-       {{coin.name | titlecase}}
-     </div>
-     <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
-        {{coin.price | currency }}
+<div *ngIf="portfolio && portfolio.coinsHodle.length > 0">
+  <div *ngFor="let coin of portfolio.coinsHodle">
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24">    
+        {{coin.name | titlecase}}
       </div>
       <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
-        {{coin.quantity}}
-      </div>
-      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
-        {{coin.price * coin.quantity | currency }}
-      </div>
-      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
-        <td><button class="btn btn-info" (click)="addTransaction()">Add</button></td>
-      </div>
+          {{coin.price | currency }}
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
+          {{coin.quantity}}
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
+          {{coin.price * coin.quantity | currency }}
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
+          <td><button class="btn btn-info" (click)="addTransaction()">Add</button></td>
+        </div>
+    </div>
+    </div> 
+    <hr>
   </div>
-  </div> 
-  <hr>
 </div>
 
 <div class="container">

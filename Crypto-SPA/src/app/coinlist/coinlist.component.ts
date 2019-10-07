@@ -19,7 +19,7 @@ export class CoinlistComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log('destroy');
+    // console.log('destroy');
     this.subscription.unsubscribe();
   }
 

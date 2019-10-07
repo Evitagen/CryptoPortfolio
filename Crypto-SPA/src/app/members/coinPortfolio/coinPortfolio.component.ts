@@ -3,12 +3,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { interval } from 'rxjs';
 import { User } from 'src/app/_models/user';
 import { UserService } from '../../_services/user.service';
-// import { CoinsU } from '../../_models/coinsHodle';
 import { AlertifyService } from '../../_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { Portfolio } from 'src/app/_models/portfolio';
-import { CoinsHodle } from 'src/app/_models/coinsHodle';
-import { load } from '@angular/core/src/render3/instructions';
+import { BsModalService } from 'ngx-bootstrap';
 
 
 
@@ -29,14 +27,18 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
   portfolio: Portfolio;
 
 
+  // user: User;
+  // users: User[];
+  bsModalRef: any;
+
+
+  coinSelected: string;
   user: User;
-  users: User[];
-
-
-  coinSelected: number;
   constructor(private http: HttpClient, private userService: UserService,
-     private alertify: AlertifyService, private route: ActivatedRoute) { }
+     private alertify: AlertifyService, private route: ActivatedRoute,
+     private modalService: BsModalService) { }
   total: number;
+  exists: Boolean = false;
 
   ngOnInit() {
 
@@ -65,10 +67,14 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
   }
 
   getValues() {
-    this.total = 0.004;
+
+    // Gets the total
+
+    this.total = 0.00;
     this.userService.getCoinPrices().subscribe(Response => {
     this.coins = Response;
       for (const coin of this.coins) {
+        if (this.portfolio && this.portfolio.coinsHodle.length > 0) {
           for (const co of this.portfolio.coinsHodle) {
             if (co.name === coin.name) {
               co.price = coin.price;
@@ -77,6 +83,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
               }
             }
           }
+        }
       }
     }, error => {
       console.log(error);
@@ -94,18 +101,28 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
   }
 
   onBtnAdd() {
-    // check coin doesn't already exist in list
 
-    for (const coin of this.coins) {
+
+    this.exists = false;
+    for (const coin of this.portfolio.coinsHodle) {
       if (this.coinSelected === coin.name) {
-        console.log('coin found');
-        // this.coinU.coinName = coin.name;
-        // this.coinU.coinPrice = coin.price;
-       // this.coinsU.push(this.coinU);
+       this.alertify.warning('Already Exists');
+       this.exists = true;
       }
     }
 
-   // console.log(this.coinSelected.name);
+    if (this.exists === false && this.coinSelected != null) {
+      this.userService.addPortfolioCoin(this.coinSelected, this.portfolio.portfolioID).subscribe(data => {
+        this.alertify.success('Added ' + this.coinSelected);
+        this.ngOnInit();
+      }, error => {
+        this.alertify.error(error);
+      });
+    } else {
+      this.alertify.message('Please Select a Coin');
+    }
+
+
   }
 
     loadUsers() {
@@ -115,6 +132,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
     }, error => {
       this.alertify.error(error);
     });
+
   }
 
 }

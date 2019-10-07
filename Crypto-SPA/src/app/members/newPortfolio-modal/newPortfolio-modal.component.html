@@ -1,0 +1,20 @@
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Add new Portfolio</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+   <form #rolesForm="ngForm" id="portfolio">
+     <hr>
+     <p class="formfield">
+      <label class="lblName">Name:</label> <textarea [(ngModel)]="NameModel" class="txtName" name="NameId" id="txtNameId" cols="40" rows="1"></textarea>
+     </p>
+   </form>
+  </div>
+  
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Cancel</button>
+    <button type="button" class="btn btn-success" (click)="PortfolioAdd()" form="rolesForm">Ok</button>
+  </div>

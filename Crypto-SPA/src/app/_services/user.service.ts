@@ -31,12 +31,19 @@ export class UserService {
   }
 
   getCoinPrices() {
-    return this.http.get('http://localhost:5000/api/coins');
+    return this.http.get(this.baseUrl + 'coins');
   }
 
   getPortfolioCoins(id: number) {
-    return this.http.get('http://localhost:5000/api/portfolio/' + id);
+    return this.http.get(this.baseUrl + 'portfolio/' + id);
   }
 
+  addPortfolio(name: string, userId: number) {
+    return this.http.post(this.baseUrl + 'portfolio/add/' + name + '/' + userId, {});
+  }
+
+   addPortfolioCoin(coin: string, portfolioId: number) {
+     return this.http.post(this.baseUrl + 'portfolio/addcoin/' + coin + '/' + portfolioId, {});
+   }
 
 }

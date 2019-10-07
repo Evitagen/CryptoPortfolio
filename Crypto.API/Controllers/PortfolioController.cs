@@ -5,6 +5,7 @@ using Crypto.API.Dtos;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Crypto.API.Models;
 
 namespace Crypto.API.Controllers
 {
@@ -37,9 +38,34 @@ namespace Crypto.API.Controllers
 
              return Ok(Portfolio);
 
-
-
-    
         }
+
+         [HttpPost("Add/{name}/{id}")]
+         public async Task<IActionResult> Add(string name, int id)
+         {
+            
+            // must check the id passing in is match for id from jwt token
+
+            User user = await _repo.GetUser(id);
+
+            if (await _repo.AddPortfolio(name, user))
+                return Ok();
+            
+             return BadRequest("Failed to add Portfolio");
+         }
+
+
+         [HttpPost("AddCoin/{name}/{portFolioid}")]
+          public async Task<IActionResult> AddCoin(string name, int portFolioid)
+         { 
+            // must check the id passing in is match for id from jwt token
+            Portfolio portfolio = await _repo.GetPortfolio(portFolioid);
+
+            if (await _repo.AddCoinToPortfolio(name, portfolio))
+               return Ok();
+  
+            return BadRequest("Failed to add Coin");
+         }
+
     }
 }

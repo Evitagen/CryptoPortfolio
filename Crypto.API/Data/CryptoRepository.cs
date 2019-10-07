@@ -46,14 +46,47 @@ namespace Crypto.API.Data
             return Portfolio;
         }
 
-        public Task GetUser(object userid)
+        public async Task<bool> AddPortfolio(string name, User user)
+        {  
+            Portfolio newPortfolio = new Portfolio();
+
+            newPortfolio.PortfolioName = name;
+            newPortfolio.User = user;
+
+            _context.Portfolio.Add(newPortfolio);
+             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> AddCoinToPortfolio(string name, Portfolio portfolio)
         {
-            throw new System.NotImplementedException();
+            CoinsHodle newCoinsHodle = new CoinsHodle();
+
+            newCoinsHodle.Name = name;
+            newCoinsHodle.Quantity = 0;
+            newCoinsHodle.Portfolio = portfolio;
+
+            _context.CoinsHodle.Add(newCoinsHodle);
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public Task<bool> AddPortfolio(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<bool> AddPortfolio(string name, int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task GetUser(object userid)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

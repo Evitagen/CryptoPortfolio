@@ -1,20 +1,31 @@
 <hr>
 <hr>
 <hr>
-<h1 align="center">
-    Portfolios
+
+  <h1 align="center">
+      Portfolios
   </h1>
+<hr>
   <h5 align="center">
-    add a new or view existing portfolio
+      <button class="btn btn-success" (click)="addPortfolio(user)">Create New</button>
   </h5>
+
+<hr>
+<hr>
 
 <div class="container">
   <div class="row">   
+     <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24">
+        
+     </div>
     <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24">
-      <h4></h4>
+      <h4>Name</h4>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24">
-      <h4></h4>
+     
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24">
+     
     </div>
   </div>
 </div>
@@ -27,11 +38,17 @@
   <div class="container">
   <div class="row">
       <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24">
+        
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24">
        {{portfo.portfolioName | titlecase}}
      </div> 
      <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24"> 
         <td><button class="btn btn-info" (click)="viewPortfolio(portfo.portfolioID)">View</button></td>   
-       </div> 
+      </div> 
+      <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24">
+        
+      </div>
   </div>
   </div> 
   <hr>
