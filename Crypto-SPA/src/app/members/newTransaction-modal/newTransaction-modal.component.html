@@ -6,10 +6,18 @@
   </div>
 
   <div class="modal-body">
+
+      <div class="btn-group">
+          <label class="btn btn-success" [(ngModel)]="radioModel"
+                 btnRadio="Left" tabindex="0" role="button">Buy</label>
+          <label class="btn btn-danger" [(ngModel)]="radioModel"
+                 btnRadio="Middle" tabindex="0" role="button">Sell</label>
+      </div>
+
    <form #rolesForm="ngForm" id="portfolio">
      <hr>
      <p class="formfield">
-      <label class="lblName">Name:</label> <textarea [(ngModel)]="NameModel" class="txtName" name="NameId" id="txtNameId" cols="40" rows="1"></textarea>
+      <label class="lblName">Quantity:</label> <textarea [(ngModel)]="NameModel" class="txtName" name="NameId" id="txtNameId" cols="8" rows="1"></textarea>
      </p>
    </form>
   </div>

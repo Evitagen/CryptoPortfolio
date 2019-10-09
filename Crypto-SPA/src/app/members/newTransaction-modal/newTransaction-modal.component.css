@@ -3,3 +3,9 @@
     padding-right: 20px;
     padding-top: 8px;
 }
+
+.btn-group {
+    margin-left: auto;
+    margin-right: auto;
+    width: 8em;
+}
