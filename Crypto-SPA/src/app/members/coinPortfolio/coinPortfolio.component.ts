@@ -105,7 +105,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
 
     this.bsModalRef = this.modalService.show(NewTransactionModalComponent, {initialState});
 
-    this.bsModalRef.content.addPortfolio.subscribe((values) => {
+    this.bsModalRef.content.NewTransactionModalComponent.subscribe((values) => {
 
     });
 
