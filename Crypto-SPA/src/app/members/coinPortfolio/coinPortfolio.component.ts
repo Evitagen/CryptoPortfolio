@@ -7,6 +7,8 @@ import { AlertifyService } from '../../_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { Portfolio } from 'src/app/_models/portfolio';
 import { BsModalService } from 'ngx-bootstrap';
+import { CoinsHodle } from 'src/app/_models/coinsHodle';
+import { NewTransactionModalComponent } from '../newTransaction-modal/newTransaction-modal.component';
 
 
 
@@ -48,7 +50,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
     this.loadPortfolio(id);
 
     this.getValues();
-    this.loadUsers();
+    //this.loadUsers(this.portfolio.userid);
     this.pageRefresh();
   }
 
@@ -96,12 +98,27 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
     });
   }
 
-  addTransaction() {
+  addTransaction(portfolio: Portfolio, coin: CoinsHodle) {
+    const initialState = {
+      coin
+    };
+
+    this.bsModalRef = this.modalService.show(NewTransactionModalComponent, {initialState});
+
+    this.bsModalRef.content.addPortfolio.subscribe((values) => {
+
+    });
+
+    console.log('PortfolioId ' + coin.name);
+    // console.log(coin.userId);
+    // console.log(coin.name);
+    // console.log(coin.price);
+    // console.log(coin.quantity);
+
 
   }
 
   onBtnAdd() {
-
 
     this.exists = false;
     for (const coin of this.portfolio.coinsHodle) {
@@ -122,11 +139,10 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
       this.alertify.message('Please Select a Coin');
     }
 
-
   }
 
-    loadUsers() {
-    this.userService.getUser(1).subscribe((user: User) => {  // replace parameter with actual id
+    loadUsers(userId: number) {
+    this.userService.getUser(userId).subscribe((user: User) => {  // replace parameter with actual id
       this.user = user;
       console.log(user);
     }, error => {

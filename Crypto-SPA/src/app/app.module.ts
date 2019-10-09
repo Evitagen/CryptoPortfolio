@@ -17,6 +17,7 @@ import { CoinPortfolioComponent } from './members/coinPortfolio/coinPortfolio.co
 import { SelectPortfolioComponent } from './members/SelectPortfolio/SelectPortfolio.component';
 import { NewPortfolioModalComponent } from './members/newPortfolio-modal/newPortfolio-modal.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { NewTransactionModalComponent } from './members/newTransaction-modal/newTransaction-modal.component';
 
 
 export function tokenGetter() {
@@ -32,7 +33,8 @@ export function tokenGetter() {
       CoindetailComponent,
       CoinPortfolioComponent,
       SelectPortfolioComponent,
-      NewPortfolioModalComponent
+      NewPortfolioModalComponent,
+      NewTransactionModalComponent
    ],
    imports: [
       BrowserModule,
@@ -54,7 +56,8 @@ export function tokenGetter() {
       AuthGuard
    ],
    entryComponents: [
-      NewPortfolioModalComponent
+      NewPortfolioModalComponent,
+      NewTransactionModalComponent
    ],
    bootstrap: [
       AppComponent
