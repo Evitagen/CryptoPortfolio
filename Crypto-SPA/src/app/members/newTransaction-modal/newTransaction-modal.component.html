@@ -1,28 +1,125 @@
 <div class="modal-header">
-    <h4 class="modal-title pull-left">Transaction</h4>
+    <h4 *ngIf="TransactionModel=='Buy'"  class="modal-titleBuy pull-left">Buy {{coin.name | titlecase }}</h4>
+    <h4 *ngIf="TransactionModel=='Sell'" class="modal-titleSell pull-left">Sell {{coin.name | titlecase }}</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
+</div>
+
+  <div class="modal-body">
+      <div class="btn-group">
+          <h5 class="selbuysel">Select Buy or Sell:</h5>
+          <label class="btn btn-success" name="Buy" [(ngModel)]="TransactionModel"
+                 btnRadio="Buy" tabindex="0" role="button">Buy</label>
+          <label class="btn btn-danger" name="Sell" [(ngModel)]="TransactionModel"
+                 btnRadio="Sell" tabindex="0" role="button">Sell</label>
   </div>
+      <!-- <pre class="card card-block card-header">{{TransactionModel || 'null'}}</pre> -->
+
+
 
   <div class="modal-body">
 
-      <div class="btn-group">
-          <label class="btn btn-success" [(ngModel)]="radioModel"
-                 btnRadio="Left" tabindex="0" role="button">Buy</label>
-          <label class="btn btn-danger" [(ngModel)]="radioModel"
-                 btnRadio="Middle" tabindex="0" role="button">Sell</label>
+  <form [formGroup]="coinTransForm" (ngSubmit)="TransactionAdd()">
+      <hr>
+
+      <div *ngIf="TransactionModel=='Buy'" class="container">
+          <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-6">    
+                  <p class="formfieldQty"><label class="lblBuy">Quantity:</label></p> 
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-6">    
+                  <input class="form-control is-invalid" [ngClass]="{'is-invalid': coinTransForm.get('QtyModel').errors 
+                  && coinTransForm.get('QtyModel').touched}" type="number" formControlName="QtyModel" name="QtyId">
+                  <div class="invalid-feedback">Quantity is required</div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-6">    
+                  <p class="formfieldFee"><label class="lblBuy">Transaction Fee:</label></p> 
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-6">    
+                  <input class="form-control is-invalid" [ngClass]="{'is-invalid': coinTransForm.get('TransactionFee').errors 
+                  && coinTransForm.get('TransactionFee').touched}" type="number" formControlName="TransactionFee" name="TransId">
+                  <div class="invalid-feedback">Transaction fee is required</div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-6">    
+                  <p class="formfieldDate"><label class="lblBuy">Date:</label></p>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-6">    
+                  <input class="form-control is-invalid" [ngClass]="{'is-invalid': coinTransForm.get('dateTransaction').errors && coinTransForm.get('dateTransaction').touched}" formControlName="dateTransaction" name="DateId">
+                  <div class="invalid-feedback" *ngIf="coinTransForm.get('dateTransaction').touched && coinTransForm.get('dateTransaction').hasError('required')">Transaction Date is required</div>
+                  <div class="invalid-feedback">Transaction date is required</div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-6">    
+                  <p class="formfieldPrice"><label class="lblBuy">Price when bought:</label></p>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-6">    
+                  <input class="form-control is-invalid" [ngClass]="{'is-invalid': coinTransForm.get('PriceWhenBought').errors && coinTransForm.get('PriceWhenBought').touched}" type="number" formControlName="PriceWhenBought" name="PriceId">
+              </div>
+          </div>
       </div>
 
-   <form #rolesForm="ngForm" id="portfolio">
-     <hr>
-     <p class="formfield">
-      <label class="lblName">Quantity:</label> <textarea [(ngModel)]="NameModel" class="txtName" name="NameId" id="txtNameId" cols="8" rows="1"></textarea>
-     </p>
-   </form>
+
+
+      <div *ngIf="TransactionModel=='Sell'" class="container">
+          <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-6">    
+                  <p class="formfieldQty"><label class="lblSell">Quantity:</label></p> 
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-6">    
+                  <input class="form-control is-invalid" [ngClass]="{'is-invalid': coinTransForm.get('QtyModel').errors 
+                  && coinTransForm.get('QtyModel').touched}" type="number" formControlName="QtyModel" name="QtyId">
+                  <div class="invalid-feedback">Quantity is required</div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-6">    
+                  <p class="formfieldFee"><label class="lblSell">Transaction Fee:</label></p> 
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-6">    
+                  <input class="form-control is-invalid" [ngClass]="{'is-invalid': coinTransForm.get('TransactionFee').errors 
+                  && coinTransForm.get('TransactionFee').touched}" type="number" formControlName="TransactionFee" name="TransId">
+                  <div class="invalid-feedback">Transaction fee is required</div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-6">    
+                  <p class="formfieldDate"><label class="lblSell">Date:</label></p>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-6">    
+                  <input class="form-control is-invalid" [ngClass]="{'is-invalid': coinTransForm.get('dateTransaction').errors && coinTransForm.get('dateTransaction').touched}" formControlName="dateTransaction" name="DateId">
+                  <div class="invalid-feedback" *ngIf="coinTransForm.get('dateTransaction').touched && coinTransForm.get('dateTransaction').hasError('required')">Transaction Date is required</div>
+                  <div class="invalid-feedback">Transaction date is required</div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-6">    
+                  <p class="formfieldPrice"><label class="lblSell">Price when bought:</label></p>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-6">    
+                  <input class="form-control is-invalid" [ngClass]="{'is-invalid': coinTransForm.get('PriceWhenBought').errors && coinTransForm.get('PriceWhenBought').touched}" type="number" formControlName="PriceWhenBought" name="PriceId">
+              </div>
+          </div>
+      </div>
+
+      <div class="invalid-feedback" *ngIf="coinTransForm.get('QtyModel').touched && coinTransForm.get('QtyModel').hasError('required')">Quantity is required</div>
+      <!-- <p>Form value: {{coinTransForm.value | json}}</p>
+      <p>Form status: {{coinTransForm.status | json}}</p> -->
+     
+      <div class="container modal-footer">
+          <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Cancel</button>
+          <button type="button" class="btn btn-success" [disabled]="!coinTransForm.valid" type="submit">Ok</button>
+      </div>
+      
+      
+    </form>
+
   </div>
+
+</div>
   
-  <div class="modal-footer">
-    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Cancel</button>
-    <button type="button" class="btn btn-success" form="rolesForm">Ok</button>
-  </div>

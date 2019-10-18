@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../_models/user';
+import { stringify } from '@angular/core/src/render3/util';
 
 // const httpOptions = {
 //   headers: new HttpHeaders({
@@ -15,6 +16,7 @@ import { User } from '../_models/user';
 })
 export class UserService {
   baseUrl = environment.apiUrl;
+  deletethis: string;
 
   constructor(private http: HttpClient) {}
 
@@ -34,6 +36,10 @@ export class UserService {
     return this.http.get(this.baseUrl + 'coins');
   }
 
+  //
+  // Portfolio
+  //
+
   getPortfolioCoins(id: number) {
     return this.http.get(this.baseUrl + 'portfolio/' + id);
   }
@@ -42,8 +48,19 @@ export class UserService {
     return this.http.post(this.baseUrl + 'portfolio/add/' + name + '/' + userId, {});
   }
 
-   addPortfolioCoin(coin: string, portfolioId: number) {
-     return this.http.post(this.baseUrl + 'portfolio/addcoin/' + coin + '/' + portfolioId, {});
-   }
+  //
+  // Adding Coins
+  //
+
+  addPortfolioCoin(coin: string, portfolioId: number) {
+    return this.http.post(this.baseUrl + 'portfolio/addcoin/' + coin + '/' + portfolioId, {});
+  }
+
+  addCoinTransaction(coin: string, coinhodleid: number, quantity: number, fee: number, date: string, priceWhenBoughtSold: number) {
+    // tslint:disable-next-line:max-line-length
+    //this.deletethis = this.baseUrl + 'portfolio/addtransaction/' + coin + '/' + portfolioId + '/' + quantity + '/' + fee + '/' + date + '/' + priceWhenBoughtSold;
+    // tslint:disable-next-line:max-line-length
+    return this.http.put(this.baseUrl + 'portfolio/addtransaction/' + coin + '/' + coinhodleid + '/' + quantity + '/' + fee + '/' + date + '/' + priceWhenBoughtSold, {});
+  }
 
 }

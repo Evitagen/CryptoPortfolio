@@ -45,7 +45,8 @@ export class SelectPortfolioComponent implements OnInit {
     this.route.navigate(['/coinportfolio/' + portfolioID]);
   }
 
-    addPortfolio(user: User) {
+
+  addPortfolio(user: User) {
     const initialState = {
       user
     };
@@ -63,7 +64,6 @@ export class SelectPortfolioComponent implements OnInit {
       });
     });
   }
-
 
 
   loggedIn() {

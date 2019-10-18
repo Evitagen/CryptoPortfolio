@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Crypto.API.Models;
+using System;
 
 namespace Crypto.API.Controllers
 {
@@ -58,13 +59,40 @@ namespace Crypto.API.Controllers
          [HttpPost("AddCoin/{name}/{portFolioid}")]
           public async Task<IActionResult> AddCoin(string name, int portFolioid)
          { 
-            // must check the id passing in is match for id from jwt token
+             System.Console.WriteLine("add coin");
+            // must check the id passing in is match for id from jwt token as somone could hack other users
             Portfolio portfolio = await _repo.GetPortfolio(portFolioid);
 
             if (await _repo.AddCoinToPortfolio(name, portfolio))
                return Ok();
   
             return BadRequest("Failed to add Coin");
+         }
+
+
+         [HttpPut("AddTransaction/{coinname}/{coinhodleid}/{quantity}/{fee}/{datatime}/{priceWhenBoughtSold}")]
+         public async Task<IActionResult> AddTransaction(string coinname, int coinhodleid, decimal quantity, decimal fee, string datatime, decimal priceWhenBoughtSold)
+         {
+
+            //  Console.WriteLine(coinname);
+            //  Console.WriteLine(coinhodleid);
+            //  Console.WriteLine(quantity);
+            //  Console.WriteLine(fee);
+            //  Console.WriteLine(datatime);
+            //  Console.WriteLine(priceWhenBoughtSold);
+
+            CoinsHodle coinsHodle = await _repo.GetCoinsHodle(coinhodleid);
+
+            //Transactions transactions = await _repo.GetTransactions(coinsHodle.Id);
+
+            if (await _repo.AddTransaction(coinsHodle, quantity, datatime))
+            {
+                if (await _repo.UpdateCoinHodleAmount(coinsHodle))
+                 return Ok();
+            }
+               
+           return BadRequest("Failed to add Transaction");
+             
          }
 
     }

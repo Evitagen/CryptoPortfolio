@@ -56,7 +56,7 @@ namespace Crypto.API.Data
 
                 return coins;
            }
-           catch (Exception ex)
+           catch (Exception)
            {
                return null;
            }

@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Crypto.API.Models;
 using Microsoft.EntityFrameworkCore;
@@ -24,10 +25,17 @@ namespace Crypto.API.Data
 
         public async Task<CoinsHodle> GetCoinsHodle(int id)
         {
-            var coinsHodle = await _context.CoinsHodle.FirstOrDefaultAsync(p => p.Id == id);
+            var coinsHodle = await _context.CoinsHodle
+            .Include(t => t.Transactions)
+            .FirstOrDefaultAsync(p => p.Id == id);
             return coinsHodle;
         }
 
+        public async Task<Transactions> GetTransactions(int coinHodleId)
+        {
+            var transactions = await _context.Transactions.FirstOrDefaultAsync(p => p.CoinsHodle.Id == coinHodleId);
+            return transactions;
+        }
         public async Task<User> GetUser(int id)
         {
             var user = await _context.Users
@@ -64,9 +72,63 @@ namespace Crypto.API.Data
             newCoinsHodle.Name = name;
             newCoinsHodle.Quantity = 0;
             newCoinsHodle.Portfolio = portfolio;
+        
 
             _context.CoinsHodle.Add(newCoinsHodle);
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> AddTransaction(CoinsHodle coinHodleID, decimal quantity, string datetime)
+        {
+
+            
+            Transactions transaction = new Transactions();
+         
+           
+            //DateTime d2 = DateTime.Parse("2010-08-20T15:00:00Z", null, System.Globalization.DateTimeStyles.RoundtripKind);
+            transaction.Date = DateTime.Parse(datetime, null, System.Globalization.DateTimeStyles.RoundtripKind);
+            
+            if (decimal.ToDouble(quantity) > 0)
+            {
+                transaction.AmountSell = 0;
+                transaction.AmountBuy = decimal.ToDouble(quantity);
+            }
+            else
+            {
+                 transaction.AmountBuy = 0 ;
+                 transaction.AmountSell = decimal.ToDouble(quantity);
+            }
+           
+           transaction.CoinsHodle = coinHodleID;
+           
+            if (transaction.AmountBuy != 0 || transaction.AmountSell != 0)
+            {
+                _context.Transactions.Add(transaction);
+            }
+
+            return await _context.SaveChangesAsync() > 0;
+
+        }
+
+        public async Task<bool> UpdateCoinHodleAmount(CoinsHodle coinHodleID)
+        {
+
+                double totalBuy = 0;
+                double totalSell = 0;
+                double total = 0;
+
+                foreach (var coinTrans in coinHodleID.Transactions)
+                {
+                    totalBuy += coinTrans.AmountBuy;
+                    totalSell += coinTrans.AmountSell;      
+                }
+                total = totalBuy - totalSell;
+
+                coinHodleID.Quantity = Convert.ToDecimal(total);
+
+                _context.CoinsHodle.Update(coinHodleID);
+
+                return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<bool> SaveAll()
@@ -89,4 +151,5 @@ namespace Crypto.API.Data
             throw new System.NotImplementedException();
         }
     }
+
 }

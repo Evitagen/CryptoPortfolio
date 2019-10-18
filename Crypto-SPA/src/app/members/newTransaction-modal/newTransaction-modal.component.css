@@ -1,11 +1,38 @@
-.lblName {
+.modal-titleBuy {
+    /* background: rgb(115, 255, 197); */
+    color: rgb(115, 255, 197);
+    /* color: rgb(115, 255, 197); */
+}
+.modal-titleSell {
+    /* background: red; */
+    color: red;
+}
+
+.lblBuy {
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 8px;
+    color: rgb(115, 255, 197);
 }
 
-.btn-group {
+.lblSell {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 8px;
+    color: red;
+}
+
+.selbuysel {
+    /* color: red; */
+    padding-right: 25px;
+}
+
+.txtName {
+    /* resize: none; */
+}
+
+/* .btn-group {
     margin-left: auto;
     margin-right: auto;
     width: 8em;
-}
+} */

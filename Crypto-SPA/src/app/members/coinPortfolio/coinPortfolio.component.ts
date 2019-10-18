@@ -21,17 +21,20 @@ import { NewTransactionModalComponent } from '../newTransaction-modal/newTransac
 export class CoinPortfolioComponent implements OnInit, OnDestroy {
 
   coins: any;
-  // getprice = true;
   subscription: any;
+  portfolio: Portfolio;
+  bsModalRef: any;
+  // getprice = true;
+
   // coinU: CoinsU = { coinName: 'any', coinPrice: 0, coinQty: 0, priceBought: 0, PriceSold: 0 };
   // coinsU: CoinsU[];
 
-  portfolio: Portfolio;
+
 
 
   // user: User;
   // users: User[];
-  bsModalRef: any;
+
 
 
   coinSelected: string;
@@ -50,7 +53,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
     this.loadPortfolio(id);
 
     this.getValues();
-    //this.loadUsers(this.portfolio.userid);
+    // this.loadUsers(this.portfolio.userid);
     this.pageRefresh();
   }
 
@@ -98,18 +101,28 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
     });
   }
 
-  addTransaction(portfolio: Portfolio, coin: CoinsHodle) {
+  addTransaction(coin: CoinsHodle, portfolio: Portfolio) {
+ 
     const initialState = {
-      coin
+      coin,
+      portfolio
     };
 
     this.bsModalRef = this.modalService.show(NewTransactionModalComponent, {initialState});
 
-    this.bsModalRef.content.NewTransactionModalComponent.subscribe((values) => {
+    console.log('coin name ' + coin.name);
+
+    this.bsModalRef.content.addTransaction.subscribe((values: string[]) => {
+
+      console.log('Quantity ' + values.Quantity);
+      console.log('Fee ' + values.Fee);
+      console.log('Date ' + values.Date);
+      console.log('PriceBought ' + values.PriceBought);
+      this.ngOnInit();
 
     });
 
-    console.log('PortfolioId ' + coin.name);
+    //console.log('PortfolioId ' + coin.name);
     // console.log(coin.userId);
     // console.log(coin.name);
     // console.log(coin.price);

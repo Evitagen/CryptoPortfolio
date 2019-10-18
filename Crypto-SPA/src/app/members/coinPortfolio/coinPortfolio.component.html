@@ -1,6 +1,7 @@
 <br><br><br>
   
 <div style="margin: auto; width: 50%;">
+  <p *ngIf="portfolio && portfolio.coinsHodle.length < 1">Select a coin from the dropdown box then click add</p>
   <select class="select" [(ngModel)]="coinSelected">
       <option *ngFor="let coin of coins" [value]="coin.name">
         {{coin.name}}
@@ -56,7 +57,7 @@
           {{coin.price * coin.quantity | currency }}
         </div>
         <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
-          <td><button class="btn btn-info" (click)="addTransaction(portfolio, coin)">Add</button></td>
+          <td><button class="btn btn-info" (click)="addTransaction(coin, portfolio)">Add</button></td>
         </div>
     </div>
     </div> 

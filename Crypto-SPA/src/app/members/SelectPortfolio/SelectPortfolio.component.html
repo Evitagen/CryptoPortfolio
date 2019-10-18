@@ -7,7 +7,7 @@
   </h1>
 <hr>
   <h5 align="center">
-      <button class="btn btn-success" (click)="addPortfolio(user)">Create New</button>
+      <button  class="btn btn-success" (click)="addPortfolio(user)">Create New</button>
   </h5>
 
 <hr>
@@ -19,7 +19,7 @@
         
      </div>
     <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24">
-      <h4>Name</h4>
+      <h4 *ngIf="user && user.portfolio.length > 0">Name</h4>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24">
      
