@@ -114,10 +114,10 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
 
     this.bsModalRef.content.addTransaction.subscribe((values: string[]) => {
 
-      console.log('Quantity ' + values.Quantity);
-      console.log('Fee ' + values.Fee);
-      console.log('Date ' + values.Date);
-      console.log('PriceBought ' + values.PriceBought);
+      // console.log('Quantity ' + values.Quantity);
+      // console.log('Fee ' + values.Fee);
+      // console.log('Date ' + values.Date);
+      // console.log('PriceBought ' + values.PriceBought);
       this.ngOnInit();
 
     });
