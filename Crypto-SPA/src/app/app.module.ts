@@ -1,10 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { BsDropdownModule, ModalModule, ButtonsModule } from 'ngx-bootstrap';
+import { BsDropdownModule, ModalModule, ButtonsModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { JwtModule } from '@auth0/angular-jwt';
+
 
 import { AppComponent } from './app.component';
 import { CoinlistComponent } from './coinlist/coinlist.component';
@@ -38,6 +40,7 @@ export function tokenGetter() {
    ],
    imports: [
       BrowserModule,
+      BrowserAnimationsModule,
       HttpClientModule,
       FormsModule,
       ReactiveFormsModule,
@@ -45,6 +48,7 @@ export function tokenGetter() {
       RouterModule.forRoot(appRoutes),
       ModalModule.forRoot(),
       BsDropdownModule.forRoot(),
+      BsDatepickerModule.forRoot(),
       JwtModule.forRoot({
          config: {
            tokenGetter: tokenGetter,

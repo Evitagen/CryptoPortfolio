@@ -3,7 +3,6 @@ import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../_models/user';
-import { stringify } from '@angular/core/src/render3/util';
 
 // const httpOptions = {
 //   headers: new HttpHeaders({

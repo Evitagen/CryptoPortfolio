@@ -49,7 +49,7 @@
                   <p class="formfieldDate"><label class="lblBuy">Date:</label></p>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-6">    
-                  <input class="form-control is-invalid" [ngClass]="{'is-invalid': coinTransForm.get('dateTransaction').errors && coinTransForm.get('dateTransaction').touched}" formControlName="dateTransaction" name="DateId">
+                  <input class="form-control is-invalid" [ngClass]="{'is-invalid': coinTransForm.get('dateTransaction').errors && coinTransForm.get('dateTransaction').touched}" formControlName="dateTransaction" name="DateId" bsDatepicker [bsConfig]="bsConfig">
                   <div class="invalid-feedback" *ngIf="coinTransForm.get('dateTransaction').touched && coinTransForm.get('dateTransaction').hasError('required')">Transaction Date is required</div>
                   <div class="invalid-feedback">Transaction date is required</div>
               </div>
