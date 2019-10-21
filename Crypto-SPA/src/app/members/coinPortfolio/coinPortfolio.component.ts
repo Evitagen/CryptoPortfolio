@@ -21,19 +21,13 @@ import { NewTransactionModalComponent } from '../newTransaction-modal/newTransac
 export class CoinPortfolioComponent implements OnInit, OnDestroy {
 
   coins: any;
+  coinsLoaded: boolean = false;
+  coinsDropDown: any;
+
   subscription: any;
   portfolio: Portfolio;
   bsModalRef: any;
-  // getprice = true;
-
-  // coinU: CoinsU = { coinName: 'any', coinPrice: 0, coinQty: 0, priceBought: 0, PriceSold: 0 };
-  // coinsU: CoinsU[];
-
-
-
-
-  // user: User;
-  // users: User[];
+ 
 
 
 
@@ -44,14 +38,14 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
      private modalService: BsModalService) { }
   total: number;
   exists: Boolean = false;
+  id: number;
 
   ngOnInit() {
 
 
     // tslint:disable-next-line:radix
-    const id = parseInt(this.route.snapshot.paramMap.get('id'));
-    this.loadPortfolio(id);
-
+    this.id = parseInt(this.route.snapshot.paramMap.get('id'));
+    this.loadPortfolio(this.id);
     this.getValues();
     // this.loadUsers(this.portfolio.userid);
     this.pageRefresh();
@@ -74,10 +68,15 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
   getValues() {
 
     // Gets the total
-
     this.total = 0.00;
     this.userService.getCoinPrices().subscribe(Response => {
     this.coins = Response;
+
+    if (this.coinsLoaded === false) {
+      this.coinsDropDown = this.coins;
+      this.coinsLoaded = true;
+    }
+
       for (const coin of this.coins) {
         if (this.portfolio && this.portfolio.coinsHodle.length > 0) {
           for (const co of this.portfolio.coinsHodle) {
@@ -102,7 +101,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
   }
 
   addTransaction(coin: CoinsHodle, portfolio: Portfolio) {
- 
+
     const initialState = {
       coin,
       portfolio
@@ -112,17 +111,20 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
 
     console.log('coin name ' + coin.name);
 
-    this.bsModalRef.content.addTransaction.subscribe((values: string[]) => {
+    this.bsModalRef.content.addTransaction.subscribe(async (values: string[]) => {
 
       // console.log('Quantity ' + values.Quantity);
       // console.log('Fee ' + values.Fee);
       // console.log('Date ' + values.Date);
       // console.log('PriceBought ' + values.PriceBought);
-      this.ngOnInit();
+
+      await this.delay(1000);
+      this.loadPortfolio(this.id);
+      this.getValues();
 
     });
 
-    //console.log('PortfolioId ' + coin.name);
+    // console.log('PortfolioId ' + coin.name);
     // console.log(coin.userId);
     // console.log(coin.name);
     // console.log(coin.price);
@@ -154,14 +156,18 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
 
   }
 
-    loadUsers(userId: number) {
-    this.userService.getUser(userId).subscribe((user: User) => {  // replace parameter with actual id
-      this.user = user;
-      console.log(user);
-    }, error => {
-      this.alertify.error(error);
-    });
+    // loadUsers(userId: number) {
+    // this.userService.getUser(userId).subscribe((user: User) => {  // replace parameter with actual id
+    //   this.user = user;
+    //   console.log(user);
+    // }, error => {
+    //   this.alertify.error(error);
+    // });
+
+     delay(ms: number) {
+      return new Promise( resolve => setTimeout(resolve, ms) );
+    }
 
   }
 
-}
+

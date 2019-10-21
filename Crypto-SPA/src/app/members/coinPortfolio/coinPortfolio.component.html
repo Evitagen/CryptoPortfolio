@@ -3,7 +3,7 @@
 <div style="margin: auto; width: 50%;">
   <p *ngIf="portfolio && portfolio.coinsHodle.length < 1">Select a coin from the dropdown box then click add</p>
   <select class="select" [(ngModel)]="coinSelected">
-      <option *ngFor="let coin of coins" [value]="coin.name">
+      <option *ngFor="let coin of coinsDropDown" [value]="coin.name">
         {{coin.name}}
       </option>
   </select>

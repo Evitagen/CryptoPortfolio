@@ -125,7 +125,7 @@ namespace Crypto.API.Data
                return decimal.Parse(strCirculating.ToString());
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return 0;
             }
