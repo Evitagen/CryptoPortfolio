@@ -24,11 +24,12 @@ export class NewTransactionModalComponent implements OnInit {
   coin: CoinsHodle;
   transaction: Transaction;
   coinTransForm: FormGroup;
-  portfolio: Portfolio;
-  stringtransDate: string;
+  // portfolio: Portfolio;
+  // stringtransDate: string;
   transDate: Date;
   transDateISO: string;
   bsConfig: Partial<BsDatepickerConfig>;  // partial - makes all properties in type optional
+  TotalSell: number;
 
 
   // public now: Date = new Date();
@@ -59,33 +60,39 @@ export class NewTransactionModalComponent implements OnInit {
   TransactionAdd() {
     if (this.coinTransForm.valid) {
         this.transaction = Object.assign({}, this.coinTransForm.value);
-        // console.log('adding stuff to db');
-        // console.log('price bought = ' + this.transaction.PriceWhenBought);
-        // console.log('qty = ' + this.transaction.QtyModel);
-       console.log('date = ' + this.transaction.dateTransaction);
 
-        // console.log('Transaction fee = ' + this.transaction.TransactionFee);
-        // console.log('Portfolio id = ' + this.portfolio.portfolioID);
-        // console.log('coin - ' + this.coin.name);
-        // console.log('coinhodleID = ' + this.coin.id);
+        const ddate = new Date(this.transaction.dateTransaction);
 
-      //  const momentVariable = moment(this.transaction.dateTransaction.toString(), 'DD-MM-YYYY');  // gets uk date into moment
-      //  const stringvalue = momentVariable.format('YYYY-MM-DD');                                   // formats the best way
-      //  this.transDate = new Date(stringvalue);                                                    // turns back into date
-      //  this.transDateISO = this.transDate.toISOString();                                          // turns to iso string
-      const ddate = new Date(this.transaction.dateTransaction);
+        this.transDateISO = ddate.toISOString();
 
-      this.transDateISO = ddate.toISOString();
-          // this.transDateISO = this.transaction.dateTransaction.toISOString();
+        console.log(this.transaction.QtyModel);
+        if (this.TransactionModel === 'Sell') {
+          this.TotalSell = this.transaction.QtyModel - this.transaction.QtyModel - this.transaction.QtyModel;
 
 
-        this.user.addCoinTransaction(this.coin.name, this.coin.id, this.transaction.QtyModel,
-           this.transaction.TransactionFee, this.transDateISO, this.transaction.PriceWhenBought).subscribe(data => {
-             console.log('success!!!!');
+          this.user.addCoinTransaction(this.coin.name, this.coin.id, this.TotalSell,
+            this.transaction.TransactionFee, this.transDateISO, this.transaction.PriceWhenBought).subscribe(data => {
+              console.log('success!!!!');
 
-           }, error => {
-             console.log('fail');
-           });
+            }, error => {
+              console.log('fail');
+            });
+
+
+        } else {
+
+          this.user.addCoinTransaction(this.coin.name, this.coin.id, this.transaction.QtyModel,
+            this.transaction.TransactionFee, this.transDateISO, this.transaction.PriceWhenBought).subscribe(data => {
+              console.log('success!!!!');
+
+            }, error => {
+              console.log('fail');
+            });
+
+        }
+
+
+
 
       // emits more than 1 parameter
       // this.addTransaction.emit({Quantity: this.QtyModel, Fee: this.TransModel, Date: this.DateModel, PriceBought: this.PriceModel});

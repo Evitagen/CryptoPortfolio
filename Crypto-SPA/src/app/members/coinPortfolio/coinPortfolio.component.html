@@ -76,7 +76,7 @@
       <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
         
       </div>
-      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
+      <div *ngIf="total > 0" class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
         {{total | currency}}
       </div>
   </div>

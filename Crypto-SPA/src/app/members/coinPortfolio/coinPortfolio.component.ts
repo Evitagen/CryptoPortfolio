@@ -69,6 +69,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
 
     // Gets the total
     this.total = 0.00;
+
     this.userService.getCoinPrices().subscribe(Response => {
     this.coins = Response;
 

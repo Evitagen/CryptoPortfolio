@@ -96,7 +96,7 @@ namespace Crypto.API.Data
             else
             {
                  transaction.AmountBuy = 0 ;
-                 transaction.AmountSell = decimal.ToDouble(quantity);
+                 transaction.AmountSell = decimal.ToDouble(quantity) - decimal.ToDouble(quantity) - decimal.ToDouble(quantity);
             }
            
            transaction.CoinsHodle = coinHodleID;

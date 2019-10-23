@@ -92,14 +92,14 @@
                   <p class="formfieldDate"><label class="lblSell">Date:</label></p>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-6">    
-                  <input class="form-control is-invalid" [ngClass]="{'is-invalid': coinTransForm.get('dateTransaction').errors && coinTransForm.get('dateTransaction').touched}" formControlName="dateTransaction" name="DateId">
+                <input class="form-control is-invalid" [ngClass]="{'is-invalid': coinTransForm.get('dateTransaction').errors && coinTransForm.get('dateTransaction').touched}" formControlName="dateTransaction" name="DateId" bsDatepicker [bsConfig]="bsConfig">
                   <div class="invalid-feedback" *ngIf="coinTransForm.get('dateTransaction').touched && coinTransForm.get('dateTransaction').hasError('required')">Transaction Date is required</div>
                   <div class="invalid-feedback">Transaction date is required</div>
               </div>
           </div>
           <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-6">    
-                  <p class="formfieldPrice"><label class="lblSell">Price when bought:</label></p>
+                  <p class="formfieldPrice"><label class="lblSell">Price when sold:</label></p>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-6">    
                   <input class="form-control is-invalid" [ngClass]="{'is-invalid': coinTransForm.get('PriceWhenBought').errors && coinTransForm.get('PriceWhenBought').touched}" type="number" formControlName="PriceWhenBought" name="PriceId">
