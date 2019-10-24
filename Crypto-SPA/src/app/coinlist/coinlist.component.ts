@@ -11,6 +11,7 @@ import { CoinList } from 'src/app/_models/coinList';
 export class CoinlistComponent implements OnInit, OnDestroy {
   coins: CoinList;
   coinsnImage: CoinList;
+  coinImageLinks: string[] = [];
   coinsnImageList: CoinList[] = [];
   getprice = true;
   subscription: any;
@@ -45,7 +46,8 @@ export class CoinlistComponent implements OnInit, OnDestroy {
     }
 
     for (let i = 0; i < this.coinsnImageList.length; i++) {
-      console.log(this.coinsnImageList[i]);
+      this.coinsnImageList[i].imagelocation = '/images/' + this.coinsnImageList[i].name + '.png';
+      console.log(this.coinsnImageList[i].imagelocation);
     }
 
   }
