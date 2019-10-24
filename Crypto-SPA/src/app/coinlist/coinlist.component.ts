@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { interval } from 'rxjs';
 import { UserService } from '../_services/user.service';
+import { CoinList } from 'src/app/_models/coinList';
 
 @Component({
   selector: 'app-coinlist',
@@ -8,10 +9,13 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./coinlist.component.css']
 })
 export class CoinlistComponent implements OnInit, OnDestroy {
-  coins: any;
+  coins: CoinList;
+  coinsnImage: CoinList;
+  coinsnImageList: CoinList[] = [];
   getprice = true;
   subscription: any;
   constructor(private userService: UserService) { }
+
 
   ngOnInit() {
     this.getValues();
@@ -24,11 +28,26 @@ export class CoinlistComponent implements OnInit, OnDestroy {
   }
 
   getValues() {
-    this.userService.getCoinPrices().subscribe(Response => {
-      this.coins = Response;
+    this.userService.getCoinPrices().subscribe((coins: CoinList) => {
+      this.coins = coins;
+      this.AddCoinImages();
     }, error => {
       console.log(error);
     });
+  }
+
+  AddCoinImages() {
+
+
+    for (let i = 0; i < this.coins.length; i++) {
+      const coin = this.coins[i];
+      this.coinsnImageList.push(coin);
+    }
+
+    for (let i = 0; i < this.coinsnImageList.length; i++) {
+      console.log(this.coinsnImageList[i]);
+    }
+
   }
 
   pageRefresh() {

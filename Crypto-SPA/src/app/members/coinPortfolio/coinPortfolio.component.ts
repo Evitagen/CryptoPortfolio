@@ -21,13 +21,14 @@ import { NewTransactionModalComponent } from '../newTransaction-modal/newTransac
 export class CoinPortfolioComponent implements OnInit, OnDestroy {
 
   coins: any;
-  coinsLoaded: boolean = false;
+  images: string[];
+  coinsLoaded = false;
   coinsDropDown: any;
 
   subscription: any;
   portfolio: Portfolio;
   bsModalRef: any;
- 
+
 
 
 

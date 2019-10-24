@@ -32,17 +32,17 @@
     </div>
 <hr>
 
-<div *ngFor="let coin of coins">
+<div *ngFor="let coin of coinsnImageList">
 <div class="container">
 <div class="row">
   <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
       {{coin.name | titlecase}}
   </div>
   <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
-      {{coin.price | currency}}
+      <div class="blue">{{coin.price | currency}}</div>
   </div>
   <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
-      {{coin.volume | currency}}
+      <div class="blue">{{coin.volume | currency}}</div>
   </div>  
   <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
     {{coin.circulating | number}}
