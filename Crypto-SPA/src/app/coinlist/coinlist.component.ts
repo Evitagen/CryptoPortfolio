@@ -40,13 +40,15 @@ export class CoinlistComponent implements OnInit, OnDestroy {
   AddCoinImages() {
 
 
+    this.coinsnImageList = [];
+
     for (let i = 0; i < this.coins.length; i++) {
       const coin = this.coins[i];
       this.coinsnImageList.push(coin);
     }
 
     for (let i = 0; i < this.coinsnImageList.length; i++) {
-      this.coinsnImageList[i].imagelocation = '/images/' + this.coinsnImageList[i].name + '.png';
+      this.coinsnImageList[i].imagelocation = './images/' + this.coinsnImageList[i].name + '.png';
       console.log(this.coinsnImageList[i].imagelocation);
     }
 
