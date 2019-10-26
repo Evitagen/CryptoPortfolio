@@ -9,6 +9,7 @@ import { Portfolio } from 'src/app/_models/portfolio';
 import { BsModalService } from 'ngx-bootstrap';
 import { CoinsHodle } from 'src/app/_models/coinsHodle';
 import { NewTransactionModalComponent } from '../newTransaction-modal/newTransaction-modal.component';
+import { CoinList } from 'src/app/_models/coinList';
 
 
 
@@ -29,7 +30,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
   portfolio: Portfolio;
   bsModalRef: any;
 
-
+  coinsnImageList: CoinsHodle[] = [];
 
 
   coinSelected: string;
@@ -68,6 +69,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
 
   getValues() {
 
+    this.coinsnImageList = [];
     // Gets the total
     this.total = 0.00;
 
@@ -79,6 +81,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
       this.coinsLoaded = true;
     }
 
+      // gets the total
       for (const coin of this.coins) {
         if (this.portfolio && this.portfolio.coinsHodle.length > 0) {
           for (const co of this.portfolio.coinsHodle) {
@@ -91,9 +94,29 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
           }
         }
       }
+
+      this.AddCoinImages();
+
     }, error => {
       console.log(error);
     });
+  }
+
+  AddCoinImages() {
+
+    this.coinsnImageList = [];
+
+    // copy portfolio coins into coinsnImageList
+    for (let i = 0; i < this.portfolio.coinsHodle.length; i++) {
+      const coinHodle = this.portfolio.coinsHodle[i];
+      this.coinsnImageList.push(coinHodle);
+    }
+    // gets the icon location and puts in coinsnImageList
+    for (let i = 0; i < this.coinsnImageList.length; i++) {
+      this.coinsnImageList[i].imageLocation = 'assets/images/' + this.coinsnImageList[i].name + '.png';
+      console.log(this.coinsnImageList[i].imageLocation);
+    }
+
   }
 
   pageRefresh() {
@@ -115,23 +138,11 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
 
     this.bsModalRef.content.addTransaction.subscribe(async (values: string[]) => {
 
-      // console.log('Quantity ' + values.Quantity);
-      // console.log('Fee ' + values.Fee);
-      // console.log('Date ' + values.Date);
-      // console.log('PriceBought ' + values.PriceBought);
-
       await this.delay(1000);
       this.loadPortfolio(this.id);
       this.getValues();
 
     });
-
-    // console.log('PortfolioId ' + coin.name);
-    // console.log(coin.userId);
-    // console.log(coin.name);
-    // console.log(coin.price);
-    // console.log(coin.quantity);
-
 
   }
 
@@ -157,14 +168,6 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
     }
 
   }
-
-    // loadUsers(userId: number) {
-    // this.userService.getUser(userId).subscribe((user: User) => {  // replace parameter with actual id
-    //   this.user = user;
-    //   console.log(user);
-    // }, error => {
-    //   this.alertify.error(error);
-    // });
 
      delay(ms: number) {
       return new Promise( resolve => setTimeout(resolve, ms) );

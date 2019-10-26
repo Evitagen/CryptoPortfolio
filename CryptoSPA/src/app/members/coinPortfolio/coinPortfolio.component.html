@@ -1,5 +1,9 @@
 <br><br><br>
   
+<h1 align="center">
+    {{portfolio.portfolioName}}
+</h1>
+
 <div style="margin: auto; width: 50%;">
   <p *ngIf="portfolio && portfolio.coinsHodle.length < 1">Select a coin from the dropdown box then click add</p>
   <select class="select" [(ngModel)]="coinSelected">
@@ -41,11 +45,11 @@
 <hr>
 
 <div *ngIf="portfolio && portfolio.coinsHodle.length > 0">
-  <div *ngFor="let coin of portfolio.coinsHodle">
+  <div *ngFor="let coin of coinsnImageList">
     <div class="container">
     <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24">    
-        {{coin.name | titlecase}}
+        <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24"> 
+          <img class="image"  src={{coin.imageLocation}} width="32" height="32"/>  {{coin.name | titlecase}}
       </div>
       <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
           {{coin.price | currency }}
@@ -82,31 +86,6 @@
   </div>
   </div> 
 
-
-
-<div *ngFor="let coin of coins">
-<div class="container">
-
-<!-- <div class="row">
-  {{user.id}}
-</div> -->
-
-  <!-- <div class="row">
-    <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
-        {{coin.name | titlecase}}
-    </div>
-    <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
-        {{coin.price | currency}}
-    </div>
-  
-    <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24">
-        <textarea name="" rows="1" class="form-control" [(ngModel)]="users"></textarea>
-    </div> 
-  </div> -->
-
-</div>
-<hr>
-</div>
 
 
 

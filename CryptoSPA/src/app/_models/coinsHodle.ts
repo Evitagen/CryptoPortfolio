@@ -4,5 +4,6 @@ export interface CoinsHodle {
     name: string;
     quantity: number;
     portfolioID: number;
+    imageLocation: string;
     userId: number;
 }
