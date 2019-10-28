@@ -76,6 +76,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
     this.userService.getCoinPrices().subscribe(Response => {
     this.coins = Response;
 
+
     if (this.coinsLoaded === false) {
       this.coinsDropDown = this.coins;
       this.coinsLoaded = true;

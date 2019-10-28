@@ -20,6 +20,7 @@ export class SelectPortfolioComponent implements OnInit {
   total: number;
   bsModalRef: any;
   portfolio: Portfolio;
+  coins: any;
 
   AllcoinsList: CoinsHodle[] = [];
   coinFound = false;
@@ -30,19 +31,28 @@ export class SelectPortfolioComponent implements OnInit {
   ngOnInit() {
     if (this.loggedIn) {
       this.loadUser(this.authService.decodedToken.nameid);
-      // console.log(this.authService.decodedToken.nameid);
-      // this.user = this.userService.getUser(this.authService.decodedToken.nameid);
     }
   }
 
    loadUser(id: number) {
     this.userService.getUser(id).subscribe((user: User) => {
       this.user = user;
+      this.getCoinPrices();
       this.getValues(this.user);
     }, error => {
       this.alertify.error(error);
     });
   }
+
+
+  getCoinPrices() {
+    this.userService.getCoinPrices().subscribe(Response => {
+      this.coins = Response;
+    }, error => {
+      console.log(error);
+    });
+  }
+
 
   getValues(user: User) {
 
@@ -61,19 +71,26 @@ export class SelectPortfolioComponent implements OnInit {
                   if (co.name === this.AllcoinsList[i].name) {                                   // if the name matches
                     this.coinFound = true;
                     this.AllcoinsList[i].quantity = this.AllcoinsList[i].quantity + co.quantity; // add quantity to existing in AllcoinsList
+
+                        for (let j = 0; j < this.coins.length; j++) {                     // loop through each
+                          if (co.name === this.coins[j].name) {                           //
+                            this.AllcoinsList[i].price = this.coins[j].price;             //
+                          }
+                        }
                   }
                 }
 
                 if (this.coinFound === false) {       // if coin not found
                     this.AllcoinsList.push(co);       // add coin and qty to Allcoins list
                 }
-                
           }
         }
       }
 
       for (const AllCoin of this.AllcoinsList) {
-        console.log(AllCoin);
+          if (AllCoin.price > 0 && AllCoin.quantity > 0) {
+            this.total = this.total + (AllCoin.price * AllCoin.quantity);
+          }
       }
 
     }, error => {
