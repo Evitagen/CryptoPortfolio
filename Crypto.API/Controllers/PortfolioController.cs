@@ -35,10 +35,33 @@ namespace Crypto.API.Controllers
 
              //var PortfolioToReturn = _mapper.Map<PortFoliosForDetailedDto>(Portfolio);
 
+             //
              // must check only users portfolios are returned not other users
+             //
 
              return Ok(Portfolio);
 
+        }
+
+        [HttpGet("All/{id}")]
+        public async Task<IActionResult> GetAllPortfolio(int id)
+        {
+
+            User user = await _repo.GetUser(id);
+
+            var Portfolios = await _repo.GetAllPortfolios(user);
+
+             // instead of doing this could create a DTO?
+            for (int i = 0; i < Portfolios.Count; i++)
+            {
+                Portfolios[i].User = null;  // removes all user details containing hash etc
+            }
+
+             //
+             // must check only users portfolios are returned not other users
+             //
+
+             return Ok(Portfolios);
         }
 
          [HttpPost("Add/{name}/{id}")]

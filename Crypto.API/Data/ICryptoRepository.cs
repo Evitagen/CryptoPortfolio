@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Crypto.API.Models;
 
@@ -18,6 +19,8 @@ namespace Crypto.API.Data
 
          Task<Portfolio> GetPortfolio(int id);
 
+         Task<List<Portfolio>> GetAllPortfolios(User user);
+
          Task<bool> AddPortfolio(string name, User user);
 
          Task<bool> AddCoinToPortfolio(string name, Portfolio portfolio);
@@ -27,5 +30,6 @@ namespace Crypto.API.Data
          Task<bool> UpdateCoinHodleAmount(CoinsHodle coinHodleID);
 
          Task GetUser(object userid);
+        
     }
 }

@@ -43,6 +43,10 @@ export class UserService {
     return this.http.get(this.baseUrl + 'portfolio/' + id);
   }
 
+  getAllPortfolioCoins(userId: number) {
+    return this.http.get(this.baseUrl + 'portfolio/All/' + userId);
+  }
+
   addPortfolio(name: string, userId: number) {
     return this.http.post(this.baseUrl + 'portfolio/add/' + name + '/' + userId, {});
   }

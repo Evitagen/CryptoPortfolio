@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Crypto.API.Models;
 using Microsoft.EntityFrameworkCore;
@@ -52,6 +53,23 @@ namespace Crypto.API.Data
             .FirstOrDefaultAsync(p => p.PortfolioID == id);
 
             return Portfolio;
+        }
+
+        public async Task<List<Portfolio>> GetAllPortfolios(User user)
+        {
+            //Portfolio[] portfolios = new Portfolio[] {};
+            List<Portfolio> portfolios = new List<Portfolio>();
+
+            foreach (var portfolio in user.Portfolio)
+            {
+              portfolios.Add(await GetPortfolio(portfolio.PortfolioID));
+            }
+
+            //  var Portfolio = await _context.Portfolio
+            // .Include(c => c.coinsHodle)
+            // .FirstOrDefaultAsync(p => p.User.Id == Userid);
+
+            return portfolios;
         }
 
         public async Task<bool> AddPortfolio(string name, User user)
@@ -150,6 +168,7 @@ namespace Crypto.API.Data
         {
             throw new System.NotImplementedException();
         }
+
     }
 
 }
