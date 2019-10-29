@@ -38,7 +38,7 @@ export class NewTransactionModalComponent implements OnInit {
 
   ngOnInit() {
     this.bsConfig = {
-      containerClass: 'theme-blue'
+      containerClass: 'theme-green'
     },
     this.createTransactionForm();
   }
@@ -101,6 +101,18 @@ export class NewTransactionModalComponent implements OnInit {
     }
     console.log('done');
 
+  }
+
+  BuySellChange() {
+   if (this.TransactionModel === 'Buy') {
+    this.bsConfig = {
+      containerClass: 'theme-green'
+    };
+   } else {
+    this.bsConfig = {
+      containerClass: 'theme-red'
+    };
+   }
   }
 
 

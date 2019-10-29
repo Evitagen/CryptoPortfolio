@@ -10,9 +10,9 @@
       <div class="btn-group">
           <h5 class="selbuysel">Select Buy or Sell:</h5>
           <label class="btn btn-success" name="Buy" [(ngModel)]="TransactionModel"
-                 btnRadio="Buy" tabindex="0" role="button">Buy</label>
+                 btnRadio="Buy" tabindex="0" (ngModelChange)="BuySellChange()" role="button">Buy</label>
           <label class="btn btn-danger" name="Sell" [(ngModel)]="TransactionModel"
-                 btnRadio="Sell" tabindex="0" role="button">Sell</label>
+                 btnRadio="Sell" tabindex="0" (ngModelChange)="BuySellChange()" role="button">Sell</label>
   </div>
       <!-- <pre class="card card-block card-header">{{TransactionModel || 'null'}}</pre> -->
 
