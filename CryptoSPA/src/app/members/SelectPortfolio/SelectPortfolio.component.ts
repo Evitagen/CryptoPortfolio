@@ -81,8 +81,13 @@ export class SelectPortfolioComponent implements OnInit {
                 }
 
                 if (this.coinFound === false) {       // if coin not found
-                    this.AllcoinsList.push(co);       // add coin and qty to Allcoins list
-                }
+                  for (let i = 0; i < this.coins.length; i++) {
+                    if (co.name === this.coins[i].name) {
+                      co.price = this.coins[i].price;
+                    }
+                  }
+                  this.AllcoinsList.push(co);       // add coin and qty to Allcoins list
+                 }
           }
         }
       }

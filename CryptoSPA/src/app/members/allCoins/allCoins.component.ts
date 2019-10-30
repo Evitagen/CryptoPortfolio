@@ -5,6 +5,7 @@ import { CoinsHodle } from 'src/app/_models/coinsHodle';
 import { Portfolio } from 'src/app/_models/portfolio';
 import { AuthService } from 'src/app/_services/auth.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
+import { interval } from 'rxjs';
 
 
 @Component({
@@ -18,7 +19,9 @@ export class AllCoinsComponent implements OnInit {
   total: number;
   coins: any;
   AllcoinsList: CoinsHodle[] = [];
+  AllcoinsnImageList: CoinsHodle[] = [];
   coinFound = false;
+  subscription: any;
 
   constructor(private userService: UserService, private authService: AuthService,
     private alertify: AlertifyService) { }
@@ -27,6 +30,7 @@ export class AllCoinsComponent implements OnInit {
     if (this.loggedIn) {
       this.loadUser(this.authService.decodedToken.nameid);
     }
+    this.pageRefresh();
   }
 
   loadUser(id: number) {
@@ -39,6 +43,13 @@ export class AllCoinsComponent implements OnInit {
     });
   }
 
+  pageRefresh() {
+    this.subscription = interval(500 * 60).subscribe(x => {
+      if (this.loggedIn) {
+        this.loadUser(this.authService.decodedToken.nameid);
+      }
+     });
+   }
 
   getCoinPrices() {
     this.userService.getCoinPrices().subscribe(Response => {
@@ -48,11 +59,9 @@ export class AllCoinsComponent implements OnInit {
     });
   }
 
-
-
-
   getValues(user: User) {
 
+    this.AllcoinsnImageList = [];
     this.total = 0;
     this.AllcoinsList = [];
     this.coinFound = false;
@@ -78,11 +87,29 @@ export class AllCoinsComponent implements OnInit {
                 }
 
                 if (this.coinFound === false) {       // if coin not found
+                    for (let i = 0; i < this.coins.length; i++) {
+                      if (co.name === this.coins[i].name) {
+                        co.price = this.coins[i].price;
+                      }
+                    }
                     this.AllcoinsList.push(co);       // add coin and qty to Allcoins list
                 }
           }
         }
       }
+
+
+        // copy portfolio coins into coinsnImageList
+        for (let i = 0; i < this.AllcoinsList.length; i++) {
+          const coinHodle = this.AllcoinsList[i];
+          this.AllcoinsnImageList.push(coinHodle);
+        }
+        // gets the icon location and puts in coinsnImageList
+        for (let i = 0; i < this.AllcoinsnImageList.length; i++) {
+          this.AllcoinsnImageList[i].imageLocation = 'assets/images/' + this.AllcoinsnImageList[i].name + '.png';
+          console.log(this.AllcoinsnImageList[i].imageLocation);
+        }
+
 
       for (const AllCoin of this.AllcoinsList) {
           if (AllCoin.price > 0 && AllCoin.quantity > 0) {

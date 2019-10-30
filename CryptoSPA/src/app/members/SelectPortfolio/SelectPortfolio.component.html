@@ -5,7 +5,7 @@
   <h1 align="center">
       Portfolios
   </h1>
-  <h3 align="center" *ngIf="this.total > 0">{{this.total | currency}}</h3>
+  <h3 align="center" *ngIf="this.total > 0">Total Value - {{this.total | currency}}</h3>
 <hr>
   <h5 align="center">
       <button  class="btn btn-success" (click)="addPortfolio(user)">Create New</button>

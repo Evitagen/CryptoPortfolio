@@ -5,6 +5,7 @@
 </h1>
 
 <br>
+<h4 align="center"> Total -  {{total | currency}}</h4>
 <br>
 
 
@@ -36,8 +37,8 @@
 </div>
 <hr>
 
-<div *ngIf="AllcoinsList.length > 0">
-  <div *ngFor="let coin of AllcoinsList">
+<div *ngIf="AllcoinsnImageList.length > 0">
+  <div *ngFor="let coin of AllcoinsnImageList">
     <div class="container">
     <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24"> 
@@ -53,7 +54,7 @@
           {{coin.price * coin.quantity | currency }}
         </div>
         <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
-        
+            <td><button class="btn btn-success">View</button></td>
         </div>
     </div>
     </div> 
