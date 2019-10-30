@@ -1,32 +1,27 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/_services/user.service';
-import { AuthService } from 'src/app/_services/auth.service';
 import { User } from 'src/app/_models/user';
-import { AlertifyService } from 'src/app/_services/alertify.service';
-import { RouterLink, Router } from '@angular/router';
-import { BsModalService } from 'ngx-bootstrap';
-import { NewPortfolioModalComponent } from '../newPortfolio-modal/newPortfolio-modal.component';
-import { Portfolio } from 'src/app/_models/portfolio';
 import { CoinsHodle } from 'src/app/_models/coinsHodle';
+import { Portfolio } from 'src/app/_models/portfolio';
+import { AuthService } from 'src/app/_services/auth.service';
+import { AlertifyService } from 'src/app/_services/alertify.service';
+
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'app-SelectPortfolio',
-  templateUrl: './SelectPortfolio.component.html',
-  styleUrls: ['./SelectPortfolio.component.css']
+  selector: 'app-allCoins',
+  templateUrl: './allCoins.component.html',
+  styleUrls: ['./allCoins.component.css']
 })
-export class SelectPortfolioComponent implements OnInit {
+export class AllCoinsComponent implements OnInit {
   user: User;
   total: number;
-  bsModalRef: any;
-  portfolio: Portfolio;
   coins: any;
-
   AllcoinsList: CoinsHodle[] = [];
   coinFound = false;
 
   constructor(private userService: UserService, private authService: AuthService,
-    private alertify: AlertifyService, private route: Router, private modalService: BsModalService) { }
+    private alertify: AlertifyService) { }
 
   ngOnInit() {
     if (this.loggedIn) {
@@ -34,7 +29,7 @@ export class SelectPortfolioComponent implements OnInit {
     }
   }
 
-   loadUser(id: number) {
+  loadUser(id: number) {
     this.userService.getUser(id).subscribe((user: User) => {
       this.user = user;
       this.getCoinPrices();
@@ -52,6 +47,8 @@ export class SelectPortfolioComponent implements OnInit {
       console.log(error);
     });
   }
+
+
 
 
   getValues(user: User) {
@@ -98,37 +95,8 @@ export class SelectPortfolioComponent implements OnInit {
     });
   }
 
-  viewPortfolio(portfolioID: number) {
-    this.route.navigate(['/coinportfolio/' + portfolioID]);
-  }
-
-
-  addPortfolio(user: User) {
-    const initialState = {
-      user
-    };
-
-    this.bsModalRef = this.modalService.show(NewPortfolioModalComponent, {initialState});
-
-    this.bsModalRef.content.addPortfolio.subscribe((values) => {
-      console.log(values);
-
-      this.userService.addPortfolio(values, this.user.id).subscribe(data => {
-        this.alertify.success('Added ' + values);
-        this.loadUser(this.user.id);
-      }, error => {
-        this.alertify.error(error);
-      });
-    });
-  }
-
-  viewAllPortfolio() {
-    // this.route.navigate(['./allcoins']);
-    this.route.navigateByUrl('/allCoins');
-  }
 
   loggedIn() {
     return this.authService.loggedIn();
   }
-
 }

@@ -1,0 +1,83 @@
+<br><br><br>
+  
+<h1 align="center">
+    All Portfolios Combined
+</h1>
+
+<br>
+<br>
+
+
+<!-- <div style="margin: auto; width: 50%; padding: 10px">
+  <td><button class="btn btn-info" (click)="addTransaction()">Add New</button></td>
+</div> -->
+
+<br><br><br>
+
+<div class="container">
+    <div class="row">   
+      <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24">
+        <h4>Coin</h4>
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+        <h4>Price</h4>
+      </div>
+
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+          <h4>Holdings</h4>
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+          <h4>Total</h4>
+      </div> 
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+        <h4>Transactions</h4>
+      </div> 
+    </div>
+</div>
+<hr>
+
+<div *ngIf="AllcoinsList.length > 0">
+  <div *ngFor="let coin of AllcoinsList">
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24"> 
+          <img class="image"  src={{coin.imageLocation}} width="32" height="32"/>  {{coin.name | titlecase}}
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
+          {{coin.price | currency }}
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
+          {{coin.quantity}}
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
+          {{coin.price * coin.quantity | currency }}
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
+        
+        </div>
+    </div>
+    </div> 
+    <hr>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24">    
+       
+     </div>
+     <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
+      
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
+        
+      </div>
+      <div *ngIf="total > 0" class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
+        {{total | currency}}
+      </div>
+  </div>
+  </div> 
+
+
+
+
