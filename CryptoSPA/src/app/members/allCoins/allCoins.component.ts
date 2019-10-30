@@ -18,6 +18,7 @@ export class AllCoinsComponent implements OnInit {
   user: User;
   total: number;
   coins: any;
+  bitcoinPrice: number;
   AllcoinsList: CoinsHodle[] = [];
   AllcoinsnImageList: CoinsHodle[] = [];
   coinFound = false;
@@ -54,6 +55,12 @@ export class AllCoinsComponent implements OnInit {
   getCoinPrices() {
     this.userService.getCoinPrices().subscribe(Response => {
       this.coins = Response;
+
+      for (let i = 0; i < this.coins.length; i++) {
+        if (this.coins[i].name === 'bitcoin') {
+          this.bitcoinPrice = this.coins[i].price;
+        }
+      }
     }, error => {
       console.log(error);
     });

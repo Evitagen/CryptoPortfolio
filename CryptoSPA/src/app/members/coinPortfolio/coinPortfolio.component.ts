@@ -10,6 +10,7 @@ import { BsModalService } from 'ngx-bootstrap';
 import { CoinsHodle } from 'src/app/_models/coinsHodle';
 import { NewTransactionModalComponent } from '../newTransaction-modal/newTransaction-modal.component';
 import { CoinList } from 'src/app/_models/coinList';
+import { AuthService } from 'src/app/_services/auth.service';
 
 
 
@@ -37,20 +38,22 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
   user: User;
   constructor(private http: HttpClient, private userService: UserService,
      private alertify: AlertifyService, private route: ActivatedRoute,
-     private modalService: BsModalService) { }
+     private modalService: BsModalService, private authService: AuthService) { }
   total: number;
   exists: Boolean = false;
   id: number;
 
   ngOnInit() {
 
-
+    if (this.loggedIn) {
     // tslint:disable-next-line:radix
     this.id = parseInt(this.route.snapshot.paramMap.get('id'));
     this.loadPortfolio(this.id);
     this.getValues();
     // this.loadUsers(this.portfolio.userid);
     this.pageRefresh();
+    }
+
   }
 
 
@@ -172,6 +175,10 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
 
      delay(ms: number) {
       return new Promise( resolve => setTimeout(resolve, ms) );
+    }
+
+    loggedIn() {
+      return this.authService.loggedIn();
     }
 
   }
