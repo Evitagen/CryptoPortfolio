@@ -23,7 +23,7 @@
       <h4 *ngIf="user && user.portfolio.length > 0">Name</h4>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24">
-        <button *ngIf="user.portfolio.length > 1" class="btn btn-success" (click)="viewAllPortfolio()">View All</button>
+        <button *ngIf="user?.portfolio.length > 1" class="btn btn-success" (click)="viewAllPortfolio()">View All</button>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24">
      

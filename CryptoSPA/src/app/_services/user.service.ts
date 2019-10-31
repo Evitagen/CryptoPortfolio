@@ -61,7 +61,7 @@ export class UserService {
 
   addCoinTransaction(coin: string, coinhodleid: number, quantity: number, fee: number, date: string, priceWhenBoughtSold: number) {
     // tslint:disable-next-line:max-line-length
-    //this.deletethis = this.baseUrl + 'portfolio/addtransaction/' + coin + '/' + portfolioId + '/' + quantity + '/' + fee + '/' + date + '/' + priceWhenBoughtSold;
+    // this.deletethis = this.baseUrl + 'portfolio/addtransaction/' + coin + '/' + portfolioId + '/' + quantity + '/' + fee + '/' + date + '/' + priceWhenBoughtSold;
     // tslint:disable-next-line:max-line-length
     return this.http.put(this.baseUrl + 'portfolio/addtransaction/' + coin + '/' + coinhodleid + '/' + quantity + '/' + fee + '/' + date + '/' + priceWhenBoughtSold, {});
   }

@@ -6,7 +6,7 @@ import { UserService } from '../../_services/user.service';
 import { AlertifyService } from '../../_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { Portfolio } from 'src/app/_models/portfolio';
-import { BsModalService } from 'ngx-bootstrap';
+import { BsModalService, TabHeadingDirective } from 'ngx-bootstrap';
 import { CoinsHodle } from 'src/app/_models/coinsHodle';
 import { NewTransactionModalComponent } from '../newTransaction-modal/newTransaction-modal.component';
 import { CoinList } from 'src/app/_models/coinList';
@@ -109,12 +109,16 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
   AddCoinImages() {
 
     this.coinsnImageList = [];
+   // this.portfolio.coinsHodle = [];
 
     // copy portfolio coins into coinsnImageList
-    for (let i = 0; i < this.portfolio.coinsHodle.length; i++) {
-      const coinHodle = this.portfolio.coinsHodle[i];
-      this.coinsnImageList.push(coinHodle);
-    }
+      for (let i = 0; i < this.portfolio.coinsHodle.length; i++) {
+        const coinHodle = this.portfolio.coinsHodle[i];
+        this.coinsnImageList.push(coinHodle);
+      }
+
+
+
     // gets the icon location and puts in coinsnImageList
     for (let i = 0; i < this.coinsnImageList.length; i++) {
       this.coinsnImageList[i].imageLocation = 'assets/images/' + this.coinsnImageList[i].name + '.png';
