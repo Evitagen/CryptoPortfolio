@@ -76,7 +76,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
     // Gets the total
     this.total = 0.00;
 
-    this.userService.getCoinPrices().subscribe(Response => {
+    this.userService.getCoinPrices().subscribe(async Response => {
     this.coins = Response;
 
 
@@ -84,6 +84,9 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
       this.coinsDropDown = this.coins;
       this.coinsLoaded = true;
     }
+
+      // put delay
+      await this.delay(100);
 
       // gets the total
       for (const coin of this.coins) {
@@ -99,6 +102,8 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
         }
       }
 
+
+
       this.AddCoinImages();
 
     }, error => {
@@ -109,15 +114,12 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
   AddCoinImages() {
 
     this.coinsnImageList = [];
-   // this.portfolio.coinsHodle = [];
 
     // copy portfolio coins into coinsnImageList
       for (let i = 0; i < this.portfolio.coinsHodle.length; i++) {
         const coinHodle = this.portfolio.coinsHodle[i];
         this.coinsnImageList.push(coinHodle);
       }
-
-
 
     // gets the icon location and puts in coinsnImageList
     for (let i = 0; i < this.coinsnImageList.length; i++) {
