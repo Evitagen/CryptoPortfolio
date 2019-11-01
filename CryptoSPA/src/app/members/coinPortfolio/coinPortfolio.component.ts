@@ -26,12 +26,11 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
   images: string[];
   coinsLoaded = false;
   coinsDropDown: any;
-
   subscription: any;
   portfolio: Portfolio;
   bsModalRef: any;
-
   coinsnImageList: CoinsHodle[] = [];
+  allowRefresh = true;
 
 
   coinSelected: string;
@@ -43,15 +42,18 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
   exists: Boolean = false;
   id: number;
 
-  ngOnInit() {
+  async ngOnInit() {
 
     if (this.loggedIn) {
     // tslint:disable-next-line:radix
     this.id = parseInt(this.route.snapshot.paramMap.get('id'));
     this.loadPortfolio(this.id);
+
+    // put delay
+    await this.delay(100);
     this.getValues();
     // this.loadUsers(this.portfolio.userid);
-    this.pageRefresh();
+    //this.pageRefresh();
     }
 
   }
@@ -67,7 +69,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     console.log('destroy');
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribe();
   }
 
   getValues() {
@@ -84,9 +86,6 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
       this.coinsDropDown = this.coins;
       this.coinsLoaded = true;
     }
-
-      // put delay
-      await this.delay(100);
 
       // gets the total
       for (const coin of this.coins) {
@@ -124,13 +123,13 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
     // gets the icon location and puts in coinsnImageList
     for (let i = 0; i < this.coinsnImageList.length; i++) {
       this.coinsnImageList[i].imageLocation = 'assets/images/' + this.coinsnImageList[i].name + '.png';
-      console.log(this.coinsnImageList[i].imageLocation);
+      // console.log(this.coinsnImageList[i].imageLocation);
     }
 
   }
 
   pageRefresh() {
-   this.subscription = interval(100 * 60).subscribe(x => {
+   this.subscription = interval(1000 * 60).subscribe(x => {
       this.getValues();
     });
   }
@@ -148,8 +147,9 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
 
     this.bsModalRef.content.addTransaction.subscribe(async (values: string[]) => {
 
-      await this.delay(1000);
+      await this.delay(350);
       this.loadPortfolio(this.id);
+      await this.delay(350);
       this.getValues();
 
     });
