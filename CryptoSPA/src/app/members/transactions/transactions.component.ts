@@ -1,38 +1,32 @@
 import { Component, OnInit } from '@angular/core';
+import { Portfolio } from 'src/app/_models/portfolio';
+import { AlertifyService } from 'src/app/_services/alertify.service';
 import { UserService } from 'src/app/_services/user.service';
+import { AuthService } from 'src/app/_services/auth.service';
 import { User } from 'src/app/_models/user';
 import { CoinsHodle } from 'src/app/_models/coinsHodle';
-import { Portfolio } from 'src/app/_models/portfolio';
-import { AuthService } from 'src/app/_services/auth.service';
-import { AlertifyService } from 'src/app/_services/alertify.service';
-import { interval } from 'rxjs';
-
 
 @Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'app-allCoins',
-  templateUrl: './allCoins.component.html',
-  styleUrls: ['./allCoins.component.css']
+  selector: 'app-transactions',
+  templateUrl: './transactions.component.html',
+  styleUrls: ['./transactions.component.css']
 })
-export class AllCoinsComponent implements OnInit {
-  user: User;
-  total: number;
-  coins: any;
-  bitcoinPrice: number;
-  AllcoinsList: CoinsHodle[] = [];
-  AllcoinsnImageList: CoinsHodle[] = [];
-  coinFound = false;
-  subscription: any;
 
-  constructor(private userService: UserService, private authService: AuthService,
-    private alertify: AlertifyService) { }
+export class TransactionsComponent implements OnInit {
+
+  user: User;
+  coins: any;
+
+  total: number;
+  AllcoinsList: CoinsHodle[] = [];
+  coinFound = false;
+
+  constructor(private userService: UserService, private alertify: AlertifyService, private authService: AuthService) { }
 
   ngOnInit() {
-    if (this.loggedIn) {
-      this.loadUser(this.authService.decodedToken.nameid);
-    }
-    this.pageRefresh();
+    this.loadUser(this.authService.decodedToken.nameid);
   }
+
 
   loadUser(id: number) {
     this.userService.getUser(id).subscribe((user: User) => {
@@ -44,23 +38,9 @@ export class AllCoinsComponent implements OnInit {
     });
   }
 
-  pageRefresh() {
-    this.subscription = interval(500 * 60).subscribe(x => {
-      if (this.loggedIn) {
-        this.loadUser(this.authService.decodedToken.nameid);
-      }
-     });
-   }
-
   getCoinPrices() {
     this.userService.getCoinPrices().subscribe(Response => {
       this.coins = Response;
-
-      for (let i = 0; i < this.coins.length; i++) {
-        if (this.coins[i].name === 'bitcoin') {
-          this.bitcoinPrice = this.coins[i].price;
-        }
-      }
     }, error => {
       console.log(error);
     });
@@ -68,7 +48,6 @@ export class AllCoinsComponent implements OnInit {
 
   getValues(user: User) {
 
-    this.AllcoinsnImageList = [];
     this.total = 0;
     this.AllcoinsList = [];
     this.coinFound = false;
@@ -94,29 +73,16 @@ export class AllCoinsComponent implements OnInit {
                 }
 
                 if (this.coinFound === false) {       // if coin not found
-                    for (let i = 0; i < this.coins.length; i++) {
-                      if (co.name === this.coins[i].name) {
-                        co.price = this.coins[i].price;
-                      }
+                  for (let i = 0; i < this.coins.length; i++) {
+                    if (co.name === this.coins[i].name) {
+                      co.price = this.coins[i].price;
                     }
-                    this.AllcoinsList.push(co);       // add coin and qty to Allcoins list
-                }
+                  }
+                  this.AllcoinsList.push(co);       // add coin and qty to Allcoins list
+                 }
           }
         }
       }
-
-
-        // copy portfolio coins into coinsnImageList
-        for (let i = 0; i < this.AllcoinsList.length; i++) {
-          const coinHodle = this.AllcoinsList[i];
-          this.AllcoinsnImageList.push(coinHodle);
-        }
-        // gets the icon location and puts in coinsnImageList
-        for (let i = 0; i < this.AllcoinsnImageList.length; i++) {
-          this.AllcoinsnImageList[i].imageLocation = 'assets/images/' + this.AllcoinsnImageList[i].name + '.png';
-          // console.log(this.AllcoinsnImageList[i].imageLocation);
-        }
-
 
       for (const AllCoin of this.AllcoinsList) {
           if (AllCoin.price > 0 && AllCoin.quantity > 0) {
@@ -129,8 +95,10 @@ export class AllCoinsComponent implements OnInit {
     });
   }
 
-
-  loggedIn() {
-    return this.authService.loggedIn();
+  onBtnView() {
+    console.log('view');
   }
+
+
+
 }

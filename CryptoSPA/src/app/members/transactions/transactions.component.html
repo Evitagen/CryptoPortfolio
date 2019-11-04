@@ -1,0 +1,24 @@
+<br><br><br>
+  
+<h1 align="center">
+    Transactions
+</h1>
+
+<br>
+<br>
+
+<div align="center">
+  <p *ngIf="AllcoinsList && AllcoinsList.length < 1">No Transactions Yet</p>
+  Select Coin
+  <select class="select" [(ngModel)]="coinSelected">
+      <option *ngFor="let coin of AllcoinsList" [value]="coin.name">
+        {{coin.name}}
+      </option>
+  </select>
+
+  
+
+</div>
+<div class="viewbtn" align="center">
+    <button class="btn btn-success" (click)="onBtnView()">View Transactions</button>
+</div>

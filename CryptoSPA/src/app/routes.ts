@@ -6,6 +6,7 @@ import { CoinPortfolioComponent } from './members/coinPortfolio/coinPortfolio.co
 import { AuthGuard } from './_guards/auth.guard';
 import { SelectPortfolioComponent } from './members/SelectPortfolio/SelectPortfolio.component';
 import { AllCoinsComponent } from './members/allCoins/allCoins.component';
+import { TransactionsComponent } from './members/transactions/transactions.component';
 
 export const appRoutes: Routes = [
     {path: 'coin', component: CoinlistComponent},
@@ -13,5 +14,6 @@ export const appRoutes: Routes = [
     {path: 'allCoins', component: AllCoinsComponent, canActivate: [AuthGuard]},
     {path: 'coinportfolio/:id', component: CoinPortfolioComponent, canActivate: [AuthGuard]},
     {path: 'selectportfolio', component: SelectPortfolioComponent, canActivate: [AuthGuard]},
+    {path: 'transactions', component: TransactionsComponent, canActivate: [AuthGuard]},
     {path: '**', redirectTo: 'coin', pathMatch: 'full'},
 ];
