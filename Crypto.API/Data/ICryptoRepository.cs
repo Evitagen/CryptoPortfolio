@@ -21,6 +21,8 @@ namespace Crypto.API.Data
 
          Task<List<Portfolio>> GetAllPortfolios(User user);
 
+         Task<Transactions> GetTransactions(User user);
+
          Task<bool> AddPortfolio(string name, User user);
 
          Task<bool> AddCoinToPortfolio(string name, Portfolio portfolio);

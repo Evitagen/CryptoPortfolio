@@ -52,12 +52,16 @@ export class UserService {
   }
 
   //
-  // Adding Coins
+  //  Coins
   //
 
   addPortfolioCoin(coin: string, portfolioId: number) {
     return this.http.post(this.baseUrl + 'portfolio/addcoin/' + coin + '/' + portfolioId, {});
   }
+
+  //
+  // Transactions
+  //
 
   addCoinTransaction(coin: string, coinhodleid: number, quantity: number, fee: number, date: string, priceWhenBoughtSold: number) {
     // tslint:disable-next-line:max-line-length
@@ -65,5 +69,11 @@ export class UserService {
     // tslint:disable-next-line:max-line-length
     return this.http.put(this.baseUrl + 'portfolio/addtransaction/' + coin + '/' + coinhodleid + '/' + quantity + '/' + fee + '/' + date + '/' + priceWhenBoughtSold, {});
   }
+
+  getTransactions() {
+    return this.http.get(this.baseUrl + '');
+  }
+
+
 
 }

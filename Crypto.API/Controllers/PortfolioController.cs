@@ -64,6 +64,15 @@ namespace Crypto.API.Controllers
              return Ok(Portfolios);
         }
 
+        [HttpGet("Transactions/{PortfolioID}/{Coin}")]
+        public async Task<IActionResult> GetTransactions(int PortfolioID, string Coin)
+        {
+          //   var Transactions = await _repo.GetTransactions()
+
+
+              return Ok();
+        }
+
          [HttpPost("Add/{name}/{id}")]
          public async Task<IActionResult> Add(string name, int id)
          {
@@ -96,13 +105,6 @@ namespace Crypto.API.Controllers
          [HttpPut("AddTransaction/{coinname}/{coinhodleid}/{quantity}/{fee}/{datatime}/{priceWhenBoughtSold}")]
          public async Task<IActionResult> AddTransaction(string coinname, int coinhodleid, decimal quantity, decimal fee, string datatime, decimal priceWhenBoughtSold)
          {
-
-            //  Console.WriteLine(coinname);
-            //  Console.WriteLine(coinhodleid);
-            //  Console.WriteLine(quantity);
-            //  Console.WriteLine(fee);
-            //  Console.WriteLine(datatime);
-            //  Console.WriteLine(priceWhenBoughtSold);
 
             CoinsHodle coinsHodle = await _repo.GetCoinsHodle(coinhodleid);
 

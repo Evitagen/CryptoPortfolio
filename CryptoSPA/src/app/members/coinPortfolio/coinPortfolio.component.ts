@@ -53,7 +53,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
     await this.delay(100);
     this.getValues();
     // this.loadUsers(this.portfolio.userid);
-    //this.pageRefresh();
+    // this.pageRefresh();
     }
 
   }

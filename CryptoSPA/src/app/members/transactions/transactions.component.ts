@@ -50,7 +50,21 @@ export class TransactionsComponent implements OnInit {
 
     this.total = 0;
     this.AllcoinsList = [];
+
+
     this.coinFound = false;
+
+    const All: CoinsHodle = {
+      id: 0,
+      price: 0,
+      name: '**** ALL ****',
+      quantity: 0,
+      portfolioID: 0,
+      imageLocation: '',
+      userId: 0
+    };
+
+     this.AllcoinsList.push(All);
 
     this.userService.getAllPortfolioCoins(user.id).subscribe((portfolios: Portfolio[]) => {
 
@@ -84,12 +98,6 @@ export class TransactionsComponent implements OnInit {
         }
       }
 
-      for (const AllCoin of this.AllcoinsList) {
-          if (AllCoin.price > 0 && AllCoin.quantity > 0) {
-            this.total = this.total + (AllCoin.price * AllCoin.quantity);
-          }
-      }
-
     }, error => {
       this.alertify.error(error);
     });
@@ -99,6 +107,5 @@ export class TransactionsComponent implements OnInit {
     console.log('view');
   }
 
-
-
+ 
 }

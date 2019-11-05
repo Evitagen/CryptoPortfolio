@@ -169,6 +169,10 @@ namespace Crypto.API.Data
             throw new System.NotImplementedException();
         }
 
+        public Task<Transactions> GetTransactions(User user)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

@@ -7,18 +7,97 @@
 <br>
 <br>
 
-<div align="center">
-  <p *ngIf="AllcoinsList && AllcoinsList.length < 1">No Transactions Yet</p>
-  Select Coin
-  <select class="select" [(ngModel)]="coinSelected">
-      <option *ngFor="let coin of AllcoinsList" [value]="coin.name">
-        {{coin.name}}
-      </option>
-  </select>
 
-  
+<div class="container">
+
+    <div class="row">
+        <p *ngIf="AllcoinsList && AllcoinsList.length < 1">No Transactions Yet</p>
+
+        <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-12">
+           <div align="right">Select Portfolio - </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-12">
+            <select class="select" [(ngModel)]="portfolioSelected">
+                <option class="optionwidth" *ngFor="let portfolio of user.portfolio" [value]="portfolio.name">
+                  {{portfolio.portfolioName}}
+                </option>
+            </select>
+        </div>
+
+      </div>
+
+    <div class="row">
+      <p *ngIf="AllcoinsList && AllcoinsList.length < 1">No Transactions Yet</p>
+
+      <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-12">
+          <div align="right">Select Coin  - </div>
+      </div>
+
+      <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-12">
+          <select class="select" [(ngModel)]="coinSelected">
+              <option class="optionwidth" *ngFor="let coin of AllcoinsList" [value]="coin.name">
+                {{coin.name}}
+              </option>
+          </select>
+      </div>
+
+    </div>
 
 </div>
+
 <div class="viewbtn" align="center">
     <button class="btn btn-success" (click)="onBtnView()">View Transactions</button>
 </div>
+
+
+
+
+<br><br><br>
+
+<div class="container">
+    <div class="row">   
+      <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-12">
+        <h4>Coin</h4>
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-12">
+        <h4>Date/Time</h4>
+      </div>
+
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-12">
+          <h4>Buy / Sell</h4>
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-12">
+          <h4>Amount</h4>
+      </div> 
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-12">
+        <h4></h4>
+      </div> 
+    </div>
+</div>
+<hr>
+
+<!-- <div *ngIf="AllcoinsnImageList.length > 0">
+  <div *ngFor="let coin of AllcoinsnImageList">
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-12"> 
+          <img class="image"  src={{coin.imageLocation}} width="32" height="32"/>  {{coin.name | titlecase}}
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-12">    
+          {{coin.price | currency }}
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-12">    
+          {{coin.quantity}}
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-12">    
+          {{coin.price * coin.quantity | currency }}
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-12">    
+            <td><button class="btn btn-success">View</button></td>
+        </div>
+    </div>
+    </div> 
+    <hr>
+  </div>
+</div> -->
