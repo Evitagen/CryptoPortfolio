@@ -9,3 +9,11 @@ p.coin {
 .image {
     padding-right: 5px;
 }
+
+.positive_percent {
+    color: lightgreen;
+}
+
+.negative_percent {
+    color: rgb(194, 23, 0);
+}

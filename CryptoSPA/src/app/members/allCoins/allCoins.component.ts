@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from 'src/app/_services/user.service';
 import { User } from 'src/app/_models/user';
 import { CoinsHodle } from 'src/app/_models/coinsHodle';
@@ -14,7 +14,7 @@ import { interval } from 'rxjs';
   templateUrl: './allCoins.component.html',
   styleUrls: ['./allCoins.component.css']
 })
-export class AllCoinsComponent implements OnInit {
+export class AllCoinsComponent implements OnInit, OnDestroy {
   user: User;
   total: number;
   coins: any;
@@ -32,6 +32,11 @@ export class AllCoinsComponent implements OnInit {
       this.loadUser(this.authService.decodedToken.nameid);
     }
     this.pageRefresh();
+  }
+
+  ngOnDestroy() {
+    console.log('destroy');
+    this.subscription.unsubscribe();
   }
 
   loadUser(id: number) {

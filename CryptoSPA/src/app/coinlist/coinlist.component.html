@@ -53,8 +53,11 @@
   <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
     {{ coin.circulating * coin.price | currency }}
   </div>  
-  <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
-      {{ coin.percentChange24hr }}
+  <div *ngIf="coin.percentChange24hr >= 0" class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+    <div class="positive_percent">{{ coin.percentChange24hr }}</div>
+  </div>
+  <div *ngIf="coin.percentChange24hr < 0" class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+    <div class="negative_percent">{{ coin.percentChange24hr }}</div>
   </div>  
 </div>
 
