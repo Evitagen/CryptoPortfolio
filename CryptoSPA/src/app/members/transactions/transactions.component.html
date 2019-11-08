@@ -19,7 +19,8 @@
 
         <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-12">
             <select class="select" [(ngModel)]="portfolioSelected">
-                <option class="optionwidth" *ngFor="let portfolio of user.portfolio" [value]="portfolio.name">
+                <option disabled selected value=undefined> --All-- </option>
+                <option class="optionwidth" *ngFor="let portfolio of user.portfolio" [value]="portfolio.portfolioName">
                   {{portfolio.portfolioName}}
                 </option>
             </select>
@@ -36,6 +37,7 @@
 
       <div class="col-lg-6 col-md-6 col-sm-6 cos-xs-12">
           <select class="select" [(ngModel)]="coinSelected">
+              <option disabled selected value=undefined> --All-- </option>
               <option class="optionwidth" *ngFor="let coin of AllcoinsList" [value]="coin.name">
                 {{coin.name}}
               </option>

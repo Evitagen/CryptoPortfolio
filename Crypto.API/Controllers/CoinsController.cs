@@ -31,16 +31,14 @@ namespace Crypto.API.Controllers
         {
          CoinList coinmcap = new CoinList();
 
-          coinmcap = await GetCoinsInterval.GetCoinList();
-  
-          //await Task.Run(() => coinmcap.loadcoinMCapData());
+         //coinmcap = await GetCoinsInterval.GetCoinList();
+         coinmcap = await GetCoinsInterval.GetCoinList_API();
 
-          return Ok(coinmcap);
+         coinmcap.viewCoins();
+  
+         return Ok(coinmcap);
         }
 
-        // get coin / {id} detailed description
-
-        // get coin price history
 
     }
 }

@@ -147,9 +147,9 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
 
     this.bsModalRef.content.addTransaction.subscribe(async (values: string[]) => {
 
-      await this.delay(350);
+      await this.delay(500);
       this.loadPortfolio(this.id);
-      await this.delay(350);
+      await this.delay(500);
       this.getValues();
 
     });

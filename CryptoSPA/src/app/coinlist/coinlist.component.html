@@ -26,6 +26,9 @@
       <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
         <h4>Marketcap</h4>
       </div>
+      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+        <h4>Change 24hr</h4>
+      </div>
        
     </div>
     
@@ -39,7 +42,7 @@
     <img class="image"  src={{coin.imagelocation}} width="32" height="32"/>  {{ coin.name | titlecase }}
   </div>
   <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
-      <div class="blue">{{coin.price | currency}}</div>
+      <div class="blue">${{coin.price}}</div>
   </div>
   <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
       <div class="blue">{{coin.volume | currency}}</div>
@@ -49,6 +52,9 @@
   </div>
   <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
     {{ coin.circulating * coin.price | currency }}
+  </div>  
+  <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+      {{ coin.percentChange24hr }}
   </div>  
 </div>
 

@@ -21,7 +21,7 @@ namespace Crypto.API.Data
             strCoinMcap = await GetCoinMarketCapData();
         }
 
-        internal List<coins> getPrices()
+        internal async Task<List<coins>> getPricesAsync()
         {
            string strcoin = "";
            char c;
@@ -45,8 +45,8 @@ namespace Crypto.API.Data
                                     }
                         strcoin = StringManipulation.Reverse(strcoin);
                         coinToAdd.Name = strcoin;
-                        Task.Run(() => coinToAdd.Volume = getVolume(strcoin));            
-                         coinToAdd.Price = GetPrice(strcoin);   
+                        await Task.Run(() => coinToAdd.Volume = getVolume(strcoin));            
+                        coinToAdd.Price = GetPrice(strcoin);   
                         coinToAdd.circulating = getCirculatingSuply(strcoin);  
                         //coinToAdd.Marketcap = GetCoinMCap(coinToAdd);                   
                         strcoin = "";

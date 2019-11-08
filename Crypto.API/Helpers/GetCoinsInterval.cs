@@ -2,6 +2,10 @@ using System.Threading.Tasks;
 using Crypto.API.Models;
 using System;
 using System.Timers;
+using System.Collections.Generic;
+using System.Net;
+using System.Web;
+using Newtonsoft.Json;
 
 namespace Crypto.API.Helpers
 {
@@ -18,12 +22,37 @@ namespace Crypto.API.Helpers
                 await Task.Run(() => coinlist.loadcoinMCapData()); 
 
                 blnStarted = true;
-                aTimer = new System.Timers.Timer(10000);  // every 10 seconds
+                aTimer = new System.Timers.Timer(100000);  // every 100 seconds
                 Timer();
             }
 
             return coinlist;
         }
+
+        internal async static Task<CoinList> GetCoinList_API()
+        {
+            try 
+            {
+                if (blnStarted == false)
+                { 
+                    blnStarted = true;
+                    coinlist = new CoinList();
+                    await Task.Run(() => coinlist.getCoinPrices_API()); 
+
+
+                    aTimer = new System.Timers.Timer(900000);  // every 900 seconds / 15 mins
+                    Timer();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine(e.ToString());
+            }
+
+            return coinlist;
+        }
+
+
 
         private static void Timer()
         {
@@ -34,7 +63,8 @@ namespace Crypto.API.Helpers
 
         private async static void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
-            await Task.Run(() => coinlist.loadcoinMCapData());              
+           // await Task.Run(() => coinlist.loadcoinMCapData());
+           await Task.Run(() => coinlist.getCoinPrices_API());            
         }
 
 

@@ -20,6 +20,9 @@ export class TransactionsComponent implements OnInit {
   total: number;
   AllcoinsList: CoinsHodle[] = [];
   coinFound = false;
+  coinSelected: string;
+  portfolioSelected: string;
+
 
   constructor(private userService: UserService, private alertify: AlertifyService, private authService: AuthService) { }
 
