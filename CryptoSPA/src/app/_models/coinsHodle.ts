@@ -1,6 +1,6 @@
 export interface CoinsHodle {
     id: number;
-    price: any;
+    price: number;
     name: string;
     quantity: number;
     portfolioID: number;

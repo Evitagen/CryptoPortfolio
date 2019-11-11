@@ -6,6 +6,8 @@ import { Portfolio } from 'src/app/_models/portfolio';
 import { AuthService } from 'src/app/_services/auth.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { interval } from 'rxjs';
+import { HelperServiceService } from "./../../_services/HelperService.service";
+import { debug } from 'util';
 
 
 @Component({
@@ -24,12 +26,16 @@ export class AllCoinsComponent implements OnInit, OnDestroy {
   coinFound = false;
   subscription: any;
 
-  constructor(private userService: UserService, private authService: AuthService,
-    private alertify: AlertifyService) { }
+  PieChart = [];
 
-  ngOnInit() {
+  constructor(private userService: UserService, private authService: AuthService,
+    private alertify: AlertifyService, public helperService: HelperServiceService) { }
+
+  async ngOnInit() {
     if (this.loggedIn) {
       this.loadUser(this.authService.decodedToken.nameid);
+       await this.delay(400);
+      this.helperService.loadPieChart(this.AllcoinsList);
     }
     this.pageRefresh();
   }
@@ -50,9 +56,11 @@ export class AllCoinsComponent implements OnInit, OnDestroy {
   }
 
   pageRefresh() {
-    this.subscription = interval(500 * 60).subscribe(x => {
+    this.subscription = interval(500 * 60).subscribe(async x => {
       if (this.loggedIn) {
         this.loadUser(this.authService.decodedToken.nameid);
+        await this.delay(400);
+        this.helperService.loadPieChart(this.AllcoinsList);
       }
      });
    }
@@ -134,6 +142,9 @@ export class AllCoinsComponent implements OnInit, OnDestroy {
     });
   }
 
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
 
   loggedIn() {
     return this.authService.loggedIn();

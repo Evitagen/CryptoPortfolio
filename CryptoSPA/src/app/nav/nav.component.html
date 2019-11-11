@@ -13,6 +13,9 @@
       <li *ngIf="loggedIn()" class="nav-item">
           <a class="nav-link" [routerLink]="['/transactions']" routerLinkActive="router-link-active">Transactions</a>
       </li>
+      <li *ngIf="loggedIn()" class="nav-item">
+          <a class="nav-link" [routerLink]="['/alerts']" routerLinkActive="router-link-active">Alerts</a>
+      </li>
       <!-- <li *ngIf="loggedIn()" class="nav-item">
           <a class="nav-link" (click)="logout()">Logout</a>
         </li> -->

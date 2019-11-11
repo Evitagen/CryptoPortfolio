@@ -37,6 +37,15 @@ export class CoinlistComponent implements OnInit, OnDestroy {
     });
   }
 
+  getValuesCoinMCap_StringManip() {
+    this.userService.getPCoinPrices_StringManip().subscribe((coins: CoinList) => {
+      this.coins = coins;
+      this.AddCoinImages();
+    }, error => {
+      console.log(error);
+    });
+  }
+
   AddCoinImages() {
 
 

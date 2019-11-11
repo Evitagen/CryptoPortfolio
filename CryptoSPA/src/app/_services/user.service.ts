@@ -35,6 +35,10 @@ export class UserService {
     return this.http.get(this.baseUrl + 'coins');
   }
 
+  getPCoinPrices_StringManip() {
+    return this.http.get(this.baseUrl + 'Mcap/MarketCapString');
+  }
+
   //
   // Portfolio
   //

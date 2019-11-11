@@ -39,6 +39,18 @@ namespace Crypto.API.Controllers
          return Ok(coinmcap);
         }
 
+        //      // GET api/values
+        [AllowAnonymous]
+        [HttpGet("Mcap/")]
+        public async Task<IActionResult> GetMarketCapString()
+        {
+         CoinList coinmcap = new CoinList();
+
+         coinmcap = await GetCoinsInterval.GetCoinList();
+  
+         return Ok(coinmcap);
+        }
+
 
     }
 }

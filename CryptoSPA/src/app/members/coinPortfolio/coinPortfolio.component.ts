@@ -11,7 +11,9 @@ import { CoinsHodle } from 'src/app/_models/coinsHodle';
 import { NewTransactionModalComponent } from '../newTransaction-modal/newTransaction-modal.component';
 import { CoinList } from 'src/app/_models/coinList';
 import { AuthService } from 'src/app/_services/auth.service';
-
+import { Chart } from 'chart.js';
+import { CurrencyPipe } from '@angular/common';
+import { HelperServiceService } from "./../../_services/HelperService.service";
 
 
 @Component({
@@ -32,15 +34,18 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
   coinsnImageList: CoinsHodle[] = [];
   allowRefresh = true;
 
+  PieChart = [];
 
   coinSelected: string;
   user: User;
   constructor(private http: HttpClient, private userService: UserService,
      private alertify: AlertifyService, private route: ActivatedRoute,
-     private modalService: BsModalService, private authService: AuthService) { }
+     private modalService: BsModalService, private authService: AuthService,
+     public helperService: HelperServiceService) { }
   total: number;
   exists: Boolean = false;
   id: number;
+
 
   async ngOnInit() {
 
@@ -54,9 +59,13 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
     this.getValues();
     // this.loadUsers(this.portfolio.userid);
     // this.pageRefresh();
+
+    await this.delay(100);
+    this.helperService.loadPieChart(this.coinsnImageList);
     }
 
   }
+
 
 
   loadPortfolio(id: number) {
@@ -151,6 +160,8 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
       this.loadPortfolio(this.id);
       await this.delay(500);
       this.getValues();
+      await this.delay(100);
+      this.helperService.loadPieChart(this.coinsnImageList);
 
     });
 
