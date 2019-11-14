@@ -7,31 +7,33 @@
 <br>
 <br>
 
-<div align="center">
-  <p *ngIf="portfolio && portfolio.coinsHodle.length < 1">Select a coin from the dropdown box then click add</p>
-  <select class="select" [(ngModel)]="coinSelected">
-      <option disabled selected value=undefined> --Select-- </option>
-      <option *ngFor="let coin of coinsDropDown" [value]="coin.name">
-        {{coin.name}}
-      </option>
-  </select>
-  <!-- <button (click)="onBtnAdd()">Add Coin</button> -->
-  <button class="btn btn-success" (click)="onBtnAdd()">Add Coin</button>
-  <!-- selected value is {{coinSelected}} -->
-</div>
 
-<!-- <div style="margin: auto; width: 50%; padding: 10px">
-  <td><button class="btn btn-info" (click)="addTransaction()">Add New</button></td>
-</div> -->
 
-<br><br><br>
+<br>
 
 
 <div style="display: block">
 
-<canvas *ngIf="total > 0" id="pieChart"></canvas>
+<h4 align="center" *ngIf="total > 0" >   
+      Total Value - {{total | currency}}
+</h4> 
 
-<br><br><br>
+
+
+<br><br>
+
+<div align="center">
+    <p *ngIf="portfolio && portfolio.coinsHodle.length < 1">Select a coin from the dropdown box then click add</p>
+    <select class="select" [(ngModel)]="coinSelected">
+        <option disabled selected value=undefined> --Select-- </option>
+        <option *ngFor="let coin of coinsDropDown" [value]="coin.name">
+          {{coin.name}}
+        </option>
+    </select>
+    <button class="btn btn-success" (click)="onBtnAdd()">Add Coin</button>
+  </div>
+
+<br><br>
 
 <div class="container">
     <div class="row">   
@@ -92,11 +94,14 @@
         
       </div>
       <div *ngIf="total > 0" class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
-        {{total | currency}}
+        <!-- {{total | currency}} -->
       </div>
   </div>
   </div> 
 
+  <br>
+
+<canvas *ngIf="total > 0" id="pieChart"></canvas>
 
 
 

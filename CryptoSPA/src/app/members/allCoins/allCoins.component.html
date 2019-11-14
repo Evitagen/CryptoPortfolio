@@ -10,16 +10,7 @@
 <br>
 
 
-<!-- <div style="margin: auto; width: 50%; padding: 10px">
-  <td><button class="btn btn-info" (click)="addTransaction()">Add New</button></td>
-</div> -->
-
-<br><br><br>
-
-<div style="display: block">
-<canvas *ngIf="total > 0" id="pieChart"></canvas>
-</div>
-<br><br><br>
+<br><br>
 
 <div class="container">
     <div class="row">   
@@ -69,21 +60,13 @@
 </div>
 
 <div class="container">
-  <div class="row">
-      <div class="col-lg-3 col-md-3 col-sm-6 cos-xs-24">    
-       
-     </div>
-     <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
-      
-      </div>
-      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
-        
-      </div>
-      <div *ngIf="total > 0" class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
-        {{total | currency}}
-      </div>
+
+  <br><br>
+
+  <div style="display: block">
+      <canvas id="pieChart"></canvas>
   </div>
-  </div> 
+</div> 
 
 
 

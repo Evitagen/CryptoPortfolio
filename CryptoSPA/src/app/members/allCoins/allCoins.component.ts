@@ -33,8 +33,8 @@ export class AllCoinsComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     if (this.loggedIn) {
-      this.loadUser(this.authService.decodedToken.nameid);
-       await this.delay(400);
+       this.loadUser(this.authService.decodedToken.nameid);
+       await this.delay(1000);
       this.helperService.loadPieChart(this.AllcoinsList);
     }
     this.pageRefresh();
@@ -45,7 +45,7 @@ export class AllCoinsComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  loadUser(id: number) {
+   loadUser(id: number) {
     this.userService.getUser(id).subscribe((user: User) => {
       this.user = user;
       this.getCoinPrices();
@@ -59,16 +59,15 @@ export class AllCoinsComponent implements OnInit, OnDestroy {
     this.subscription = interval(500 * 60).subscribe(async x => {
       if (this.loggedIn) {
         this.loadUser(this.authService.decodedToken.nameid);
-        await this.delay(400);
+        await this.delay(1000);
         this.helperService.loadPieChart(this.AllcoinsList);
       }
      });
    }
 
-  getCoinPrices() {
+   getCoinPrices() {
     this.userService.getCoinPrices().subscribe(Response => {
       this.coins = Response;
-
       for (let i = 0; i < this.coins.length; i++) {
         if (this.coins[i].name === 'bitcoin') {
           this.bitcoinPrice = this.coins[i].price;

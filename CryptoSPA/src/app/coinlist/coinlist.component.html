@@ -1,9 +1,9 @@
 <br>
   <h1 align="center">
-    Coin MarketCap Plus
+    Cryfolio
   </h1>
   <h5 align="center">
-    Top 100 Cryptocurrencies by Market Capitalization <button>C</button>
+    Top 200 Cryptocurrencies by Market Capitalization <button>C</button>
   </h5>
 <br>
 <br>
@@ -15,10 +15,10 @@
         <h4>Coin</h4>
       </div>
       <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
-        <h4>Price</h4>
+        <h4 class="blue">Price</h4>
       </div>
       <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
-          <h4>Volume</h4>
+          <h4 class="blue">Volume</h4>
       </div>
       <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
         <h4>Circulating Supply</h4>
@@ -26,8 +26,11 @@
       <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
         <h4>Marketcap</h4>
       </div>
-      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+      <div class="col-lg-1 col-md-2 col-sm-6 cos-xs-24">
         <h4>Change 24hr</h4>
+      </div>
+      <div class="col-lg-1 col-md-2 col-sm-6 cos-xs-24">
+          <h4>Change 7d</h4>
       </div>
        
     </div>
@@ -53,12 +56,22 @@
   <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
     {{ coin.circulating * coin.price | currency }}
   </div>  
-  <div *ngIf="coin.percentChange24hr >= 0" class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+
+  <div *ngIf="coin.percentChange24hr >= 0" class="col-lg-1 col-md-1 col-sm-6 cos-xs-24">
     <div class="positive_percent">{{ coin.percentChange24hr }}</div>
   </div>
-  <div *ngIf="coin.percentChange24hr < 0" class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+  <div *ngIf="coin.percentChange24hr < 0" class="col-lg-1 col-md-1 col-sm-6 cos-xs-24">
     <div class="negative_percent">{{ coin.percentChange24hr }}</div>
   </div>  
+
+  <div *ngIf="coin.percentChange7day >= 0" class="col-lg-1 col-md-1 col-sm-6 cos-xs-24">
+      <div class="positive_percent">{{ coin.percentChange7day }}</div>
+    </div>
+    <div *ngIf="coin.percentChange7day < 0" class="col-lg-1 col-md-1 col-sm-6 cos-xs-24">
+      <div class="negative_percent">{{ coin.percentChange7day }}</div>
+  </div>  
+
+
 </div>
 
 </div>

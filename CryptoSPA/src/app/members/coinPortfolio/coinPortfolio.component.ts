@@ -60,7 +60,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
     // this.loadUsers(this.portfolio.userid);
     // this.pageRefresh();
 
-    await this.delay(100);
+    await this.delay(1000);
     this.helperService.loadPieChart(this.coinsnImageList);
     }
 
@@ -160,7 +160,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
       this.loadPortfolio(this.id);
       await this.delay(500);
       this.getValues();
-      await this.delay(100);
+      await this.delay(1000);
       this.helperService.loadPieChart(this.coinsnImageList);
 
     });
