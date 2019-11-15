@@ -117,6 +117,7 @@ export class AllCoinsComponent implements OnInit, OnDestroy {
         }
       }
 
+         this.FormatNumbers();
 
         // copy portfolio coins into coinsnImageList
         for (let i = 0; i < this.AllcoinsList.length; i++) {
@@ -139,6 +140,30 @@ export class AllCoinsComponent implements OnInit, OnDestroy {
     }, error => {
       this.alertify.error(error);
     });
+  }
+
+  FormatNumbers() {
+
+    for (let i = 0; i < this.AllcoinsList.length; i++) {
+
+      ///
+      /// Format prices to correct decimal places.
+      ///
+
+      if (this.AllcoinsList[i].price < 1) {
+        this.AllcoinsList[i].price = Number(this.AllcoinsList[i].price.toFixed(8));
+      }
+
+      if (this.AllcoinsList[i].price > 1 && this.AllcoinsList[i].price < 100) {
+        this.AllcoinsList[i].price = Number(this.AllcoinsList[i].price.toFixed(4));
+      }
+
+      if (this.AllcoinsList[i].price > 100) {
+        this.AllcoinsList[i].price = Number(this.AllcoinsList[i].price.toFixed(2));
+      }
+
+    }
+
   }
 
   delay(ms: number) {

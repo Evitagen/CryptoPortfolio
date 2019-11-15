@@ -11,25 +11,25 @@
 
 <div class="container">
     <div class="row">   
-      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+      <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
         <h4>Coin</h4>
       </div>
-      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+      <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
         <h4 class="blue">Price</h4>
       </div>
-      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+      <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
           <h4 class="blue">Volume</h4>
       </div>
-      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+      <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
         <h4>Circulating Supply</h4>
       </div>
-      <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+      <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
         <h4>Marketcap</h4>
       </div>
-      <div class="col-lg-1 col-md-2 col-sm-6 cos-xs-24">
+      <div class="col-lg-1 col-md-6 col-sm-6 cos-xs-6">
         <h4>Change 24hr</h4>
       </div>
-      <div class="col-lg-1 col-md-2 col-sm-6 cos-xs-24">
+      <div class="col-lg-1 col-md-6 col-sm-6 cos-xs-6">
           <h4>Change 7d</h4>
       </div>
        
@@ -41,34 +41,34 @@
 <div *ngFor="let coin of coinsnImageList">
 <div class="container">
 <div class="row">
-  <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+  <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
     <img class="image"  src={{coin.imagelocation}} width="32" height="32"/>  {{ coin.name | titlecase }}
   </div>
-  <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+  <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
       <div class="blue">${{coin.price}}</div>
   </div>
-  <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+  <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
       <div class="blue">{{coin.volume | currency}}</div>
   </div>
-  <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+  <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
     {{coin.circulating | number}}
   </div>
-  <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
+  <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
     {{ coin.circulating * coin.price | currency }}
   </div>  
 
-  <div *ngIf="coin.percentChange24hr >= 0" class="col-lg-1 col-md-1 col-sm-6 cos-xs-24">
-    <div class="positive_percent">{{ coin.percentChange24hr }}</div>
+  <div *ngIf="coin.percentChange24hr >= 0" class="col-lg-1 col-md-6 col-sm-6 cos-xs-6">
+    <div class="positive_percent">{{ coin.percentChange24hr }}%</div>
   </div>
-  <div *ngIf="coin.percentChange24hr < 0" class="col-lg-1 col-md-1 col-sm-6 cos-xs-24">
-    <div class="negative_percent">{{ coin.percentChange24hr }}</div>
+  <div *ngIf="coin.percentChange24hr < 0" class="col-lg-1 col-md-6 col-sm-6 cos-xs-6">
+    <div class="negative_percent">{{ coin.percentChange24hr }}%</div>
   </div>  
 
-  <div *ngIf="coin.percentChange7day >= 0" class="col-lg-1 col-md-1 col-sm-6 cos-xs-24">
-      <div class="positive_percent">{{ coin.percentChange7day }}</div>
+  <div *ngIf="coin.percentChange7day >= 0" class="col-lg-1 col-md-6 col-sm-6 cos-xs-6">
+      <div class="positive_percent">{{ coin.percentChange7day }}%</div>
     </div>
-    <div *ngIf="coin.percentChange7day < 0" class="col-lg-1 col-md-1 col-sm-6 cos-xs-24">
-      <div class="negative_percent">{{ coin.percentChange7day }}</div>
+    <div *ngIf="coin.percentChange7day < 0" class="col-lg-1 col-md-6 col-sm-6 cos-xs-6">
+      <div class="negative_percent">{{ coin.percentChange7day }}%</div>
   </div>  
 
 

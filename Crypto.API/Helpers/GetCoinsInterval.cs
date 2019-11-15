@@ -16,21 +16,8 @@ namespace Crypto.API.Helpers
         private static System.Timers.Timer aTimer;
         internal async static Task<CoinList> GetCoinList()
         {
-            // if (blnStarted == false)
-            // { 
-            //     coinlist = new CoinList();
-                await Task.Run(() => coinlist.loadcoinMCapData()); 
-
-            //     blnStarted = true;
-            //     aTimer = new System.Timers.Timer(100000);  // every 100 seconds
-            //     Timer();
-            // }
-
-            System.Console.WriteLine("called coinmarketcap !!!!!!!");
-            System.Console.WriteLine("Delete this comment !!!!!!!");
-            System.Console.WriteLine("Delete this comment !!!!!!!");
-            System.Console.WriteLine("Delete this comment !!!!!!!");
-            
+            await Task.Run(() => coinlist.loadcoinMCapData()); 
+  
             return coinlist;
         }
 

@@ -113,6 +113,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
 
 
       this.AddCoinImages();
+      this.FormatNumbers();
 
     }, error => {
       console.log(error);
@@ -133,6 +134,30 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
     for (let i = 0; i < this.coinsnImageList.length; i++) {
       this.coinsnImageList[i].imageLocation = 'assets/images/' + this.coinsnImageList[i].name + '.png';
       // console.log(this.coinsnImageList[i].imageLocation);
+    }
+
+  }
+
+  FormatNumbers() {
+
+    for (let i = 0; i < this.coinsnImageList.length; i++) {
+
+      ///
+      /// Format prices to correct decimal places.
+      ///
+
+      if (this.coinsnImageList[i].price < 1) {
+        this.coinsnImageList[i].price = Number(this.coinsnImageList[i].price.toFixed(8));
+      }
+
+      if (this.coinsnImageList[i].price > 1 && this.coinsnImageList[i].price < 100) {
+        this.coinsnImageList[i].price = Number(this.coinsnImageList[i].price.toFixed(4));
+      }
+
+      if (this.coinsnImageList[i].price > 100) {
+        this.coinsnImageList[i].price = Number(this.coinsnImageList[i].price.toFixed(2));
+      }
+
     }
 
   }

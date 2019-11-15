@@ -11,7 +11,7 @@ import { CoinList } from 'src/app/_models/coinList';
 export class CoinlistComponent implements OnInit, OnDestroy {
   coins: CoinList;
   coinsnImage: CoinList;
-  coinImageLinks: string[] = [];
+  // coinImageLinks: string[] = [];
   coinsnImageList: CoinList[] = [];
   getprice = true;
   subscription: any;
@@ -24,7 +24,6 @@ export class CoinlistComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // console.log('destroy');
     this.subscription.unsubscribe();
   }
 
@@ -32,6 +31,7 @@ export class CoinlistComponent implements OnInit, OnDestroy {
     this.userService.getCoinPrices().subscribe((coins: CoinList) => {
       this.coins = coins;
       this.AddCoinImages();
+      this.FormatNumbers();
     }, error => {
       console.log(error);
     });
@@ -48,7 +48,6 @@ export class CoinlistComponent implements OnInit, OnDestroy {
 
   AddCoinImages() {
 
-
     this.coinsnImageList = [];
 
     for (let i = 0; i < this.coins.length; i++) {
@@ -59,6 +58,38 @@ export class CoinlistComponent implements OnInit, OnDestroy {
     for (let i = 0; i < this.coinsnImageList.length; i++) {
       this.coinsnImageList[i].imagelocation = 'assets/images/' + this.coinsnImageList[i].name + '.png';
       console.log(this.coinsnImageList[i].imagelocation);
+    }
+
+  }
+
+  FormatNumbers() {
+
+    for (let i = 0; i < this.coinsnImageList.length; i++) {
+
+      ///
+      /// Format prices to correct decimal places.
+      ///
+
+      if (this.coinsnImageList[i].price < 1) {
+        this.coinsnImageList[i].price = Number(this.coinsnImageList[i].price.toFixed(8));
+      }
+
+      if (this.coinsnImageList[i].price > 1 && this.coinsnImageList[i].price < 100) {
+        this.coinsnImageList[i].price = Number(this.coinsnImageList[i].price.toFixed(4));
+      }
+
+      if (this.coinsnImageList[i].price > 100) {
+        this.coinsnImageList[i].price = Number(this.coinsnImageList[i].price.toFixed(2));
+      }
+
+      ///
+      /// Format Percentage changed to 2dp
+      ///
+
+      this.coinsnImageList[i].percentChange1hr = Number(this.coinsnImageList[i].percentChange1hr.toFixed(2));
+      this.coinsnImageList[i].percentChange24hr = Number(this.coinsnImageList[i].percentChange24hr.toFixed(2));
+      this.coinsnImageList[i].percentChange7day = Number(this.coinsnImageList[i].percentChange7day.toFixed(2));
+
     }
 
   }
