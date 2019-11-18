@@ -2,6 +2,10 @@ p.coin {
     padding-left: 50px;
 }
 
+.containersmall {
+    padding-left: 100px;
+}
+
 .blue {
     color: rgb(40, 201, 255);
 }

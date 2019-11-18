@@ -10,70 +10,208 @@
 <br>
 
 <div class="container">
-    <div class="row">   
-      <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
-        <h4>Coin</h4>
-      </div>
-      <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
-        <h4 class="blue">Price</h4>
-      </div>
-      <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
-          <h4 class="blue">Volume</h4>
-      </div>
-      <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
-        <h4>Circulating Supply</h4>
-      </div>
-      <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
-        <h4>Marketcap</h4>
-      </div>
-      <div class="col-lg-1 col-md-6 col-sm-6 cos-xs-6">
-        <h4>Change 24hr</h4>
-      </div>
-      <div class="col-lg-1 col-md-6 col-sm-6 cos-xs-6">
-          <h4>Change 7d</h4>
-      </div>
-       
-    </div>
+
+  <div class="d-none d-lg-block">
+      <!-- Only on large screens -->
+      <div class="row">   
+          <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
+            <h4>Coin</h4>
+          </div>
+          <div class="col-lg-1 col-md-6 col-sm-6 cos-xs-6">
+            <h4 class="blue">Price</h4>
+          </div>
+          <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
+              <h4 class="blue">Volume</h4>
+          </div>
+          <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
+            <h4>Circulating Supply</h4>
+          </div>
+          <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
+            <h4>Marketcap</h4>
+          </div>
+          <div class="col-lg-1 col-md-6 col-sm-6 cos-xs-6">
+              <h4>1hr</h4>
+            </div>
+          <div class="col-lg-1 col-md-6 col-sm-6 cos-xs-6">
+            <h4>24hr</h4>
+          </div>
+          <div class="col-lg-1 col-md-6 col-sm-6 cos-xs-6">
+            <h4>7d</h4>
+          </div>  
+        </div>
+  </div>
+
+  <div class="d-block d-lg-none">
+      <!-- Only on Smaller screens -->
+      <!-- <div class="row">   
+          <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
+            <h4>Coin</h4>
+          </div>
+          <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
+            <h4 class="blue">Price</h4>
+          </div>
+          <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
+              <h4 class="blue">Volume</h4>
+          </div>
+          <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
+            <h4>Circulating Supply</h4>
+          </div>
+          <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
+            <h4>Marketcap</h4>
+          </div>
+          <div class="col-lg-1 col-md-6 col-sm-6 cos-xs-6">
+            <h4>Change 24hr</h4>
+          </div>
+          <div class="col-lg-1 col-md-6 col-sm-6 cos-xs-6">
+            <h4>Change 7d</h4>
+          </div>  
+        </div> -->
+
+  </div>
+
+   
     
-    </div>
+</div>
 <hr>
+
+
 
 <div *ngFor="let coin of coinsnImageList">
-<div class="container">
-<div class="row">
-  <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
-    <img class="image"  src={{coin.imagelocation}} width="32" height="32"/>  {{ coin.name | titlecase }}
-  </div>
-  <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
-      <div class="blue">${{coin.price}}</div>
-  </div>
-  <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
-      <div class="blue">{{coin.volume | currency}}</div>
-  </div>
-  <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
-    {{coin.circulating | number}}
-  </div>
-  <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
-    {{ coin.circulating * coin.price | currency }}
-  </div>  
 
-  <div *ngIf="coin.percentChange24hr >= 0" class="col-lg-1 col-md-6 col-sm-6 cos-xs-6">
-    <div class="positive_percent">{{ coin.percentChange24hr }}%</div>
-  </div>
-  <div *ngIf="coin.percentChange24hr < 0" class="col-lg-1 col-md-6 col-sm-6 cos-xs-6">
-    <div class="negative_percent">{{ coin.percentChange24hr }}%</div>
-  </div>  
 
-  <div *ngIf="coin.percentChange7day >= 0" class="col-lg-1 col-md-6 col-sm-6 cos-xs-6">
-      <div class="positive_percent">{{ coin.percentChange7day }}%</div>
+     <!-- only display on large screens -->
+    <div class="d-none d-lg-block">
+
+      <div class="container">
+          <div class="row">
+                <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
+                  <img class="image"  src={{coin.imagelocation}} width="32" height="32"/>  {{ coin.name | titlecase }}
+                </div>
+                <div class="col-lg-1 col-md-6 col-sm-6 cos-xs-6">
+                    <div class="blue">${{coin.price}}</div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
+                    <div class="blue">{{coin.volume | currency}}</div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
+                  {{coin.circulating | number}}
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 cos-xs-6">
+                  {{ coin.circulating * coin.price | currency }}
+                </div>  
+                 
+          
+                    <!-- display as green -->
+                    <div *ngIf="coin.percentChange1hr >= 0" class="col-lg-1 col-md-6 col-sm-6 cos-xs-6">
+                        <div class="positive_percent">{{ coin.percentChange1hr }}%</div>
+                    </div>
+                    <!-- display as red -->
+                    <div *ngIf="coin.percentChange1hr < 0" class="col-lg-1 col-md-6 col-sm-6 cos-xs-6">
+                        <div class="negative_percent">{{ coin.percentChange1hr }}%</div>
+                    </div>
+                    
+                    <!-- display as green -->
+                    <div *ngIf="coin.percentChange24hr >= 0" class="col-lg-1 col-md-6 col-sm-6 cos-xs-6">
+                        <div class="positive_percent">{{ coin.percentChange24hr }}%</div>
+                    </div>
+                    <!-- display as red -->
+                    <div *ngIf="coin.percentChange24hr < 0" class="col-lg-1 col-md-6 col-sm-6 cos-xs-6">
+                        <div class="negative_percent">{{ coin.percentChange24hr }}%</div>
+                    </div> 
+
+                    <!-- display as green -->
+                    <div *ngIf="coin.percentChange7day >= 0" class="col-lg-1 col-md-6 col-sm-6 cos-xs-6">
+                        <div class="positive_percent">{{ coin.percentChange7day }}%</div>
+                    </div>
+                    <!-- display as red -->
+                    <div *ngIf="coin.percentChange7day < 0" class="col-lg-1 col-md-6 col-sm-6 cos-xs-6">
+                        <div class="negative_percent">{{ coin.percentChange7day }}%</div>
+                    </div>  
+      
+            </div>
+        </div>
+
     </div>
-    <div *ngIf="coin.percentChange7day < 0" class="col-lg-1 col-md-6 col-sm-6 cos-xs-6">
-      <div class="negative_percent">{{ coin.percentChange7day }}%</div>
-  </div>  
+
+    <!-- only display on small screens -->
+    <div class="d-block d-lg-none">
+      <div class="containersmall">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 cos-xs-6">   
+                <img class="image"  src={{coin.imagelocation}} width="32" height="32"/> {{ coin.name | titlecase }}
+                <hr>
+            </div>
+            <div class="col-md-6 col-sm-6 cos-xs-6">
+                 <div class="blue"><h5>Price</h5>${{coin.price}}</div>
+                 <hr>
+            </div>           
+            <div class="col-md-6 col-sm-6 cos-xs-6">
+                <div class="blue"><h5>Volume</h5>{{coin.volume | currency}}</div>
+                <hr>
+            </div>          
+            <div class="col-md-6 col-sm-6 cos-xs-6">
+                <h5>Circulating</h5>{{coin.circulating | number}}
+                <hr>
+            </div>         
+            <div class="col-md-6 col-sm-6 cos-xs-6">
+                <h5>MarketCap</h5>{{ coin.circulating * coin.price | currency }}
+                <hr>
+            </div>  
+             
+            
+                <!-- display as green -->
+                <div *ngIf="coin.percentChange1hr >= 0" class="col-md-6 col-sm-6 cos-xs-6">
+                    <h5 class="positive_percent">1hr</h5><div class="positive_percent">{{ coin.percentChange1hr }}%</div>
+                    <hr>
+                </div>
+                <!-- display as red -->
+                <div *ngIf="coin.percentChange1hr < 0" class="col-md-6 col-sm-6 cos-xs-6">
+                    <h5 class="negative_percent">1hr</h5><div class="negative_percent">{{ coin.percentChange1hr }}%</div>
+                    <hr>
+                </div>
+                
+                <hr>
+                <!-- display as green -->
+                <div *ngIf="coin.percentChange24hr >= 0" class="col-md-6 col-sm-6 cos-xs-6">
+                    <h5 class="positive_percent">24hr</h5><div class="positive_percent">{{ coin.percentChange24hr }}%</div>
+                    <hr>
+                </div>
+                <!-- display as red -->
+                <div *ngIf="coin.percentChange24hr < 0" class="col-md-6 col-sm-6 cos-xs-6">
+                    <h5 class="negative_percent">24hr</h5><div class="negative_percent">{{ coin.percentChange24hr }}%</div>
+                    <hr>
+                </div> 
+
+                <hr>
+                <!-- display as green -->
+                <div *ngIf="coin.percentChange7day >= 0" class="col-md-6 col-sm-6 cos-xs-6">
+                    <h5 class="positive_percent">7Day</h5><div class="positive_percent">{{ coin.percentChange7day }}%</div>
+                    <hr>
+                </div>
+                <!-- display as red -->
+                <div *ngIf="coin.percentChange7day < 0" class="col-md-6 col-sm-6 cos-xs-6">
+                   <h5 class="negative_percent">7Day</h5><div class="negative_percent">{{ coin.percentChange7day }}%</div>
+                   <hr>
+                </div>  
+  
+        </div>
+      </div>
+        <hr><hr><hr>
 
 
-</div>
+    </div>
 
-</div>
-<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+  <hr>
 </div>
