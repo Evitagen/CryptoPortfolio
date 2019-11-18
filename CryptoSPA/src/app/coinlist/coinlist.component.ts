@@ -71,7 +71,7 @@ export class CoinlistComponent implements OnInit, OnDestroy {
       ///
 
       if (this.coinsnImageList[i].price < 1) {
-        this.coinsnImageList[i].price = Number(this.coinsnImageList[i].price.toFixed(8));
+        this.coinsnImageList[i].price = Number(this.coinsnImageList[i].price.toFixed(6));
       }
 
       if (this.coinsnImageList[i].price > 1 && this.coinsnImageList[i].price < 100) {
