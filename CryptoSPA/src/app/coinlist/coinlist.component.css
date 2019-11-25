@@ -28,4 +28,9 @@ p.coin {
     float: centre;
 }
 
+#parent{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
 
