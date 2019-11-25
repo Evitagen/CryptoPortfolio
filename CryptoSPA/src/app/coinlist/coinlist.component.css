@@ -21,3 +21,11 @@ p.coin {
 .negative_percent {
     color: rgb(194, 23, 0);
 }
+
+.img-container {
+    width: 65px;
+    height: 50px;
+    float: centre;
+}
+
+
