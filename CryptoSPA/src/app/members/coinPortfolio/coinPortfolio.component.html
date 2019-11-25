@@ -41,7 +41,7 @@
         <h4>Coin</h4>
       </div>
       <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
-        <h4>Price</h4>
+        <h4 class="price">Price</h4>
       </div>
 
       <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">
@@ -65,7 +65,7 @@
           <img class="image"  src={{coin.imageLocation}} width="32" height="32"/>  {{coin.name | titlecase}}
       </div>
       <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
-          ${{coin.price}}
+          <div class="price">${{coin.price}}</div>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
           {{coin.quantity}}

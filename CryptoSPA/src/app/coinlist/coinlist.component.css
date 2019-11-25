@@ -6,8 +6,16 @@ p.coin {
     padding-left: 100px;
 }
 
-.blue {
-    color: rgb(40, 201, 255);
+.circulating {
+    color: rgb(17, 134, 173);
+}
+
+.Volume {
+    color: rgb(124, 222, 255);
+}
+
+.price {
+    color: rgb(183, 255, 251)
 }
 
 .image {
@@ -28,9 +36,10 @@ p.coin {
     float: centre;
 }
 
+
 #parent{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 20px 1fr;
 }
 
 
