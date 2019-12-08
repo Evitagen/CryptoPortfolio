@@ -9,6 +9,7 @@ FEATURES
 * view top 200 Cryptocurrencies
 * changes in value over 1hr, 24hr, 7 days
 * view on different screen sizes mobile/desktop (Bootstrap)
+* Auto Refreshes the price every 2 minutes
 * Register new user
 * Login/Logout
 * Create new portfolio
@@ -18,14 +19,14 @@ FEATURES
 * View pie chart of current portfolio
 * View total amount of all portfolios
 * View Total amount and value of all coins in all portfolios
-* included feer and greed index from https://alternative.me/crypto/fear-and-greed-index
+* included fear and greed index from https://alternative.me/crypto/fear-and-greed-index
 
 Soon to be included..
 * View transactions by portfolio/coin
 * Alerts for price notifications
 
 
-the price data is got from - https://coinmarketcap.com/api/
+I get the price data from - https://coinmarketcap.com/api/
 
 
 Net Core web API
