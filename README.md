@@ -66,3 +66,8 @@ Tech / Framworks / Languages used
 * Multi-Browser support - tested on Chrome / Brave / Firefox / Safari
 
 Don't store any real cryptocurrency portfolios on this site!. - https://cryfolio.azurewebsites.net/
+
+you can login with 
+username - test 
+password - password
+
