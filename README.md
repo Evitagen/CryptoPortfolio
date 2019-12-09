@@ -60,5 +60,6 @@ Tech / Framworks / Languages used
 * Bootstrap - used to display items correctly for both mobile and desktop
 * ngx bootstrap - for date picker and button selectors.
 * Alertifyjs - notifications for logins / successfull registrations etc
+* Multi-Browser support - tested on Chrome / Brave / Firefox / Safari
 
 Don't store any real cryptocurrency portfolios on this site!. - https://cryfolio.azurewebsites.net/
