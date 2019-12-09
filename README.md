@@ -71,3 +71,4 @@ you can login with
 username - test 
 password - password
 
+Licensed under the [MIT License](LICENSE).
