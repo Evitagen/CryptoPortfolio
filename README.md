@@ -10,9 +10,9 @@ Test Project I created to learn .Net Core web API and Angular 8.
   <img src="images/MainView.png">
   <b> Portfolio View </b> 
   <img src="images/Portfolio.png"> 
-  <b> Add Transaction </b> 
-  <img src="images/AddTransaction.png">
+  <b> Add Transaction </b>
 </p>
+<img src="images/AddTransaction.png">
 
 
 FEATURES
@@ -35,18 +35,30 @@ FEATURES
 
 Soon to be included..
 * View transactions by portfolio/coin
+* Sort by price change / price / circulating suppoy
 * Alerts for price notifications
 
 
 I get the price data from - https://coinmarketcap.com/api/
 
 
-.Net Core web API
------------------
+Tech / Framworks / Languages used
+---------------------------------
 
-* gets prices every two minutes from api
-* Handles user register and logon using salt and hashing
+<b>.Net Core</b>
+
 * Entity framework for db storing users portfolios coins and transactions
+* Postman used to test API calls and responses
+* gets prices every two minutes from coinmarketcap api and stores in localy that can be accessed from front end without extra API calls.
+* Handles user register and logon using salt and hashing
 
+<b>Angular 8</b>
+
+* TypeScript
+* ChartJS - display pie charts 
+* CSS
+* Bootstrap - used to display items correctly for both mobile and desktop
+* ngx bootstrap - for date picker and button selectors.
+* Alertifyjs - notifications for logins / successfull registrations etc
 
 Don't store any real cryptocurrency portfolios on this site!. - https://cryfolio.azurewebsites.net/
