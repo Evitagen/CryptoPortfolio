@@ -3,8 +3,10 @@ Crypto Currency Portfolio Tracker made in .Net Core and Angular 8
 
 Test Project I created to learn .Net Core web API and Angular 8.
 
+<img src="Screenshot-2019-12-09-at-11.29.47.png" >
+
 FEATURES
-========
+--------
 
 * view top 200 Cryptocurrencies
 * changes in value over 1hr, 24hr, 7 days
@@ -29,8 +31,8 @@ Soon to be included..
 I get the price data from - https://coinmarketcap.com/api/
 
 
-Net Core web API
-=================
+.Net Core web API
+-----------------
 
 * gets prices every two minutes from api
 * Handles user register and logon using salt and hashing
