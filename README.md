@@ -3,7 +3,17 @@ Crypto Currency Portfolio Tracker made in .Net Core and Angular 8
 
 Test Project I created to learn .Net Core web API and Angular 8.
 
-<img src="Screenshot-2019-12-09-at-11.29.47.png" >
+
+
+<p align="center">
+  <b> Main View </b>
+  <img src="images/MainView.png">
+  <b> Portfolio View </b> 
+  <img src="images/Portfolio.png"> 
+  <b> Add Transaction </b> 
+  <img src="images/AddTransaction.png">
+</p>
+
 
 FEATURES
 --------
