@@ -1,8 +1,9 @@
 # CryptoPortfolio
 Crypto Currency Portfolio Tracker made in .Net Core and Angular 8
 
-Test Project I created to learn .Net Core web API and Angular 8.
+Test Project I created to learn .Net Core web API and Angular 8. 
 
+I chose this as I couldn't find any portfolio trackers that were accurate as the prices are typically based off one exchange and prices can sometimes vary significantly. This is done using coinmarketcap API where prices are compiled from multiple exchanges. Also with the free closed source trackers it is not possible to tell if your portfolio data was being shared with third parties.
 
 
 <p align="center">
@@ -37,6 +38,8 @@ Soon to be included..
 * View transactions by portfolio/coin
 * Sort by price change / price / circulating suppoy
 * Alerts for price notifications
+* Convert to an Electron application
+
 
 
 I get the price data from - https://coinmarketcap.com/api/
@@ -49,7 +52,7 @@ Tech / Framworks / Languages used
 
 * Entity framework for db storing users portfolios coins and transactions
 * Postman used to test API calls and responses
-* gets prices every two minutes from coinmarketcap api and stores in localy that can be accessed from front end without extra API calls.
+* gets prices every two minutes from coinmarketcap api and stores in localy that can be accessed from front end without extra API calls. You will need to get your own api key.
 * Handles user register and logon using salt and hashing
 
 <b>Angular 8</b>
