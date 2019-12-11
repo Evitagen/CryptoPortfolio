@@ -52,7 +52,7 @@ Tech / Framworks / Languages used
 
 * Entity framework for db storing users portfolios coins and transactions
 * Postman used to test API calls and responses
-* gets prices every two minutes from coinmarketcap api and stores in localy that can be accessed from front end without extra API calls. You will need to get your own api key.
+* gets prices every two minutes from coinmarketcap api and stores in localy that can be accessed from front end without extra API calls. You will need to get your own API key.
 * Handles user register and logon using salt and hashing
 
 <b>Angular 8</b>
