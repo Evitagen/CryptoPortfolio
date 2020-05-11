@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Crypto.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190930100806_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200508143109_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,13 +29,11 @@ namespace Crypto.API.Migrations
 
                     b.Property<decimal>("Quantity");
 
-                    b.Property<int?>("UserId");
+                    b.Property<int>("coinID");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PortfolioID");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("CoinsHodle");
                 });
@@ -97,16 +95,12 @@ namespace Crypto.API.Migrations
                     b.HasOne("Crypto.API.Models.Portfolio", "Portfolio")
                         .WithMany("coinsHodle")
                         .HasForeignKey("PortfolioID");
-
-                    b.HasOne("Crypto.API.Models.User")
-                        .WithMany("coinHodles")
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Crypto.API.Models.Portfolio", b =>
                 {
                     b.HasOne("Crypto.API.Models.User", "User")
-                        .WithMany()
+                        .WithMany("Portfolio")
                         .HasForeignKey("UserId");
                 });
 

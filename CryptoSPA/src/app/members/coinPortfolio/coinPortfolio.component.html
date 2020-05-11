@@ -30,7 +30,7 @@
           {{coin.name}}
         </option>
     </select>
-    <button class="btn btn-success" (click)="onBtnAdd()">Add Coin</button>
+    <button id="GreenB" class="btn btn-success" (click)="onBtnAdd()">Add Coin</button>
   </div>
 
 <br><br>
@@ -74,7 +74,7 @@
           {{coin.price * coin.quantity | currency }}
         </div>
         <div class="col-lg-2 col-md-2 col-sm-6 cos-xs-24">    
-          <td><button class="btn btn-info" (click)="addTransaction(coin, portfolio)">Add</button></td>
+          <td><button id="BlueB" class="btn" (click)="addTransaction(coin, portfolio)">Add</button></td>
         </div>
     </div>
     </div> 
