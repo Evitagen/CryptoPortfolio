@@ -32,11 +32,16 @@ namespace Crypto.API
 
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
-              services.AddDbContext<DataContext>(x => {
-                   // x.UseLazyLoadingProxies();
-                    x.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
-              });
-              ConfigureServices(services);
+            //   services.AddDbContext<DataContext>(x => {
+            //        // x.UseLazyLoadingProxies();
+            //         x.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
+            //   });
+
+            services.AddDbContext<DataContext>(x => {
+                x.UseSqlServer(Configuration.GetConnectionString("CryfolioConnection"));    
+            });
+
+            ConfigureServices(services);
         }
 
         public void ConfigureProductionServices(IServiceCollection services)

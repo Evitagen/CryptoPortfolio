@@ -5,3 +5,185 @@
 @import '../node_modules/alertifyjs/build/css/alertify.min.css';
 @import '../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
 @import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
+
+
+
+
+
+:root {
+    --blue-color:#495B8C;
+    --blue-color-lighter: #586da7;
+    --background-color:#262626;
+    --selected-Text-color:rgb(255, 0, 0);
+    --nav-color:#87878761;
+    --nav-gradiant: linear-gradient(rgb(23, 23, 23) 0%, #242424 100%);
+
+
+
+    --text-color: #5cb1b7;
+
+    --pramary-color: #495B8C;
+
+
+    --buttonbordergreen: #0d8200;
+    --buttonborderblue: #006285;
+    --buttonborderrreen: #000000;
+
+
+    --title-color: #141313;
+    --text-color: #777777;
+    --border-color: #201f1f17;
+    --green-button-gradient-color: linear-gradient(90deg, rgb(110, 181, 127) 0%, #72c269 100%);
+    --blue-button-gradient-color: linear-gradient(90deg, rgb(84, 164, 207) 0%, #2c6a99 100%);
+    --gradient-colorselected: linear-gradient(90deg, #FF6969 0%, rgb(249, 145, 145) 100%);
+    --shadow-color: 7px 0px 7px 0px rgba(213, 209, 227, 0.3);
+    --box-shadow: 7px 0px 7px 0px rgba(199, 196, 208, 0.021);
+}
+
+#foo {
+    color: var(--blue-color);
+    color: var(--blue-color-lighter);
+    color: var(--background-color);
+    color: var(--selected-Text-color);
+    color: var(--nav-color);
+}
+
+
+/* Buttons */
+
+#GreenB{
+
+    position: relative;
+    border: 2px solid var(--buttonbordergreen);
+    border-radius: 5px;
+
+    background: var(--green-button-gradient-color);
+    background-clip: padding-box;
+    color: white;
+    transition: background .6s ease;
+    box-shadow:  var(--box-shadow);
+
+    min-width: 120px;
+}
+
+#BlueB{
+
+    position: relative;
+    border: 2px solid var(--buttonborderblue);
+    border-radius: 5px;
+
+    background: var(--blue-button-gradient-color);
+    background-clip: padding-box;
+    color: white;
+    transition: background .6s ease;
+    box-shadow:  var(--box-shadow);
+
+    min-width: 120px;
+
+}
+
+
+
+#GreenB:hover{
+    background: black;
+    background-clip: padding-box;
+    color: var(--buttonbordergreen);
+    transition: .6s;
+}
+
+#BlueB:hover{
+    background: black;
+    background-clip: padding-box;
+    color: var(--buttonborderblue);
+    transition: .6s;
+}
+
+#RedB:hover{
+    background: black;
+    background-clip: padding-box;
+    color: var(--selected-Text-color);
+    transition: .6s;
+}
+
+/* #rcorners::after{
+    position: absolute;
+    top: -2px; left: -2px;
+    bottom: -2px; right: -2px;
+    background: var(--gradient-color);
+    content:'';
+    z-index: -1;
+    border-radius: 4px;
+} */
+
+
+  /* Buttons small */
+
+  .rcornersmall {
+    padding: .2rem 0rem;
+    font: normal 500 16px/20px var(--roboto);
+    position: relative;
+    border: 2px solid var(--primary-color2);
+    border-radius: 8px;
+
+    background: var(--gradient-color);
+    background-clip: padding-box;
+    color: whitesmoke;
+    transition: background .6s ease;
+    box-shadow:  var(--box-shadow);
+
+    min-width: 80px;
+    max-width: 80px;
+   
+
+  }
+  
+  .rcornersmall:hover {
+    background: black;
+    background-clip: padding-box;
+    color: var(--selected-Text-color);
+    transition: .6s;
+  }
+
+
+
+
+    /* Delete Buttons */
+
+    .deletercorn {
+        padding: .2rem 0rem;
+        font: normal 500 16px/20px var(--roboto);
+        position: relative;
+        border: 2px solid var(--primary-color2);
+        border-radius: 8px;
+    
+        background: var(--gradient-colorselected);
+        background-clip: padding-box;
+        color: whitesmoke;
+        transition: background .6s ease;
+        box-shadow:  var(--box-shadow);
+    
+        min-width: 150px;
+       
+        min-width: 80px;
+        max-width: 80px;
+
+      }
+      
+      .deletercorn:hover {
+        background: black;
+        background-clip: padding-box;
+        color: var(--selected-Text-color);
+        transition: .6s;
+      }
+
+
+
+#rcorners:focus,
+#rcorners:active
+#rcorners:hover
+#rcorners:active,
+#rcorners.active, 
+#rcorners.active{
+    outline: 0px !important;
+    box-shadow: none !important;
+}

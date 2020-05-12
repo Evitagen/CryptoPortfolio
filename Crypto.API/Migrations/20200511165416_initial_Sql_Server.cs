@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Crypto.API.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class initial_Sql_Server : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,9 +13,7 @@ namespace Crypto.API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Username = table.Column<string>(nullable: true),
                     PasswordHash = table.Column<byte[]>(nullable: true),
                     PasswordSalt = table.Column<byte[]>(nullable: true)
@@ -30,9 +28,7 @@ namespace Crypto.API.Migrations
                 columns: table => new
                 {
                     PortfolioID = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     PortfolioName = table.Column<string>(nullable: true),
                     UserId = table.Column<int>(nullable: true)
                 },
@@ -52,13 +48,11 @@ namespace Crypto.API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     Quantity = table.Column<decimal>(nullable: false),
-                    PortfolioID = table.Column<int>(nullable: true),
-                    UserId = table.Column<int>(nullable: true)
+                    coinID = table.Column<int>(nullable: false),
+                    PortfolioID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -69,12 +63,6 @@ namespace Crypto.API.Migrations
                         principalTable: "Portfolio",
                         principalColumn: "PortfolioID",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_CoinsHodle_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -82,9 +70,7 @@ namespace Crypto.API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Date = table.Column<DateTime>(nullable: false),
                     AmountBuy = table.Column<double>(nullable: false),
                     AmountSell = table.Column<double>(nullable: false),
@@ -105,11 +91,6 @@ namespace Crypto.API.Migrations
                 name: "IX_CoinsHodle_PortfolioID",
                 table: "CoinsHodle",
                 column: "PortfolioID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CoinsHodle_UserId",
-                table: "CoinsHodle",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Portfolio_UserId",

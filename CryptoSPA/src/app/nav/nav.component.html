@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+<nav class="navbar navbar-expand-md navbar-dark navbkgrnd">
   <!-- <div class="container"> -->
-      <a class="navbar-brand text-light">Coin Market</a>
+      <a class="navbar-brand textlogo">CryFolio</a>
 
 
     <ul class="navbar-nav mr-auto">
@@ -32,7 +32,7 @@
       <!-- <span>
         <img src="{{photoUrl || '../../assets/user.png'}}" alt="">
       </span> -->
-      <a class="dropdown-toggle text-light" dropdownToggle>
+      <a class="dropdown-toggle textdropdown" dropdownToggle>
         Welcome {{authService.decodedToken?.unique_name | titlecase}}
       </a>
     
@@ -43,15 +43,17 @@
       </div>
     </div>
 
-    <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
+    <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline my-0 my-lg-0" (ngSubmit)="login()">
       <input class="form-control mr-sm-2" type="text" placeholder="Username" name="username" required [(ngModel)]="model.username">
       <input class="form-control mr-sm-2" type="password" placeholder="Password" name="password" required [(ngModel)]="model.password">
-      <div>
-          <button [disabled]="!loginForm.valid" class="btn btn-success my-2 mr-sm-2" type="submit">Login</button>   
-         
-      </div>
+    
+        <button id="GreenB" [disabled]="!loginForm.valid" class="btn mr-sm-2" type="submit">Login</button>
+        
+
     </form>
-    <button *ngIf="!loggedIn()" class="btn btn-info my-3 my-sm-0" [routerLink]="['/register']" >Register</button> 
+    <button id="BlueB" *ngIf="!loggedIn()" class="btn" [routerLink]="['/register']" >Register</button> 
+
+
 
    
   <!-- </div> -->

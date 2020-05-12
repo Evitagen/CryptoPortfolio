@@ -55,6 +55,7 @@ namespace Crypto.API.Models
                 coin.PercentChange24hr = (decimal)item.quote.USD.percent_change_24h;
                 coin.PercentChange7day = (decimal)item.quote.USD.percent_change_7d;
                 coin.CoinMcapRank = item.cmc_rank;
+                coin.CoinID = item.id;
 
                 coins.Add(coin);
             }
@@ -67,7 +68,7 @@ namespace Crypto.API.Models
         {
             // swap top (Live) with below (test)
             // var URL = new UriBuilder("https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest");
-            var URL = new UriBuilder("https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest");
+             var URL = new UriBuilder("https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest");
 
             var queryString = HttpUtility.ParseQueryString(string.Empty);
             queryString["start"] = "1";
@@ -80,7 +81,7 @@ namespace Crypto.API.Models
 
             // swap top (Live) with below (test)
             // client.Headers.Add("X-CMC_PRO_API_KEY", API_KEY_COINMCAP.API_KEY);
-            client.Headers.Add("X-CMC_PRO_API_KEY", API_KEY_COINMCAP.SANDBOX_API_KEY);
+             client.Headers.Add("X-CMC_PRO_API_KEY", API_KEY_COINMCAP.SANDBOX_API_KEY);
 
 
             client.Headers.Add("Accepts", "application/json");
@@ -117,6 +118,7 @@ namespace Crypto.API.Models
         public decimal PercentChange24hr { get; set; }
         public decimal PercentChange7day { get; set; }
         public int CoinMcapRank { get; set; }
+        public int CoinID { get; set; }
         public DateTime LastUpdated { get; set; }
 
     }

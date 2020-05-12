@@ -1,3 +1,5 @@
+
+
 button.register {
     padding-right: 50px;
 }
@@ -12,4 +14,17 @@ img {
     display: inline;
 }
 
+.navbkgrnd {
+    /* background-color:  var(--nav-color); */
+    background-image:  var(--nav-gradiant);
+}
 
+
+.textlogo {
+    font-size: x-large;
+    color: white;
+}
+
+.textdropdown {
+    color: white;
+}
