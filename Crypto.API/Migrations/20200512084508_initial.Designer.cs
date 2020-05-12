@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Crypto.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200511165416_initial_Sql_Server")]
-    partial class initial_Sql_Server
+    [Migration("20200512084508_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
