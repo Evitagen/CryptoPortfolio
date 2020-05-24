@@ -6,34 +6,57 @@ using System.Collections.Generic;
 using System.Net;
 using System.Web;
 using Newtonsoft.Json;
+using Crypto.API.Data;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Crypto.API.Helpers
 {
     public class GetCoinsInterval
     {
-        private static bool blnStarted { get; set; } = false;
-        internal static CoinList coinlist { get; set; }
-        private static System.Timers.Timer aTimer;
-        internal async static Task<CoinList> GetCoinList()
-        {
-            await Task.Run(() => coinlist.loadcoinMCapData()); 
-  
-            return coinlist;
-        }
+        internal static bool blnStarted { get; set; } = false;
+        public static CoinList _coinlist { get; set; }
 
-        internal async static Task<CoinList> GetCoinList_API()
+
+        private static System.Timers.Timer aTimer;
+
+
+       
+        // public GetCoinsInterval(CoinList coinList, DataContext dc)
+        // {
+        //    // _repo = repo;
+        //     _coinlist = coinList;
+        //     // _dc = dc;
+
+        // }
+
+        // internal static async Task<CoinList> GetCoinList()
+        // {
+        //     await Task.Run(() => _coinlist.loadcoinMCapData()); 
+        //     return _coinlist;
+        // }
+
+        internal static async Task<CoinList> GetCoinList_API(List<int> coins)
         {
+
             try 
             {
                 if (blnStarted == false)
                 { 
-                    blnStarted = true;
-                    coinlist = new CoinList();
-                    await Task.Run(() => coinlist.getCoinPrices_API()); 
+                    //  _CoinsInDB = await repo.GetCoinNamesList(); 
+                    _coinlist = new CoinList();
 
+           
+                    _coinlist._CoinsInDB = coins;
+            
+                
 
-                    aTimer = new System.Timers.Timer(300000);  // every 300 seconds / 5 mins
-                    Timer();
+                     blnStarted = true;
+                     aTimer = new System.Timers.Timer(10000);  // every 300 seconds / 5 mins
+                     Timer();
+                    
+                    
+                    _coinlist = await Task.Run(() => _coinlist.getCoinPrices_APIAsync()); 
+                   
                 }
             }
             catch (Exception e)
@@ -41,22 +64,21 @@ namespace Crypto.API.Helpers
                 System.Console.WriteLine(e.ToString());
             }
 
-            return coinlist;
+            return _coinlist;
         }
 
 
 
         private static void Timer()
         {
-                aTimer.Elapsed += OnTimedEvent;
+                aTimer.Elapsed += (sender, e) => OnTimedEvent(sender, e);
                 aTimer.AutoReset = true;
                 aTimer.Enabled = true;   
         }
 
-        private async static void OnTimedEvent(Object source, ElapsedEventArgs e)
+        private static async void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
-           // await Task.Run(() => coinlist.loadcoinMCapData());
-           await Task.Run(() => coinlist.getCoinPrices_API());            
+            _coinlist = await Task.Run(() => _coinlist.getCoinPrices_APIAsync());
         }
 
 

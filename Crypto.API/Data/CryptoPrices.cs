@@ -21,7 +21,7 @@ namespace Crypto.API.Data
             strCoinMcap = await GetCoinMarketCapData();
         }
 
-        internal async Task<List<coins>> getPricesAsync()
+        internal async Task<List<coins>> getPricesAsync()     // string manipulation way of getting coin prices
         {
            string strcoin = "";
            char c;

@@ -15,7 +15,7 @@ namespace Crypto.API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             // CreateWebHostBuilder(args).Build().Run();
             var host = CreateWebHostBuilder(args).Build();
@@ -27,6 +27,8 @@ namespace Crypto.API
                 {
                     var context = services.GetRequiredService<DataContext>();
                     context.Database.Migrate();
+
+                    // await Task.Run(() => seed.SeedCoinNameIDAsync(context));
                 }
                 catch (Exception ex)
                 {

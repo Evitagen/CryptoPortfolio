@@ -48,7 +48,6 @@ namespace Crypto.API.Controllers
         {
 
             User user = await _repo.GetUser(id);
-
             var Portfolios = await _repo.GetAllPortfolios(user);
 
              // instead of doing this could create a DTO?
@@ -89,13 +88,13 @@ namespace Crypto.API.Controllers
 
 
          [HttpPost("AddCoin/{name}/{portFolioid}")]
-          public async Task<IActionResult> AddCoin(string name, int portFolioid)
+          public async Task<IActionResult> AddCoin(int coinid, string name, int portFolioid)            // need to add coinid aswell
          { 
              System.Console.WriteLine("add coin");
             // must check the id passing in is match for id from jwt token as somone could hack other users
             Portfolio portfolio = await _repo.GetPortfolio(portFolioid);
 
-            if (await _repo.AddCoinToPortfolio(name, portfolio))
+            if (await _repo.AddCoinToPortfolio(coinid, name, portfolio))
                return Ok();
   
             return BadRequest("Failed to add Coin");

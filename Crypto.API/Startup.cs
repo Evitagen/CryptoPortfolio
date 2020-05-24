@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Crypto.API.Data;
+using Crypto.API.Helpers;
+using Crypto.API.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -62,7 +64,10 @@ namespace Crypto.API
             services.AddCors();
             services.AddAutoMapper(typeof(CryptoRepository).Assembly);
             services.AddScoped<IAuthRepository, AuthRepository>();
-            services.AddScoped<ICryptoRepository, CryptoRepository>();
+            services.AddTransient<ICryptoRepository, CryptoRepository>();
+            services.AddScoped<CoinList>();
+            services.AddScoped<GetCoinsInterval>();
+            // services.AddSingleton<IConfiguration>(Configuration);
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
                     options.TokenValidationParameters = new TokenValidationParameters

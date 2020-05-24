@@ -5,9 +5,16 @@ namespace Crypto.API.Models
     public class PriceHistory
     {
         public int Id { get; set; }
+
+        public int coinid { get; set; }
+
         public DateTime DateTime { get; set; }
-        public string coin { get; set; }
-        public decimal Price { get; set; }
+
+        public decimal PriceUSD { get; set; }
+
+        public decimal priceBTC { get; set; }
+
+        public decimal priceETH { get; set; }
 
     }
 }

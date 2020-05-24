@@ -10,7 +10,7 @@ namespace Crypto.API.Data
          void Delete<T>(T entity) where T: class;
          Task<bool> SaveAll();
          
-         //Task<IEnumerable<user>> GetUsers();
+    
          Task<User> GetUser(int id);
 
          Task<CoinsHodle> GetCoinsHodle(int id);
@@ -23,9 +23,23 @@ namespace Crypto.API.Data
 
          Task<Transactions> GetTransactions(User user);
 
+
+
+
+
+         Task<List<int>> GetCoinNamesList();
+
+        Task<bool> AddCoinName(List<coins> coinlist);
+
+        Task<bool> AddPriceHistory(List<coins> coinlist);
+
+
+
+
+
          Task<bool> AddPortfolio(string name, User user);
 
-         Task<bool> AddCoinToPortfolio(string name, Portfolio portfolio);
+         Task<bool> AddCoinToPortfolio(int coinid, string name, Portfolio portfolio);
          
          Task<bool> AddTransaction(CoinsHodle coinHodleID, decimal quantity, string datetime);
 

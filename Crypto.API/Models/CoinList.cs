@@ -6,32 +6,35 @@ using System.Threading.Tasks;
 using System.Web;
 using Crypto.API.Data;
 using Crypto.API.Helpers;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Crypto.API.Models;
+using Microsoft.Extensions.Configuration;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
 
 namespace Crypto.API.Models
 {
     public class CoinList : IEnumerable
     {
-        public static List<coins> coinlist = new List<coins>();
+
+        internal ICryptoRepository _repo;
+        public List<coins> listofCoins = new List<coins>();
+        public List<int> _CoinsInDB { get; set; }
+
 
         public async void loadcoinMCapData()
         {
             CryptoPrices Prices = new CryptoPrices();
             await Prices.LoadData();
-            coinlist = await Task.Run(() => Prices.getPricesAsync());
+            listofCoins = await Task.Run(() => Prices.getPricesAsync());
         }
 
-        public void viewCoins()
-        {
-            foreach (var item in coinlist)
-            {
-                System.Console.WriteLine(item.Name);
-            }
-        }
 
-        internal void getCoinPrices_API()
+        internal async Task<CoinList> getCoinPrices_APIAsync()
         {
-        
             List<coins> coins = new List<coins>();
 
             var response = makeAPICall();
@@ -40,7 +43,7 @@ namespace Crypto.API.Models
 
             var CoinMCap = JsonConvert.DeserializeObject<RootObject>(response);
 
-            coinlist.Clear();
+            listofCoins.Clear();
 
             foreach (var item in CoinMCap.data)
             {
@@ -60,15 +63,109 @@ namespace Crypto.API.Models
                 coins.Add(coin);
             }
 
-            coinlist = coins;
+            listofCoins = coins;
+
+
+            // var coinsinDB = await _repo.GetCoinNamesList();
+            await AddCoinName(coins);
+            await AddPriceHistory(listofCoins);
+
+            return this;
+
+        }
+
+
+
+
+
+        public async Task<bool> AddCoinName(List<coins> coinlist)
+        {
+            try
+            {
+
+     
+            using(DbContext dbContextin = new DataContext())
+            {
+            
+                var blnCoinExists = false;
+
+                foreach (var coin_in_list in coinlist)
+                {
+                    blnCoinExists = false;
+
+                    if (_CoinsInDB.Count > 0)
+                    {
+                        foreach (var coin_in_db in _CoinsInDB)
+                        {
+                            if (coin_in_db == coin_in_list.CoinID)
+                            {
+                                blnCoinExists = true;
+                            }
+                        }
+                    }
+
+
+                    if (!blnCoinExists)
+                    {
+                        CoinNames coinNames = new CoinNames();
+                        coinNames.Coinid = coin_in_list.CoinID;
+                        coinNames.CoinName = coin_in_list.Name;   
+                        dbContextin.Add(coinNames);
+                        _CoinsInDB.Add(coin_in_list.CoinID);
+                    }
+                } 
+
+             return await dbContextin.SaveChangesAsync() > 0;
+            } 
+
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine(e.ToString());
+                return true;
+            }
+        }
+
+        public async Task<bool> AddPriceHistory(List<coins> coinlist)
+        {
+           decimal BTCPrice = 0;
+           decimal ETHPrice = 0;
+
+
+        using(DbContext dbContext = new DataContext())
+        {
+           foreach (var coin in coinlist)
+           {
+               if (coin.CoinID == 1)
+               {
+                   BTCPrice = coin.Price;
+               }
+               if (coin.CoinID == 1027)
+               {
+                   ETHPrice = coin.Price;
+               }
+           }
+
+           foreach (var coin in coinlist)
+           {
+               PriceHistory ph = new PriceHistory();
+               ph.coinid = coin.CoinID;
+               ph.DateTime = DateTime.Now;
+               ph.PriceUSD = coin.Price;
+               ph.priceBTC = Helpers.coinPriceConversions.priceinBTC(BTCPrice, coin.Price);
+               ph.priceETH = Helpers.coinPriceConversions.priceinEth(ETHPrice, coin.Price);
+               dbContext.Add(ph);
+           }
+           return await dbContext.SaveChangesAsync() > 0;
+        }
 
         }
 
         static string makeAPICall()
         {
-            // swap top (Live) with below (test)
-            // var URL = new UriBuilder("https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest");
-             var URL = new UriBuilder("https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest");
+
+             var URL = new UriBuilder("https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest");
+            // var URL = new UriBuilder("https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest");
 
             var queryString = HttpUtility.ParseQueryString(string.Empty);
             queryString["start"] = "1";
@@ -79,9 +176,10 @@ namespace Crypto.API.Models
 
             var client = new WebClient();
 
-            // swap top (Live) with below (test)
+            // swap top (Live) with below (test)    ////////////////////////////////////////////////////////////////////////////////////////////////  swap this one
             // client.Headers.Add("X-CMC_PRO_API_KEY", API_KEY_COINMCAP.API_KEY);
-             client.Headers.Add("X-CMC_PRO_API_KEY", API_KEY_COINMCAP.SANDBOX_API_KEY);
+            client.Headers.Add("X-CMC_PRO_API_KEY", API_KEY_COINMCAP.API_KEY_TEST);
+            // client.Headers.Add("X-CMC_PRO_API_KEY", API_KEY_COINMCAP.SANDBOX_API_KEY);
 
 
             client.Headers.Add("Accepts", "application/json");
@@ -90,7 +188,7 @@ namespace Crypto.API.Models
 
         public IEnumerator GetEnumerator()
         {
-            foreach (coins coin in coinlist)
+            foreach (coins coin in listofCoins)
             {
                 yield return coin;
             }

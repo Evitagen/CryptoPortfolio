@@ -4,14 +4,16 @@ using Crypto.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Crypto.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200514110436_coinnameid add")]
+    partial class coinnameidadd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,27 +72,6 @@ namespace Crypto.API.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Portfolio");
-                });
-
-            modelBuilder.Entity("Crypto.API.Models.PriceHistory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DateTime");
-
-                    b.Property<decimal>("PriceUSD");
-
-                    b.Property<int>("coinid");
-
-                    b.Property<decimal>("priceBTC");
-
-                    b.Property<decimal>("priceETH");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PriceHistory");
                 });
 
             modelBuilder.Entity("Crypto.API.Models.Transactions", b =>
