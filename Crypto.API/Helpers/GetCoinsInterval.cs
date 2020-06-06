@@ -15,48 +15,22 @@ namespace Crypto.API.Helpers
     {
         internal static bool blnStarted { get; set; } = false;
         public static CoinList _coinlist { get; set; }
-
-
         private static System.Timers.Timer aTimer;
 
 
-       
-        // public GetCoinsInterval(CoinList coinList, DataContext dc)
-        // {
-        //    // _repo = repo;
-        //     _coinlist = coinList;
-        //     // _dc = dc;
 
-        // }
-
-        // internal static async Task<CoinList> GetCoinList()
-        // {
-        //     await Task.Run(() => _coinlist.loadcoinMCapData()); 
-        //     return _coinlist;
-        // }
-
-        internal static async Task<CoinList> GetCoinList_API(List<int> coins)
+        internal static async Task<CoinList> GetCoinList_API(List<int> coinsInDb)
         {
-
             try 
             {
                 if (blnStarted == false)
                 { 
-                    //  _CoinsInDB = await repo.GetCoinNamesList(); 
                     _coinlist = new CoinList();
-
-           
-                    _coinlist._CoinsInDB = coins;
-            
-                
-
+                    _coinlist._CoinsInDB = coinsInDb;
                      blnStarted = true;
-                     aTimer = new System.Timers.Timer(10000);  // every 300 seconds / 5 mins
-                     Timer();
-                    
-                    
-                    _coinlist = await Task.Run(() => _coinlist.getCoinPrices_APIAsync()); 
-                   
+                     aTimer = new System.Timers.Timer(300000);  // every 300 seconds / 5 mins
+                     Timer();  
+                    _coinlist = await Task.Run(() => _coinlist.getCoinPrices_APIAsync());     
                 }
             }
             catch (Exception e)
@@ -66,8 +40,6 @@ namespace Crypto.API.Helpers
 
             return _coinlist;
         }
-
-
 
         private static void Timer()
         {

@@ -35,43 +35,42 @@ namespace Crypto.API.Models
 
         internal async Task<CoinList> getCoinPrices_APIAsync()
         {
-            List<coins> coins = new List<coins>();
+                List<coins> coins = new List<coins>();
 
-            var response = makeAPICall();
+                var response = makeAPICall();
 
-            System.Console.WriteLine(response);
+                System.Console.WriteLine(response);
 
-            var CoinMCap = JsonConvert.DeserializeObject<RootObject>(response);
+                var CoinMCap = JsonConvert.DeserializeObject<RootObject>(response);
 
-            listofCoins.Clear();
+                listofCoins.Clear();
 
-            foreach (var item in CoinMCap.data)
-            {
-                coins coin = new coins();
-                coin.Name = item.slug.ToString();    
-                coin.Price = (decimal)item.quote.USD.price;
-                coin.Volume = (decimal)item.quote.USD.volume_24h;
-                coin.circulating = (decimal)item.circulating_supply;
-                coin.Marketcap = (decimal)item.quote.USD.market_cap;
-                coin.TotalSupply = (decimal)item.total_supply;
-                coin.PercentChange1hr = (decimal)item.quote.USD.percent_change_1h;
-                coin.PercentChange24hr = (decimal)item.quote.USD.percent_change_24h;
-                coin.PercentChange7day = (decimal)item.quote.USD.percent_change_7d;
-                coin.CoinMcapRank = item.cmc_rank;
-                coin.CoinID = item.id;
+                foreach (var item in CoinMCap.data)
+                {
+                    coins coin = new coins();
+                    coin.Name = item.slug.ToString();    
+                    coin.Price = (decimal)item.quote.USD.price;
+                    coin.Volume = (decimal)item.quote.USD.volume_24h;
+                    coin.circulating = (decimal)item.circulating_supply;
+                    coin.Marketcap = (decimal)item.quote.USD.market_cap;
+                    coin.TotalSupply = (decimal)item.total_supply;
+                    coin.PercentChange1hr = (decimal)item.quote.USD.percent_change_1h;
+                    coin.PercentChange24hr = (decimal)item.quote.USD.percent_change_24h;
+                    coin.PercentChange7day = (decimal)item.quote.USD.percent_change_7d;
+                    coin.CoinMcapRank = item.cmc_rank;
+                    coin.CoinID = item.id;
 
-                coins.Add(coin);
-            }
+                    coins.Add(coin);
+                }
 
-            listofCoins = coins;
+                listofCoins = coins;
 
 
-            // var coinsinDB = await _repo.GetCoinNamesList();
-            await AddCoinName(coins);
-            await AddPriceHistory(listofCoins);
+                // var coinsinDB = await _repo.GetCoinNamesList();
+                await AddCoinName(coins);
+                await AddPriceHistory(listofCoins);
 
-            return this;
-
+                return this;
         }
 
 
@@ -83,40 +82,38 @@ namespace Crypto.API.Models
             try
             {
 
-     
-            using(DbContext dbContextin = new DataContext())
-            {
-            
-                var blnCoinExists = false;
+                using(DbContext dbContextin = new DataContext())
+                {     
+                    var blnCoinExists = false;
 
-                foreach (var coin_in_list in coinlist)
-                {
-                    blnCoinExists = false;
-
-                    if (_CoinsInDB.Count > 0)
+                    foreach (var coin_in_list in coinlist)
                     {
-                        foreach (var coin_in_db in _CoinsInDB)
+                        blnCoinExists = false;
+
+                        if (_CoinsInDB.Count > 0)
                         {
-                            if (coin_in_db == coin_in_list.CoinID)
+                            foreach (var coin_in_db in _CoinsInDB)
                             {
-                                blnCoinExists = true;
+                                if (coin_in_db == coin_in_list.CoinID)
+                                {
+                                    blnCoinExists = true;
+                                }
                             }
                         }
-                    }
 
 
-                    if (!blnCoinExists)
-                    {
-                        CoinNames coinNames = new CoinNames();
-                        coinNames.Coinid = coin_in_list.CoinID;
-                        coinNames.CoinName = coin_in_list.Name;   
-                        dbContextin.Add(coinNames);
-                        _CoinsInDB.Add(coin_in_list.CoinID);
-                    }
+                        if (!blnCoinExists)
+                        {
+                            CoinNames coinNames = new CoinNames();
+                            coinNames.Coinid = coin_in_list.CoinID;
+                            coinNames.CoinName = coin_in_list.Name;   
+                            dbContextin.Add(coinNames);
+                            _CoinsInDB.Add(coin_in_list.CoinID);
+                        }
+                    } 
+
+                return await dbContextin.SaveChangesAsync() > 0;
                 } 
-
-             return await dbContextin.SaveChangesAsync() > 0;
-            } 
 
             }
             catch (Exception e)
@@ -128,37 +125,36 @@ namespace Crypto.API.Models
 
         public async Task<bool> AddPriceHistory(List<coins> coinlist)
         {
-           decimal BTCPrice = 0;
-           decimal ETHPrice = 0;
+                decimal BTCPrice = 0;
+                decimal ETHPrice = 0;
 
 
-        using(DbContext dbContext = new DataContext())
-        {
-           foreach (var coin in coinlist)
-           {
-               if (coin.CoinID == 1)
-               {
-                   BTCPrice = coin.Price;
-               }
-               if (coin.CoinID == 1027)
-               {
-                   ETHPrice = coin.Price;
-               }
-           }
+                using(DbContext dbContext = new DataContext())
+                {
+                foreach (var coin in coinlist)
+                {
+                    if (coin.CoinID == 1)
+                    {
+                        BTCPrice = coin.Price;
+                    }
+                    if (coin.CoinID == 1027)
+                    {
+                        ETHPrice = coin.Price;
+                    }
+                }
 
-           foreach (var coin in coinlist)
-           {
-               PriceHistory ph = new PriceHistory();
-               ph.coinid = coin.CoinID;
-               ph.DateTime = DateTime.Now;
-               ph.PriceUSD = coin.Price;
-               ph.priceBTC = Helpers.coinPriceConversions.priceinBTC(BTCPrice, coin.Price);
-               ph.priceETH = Helpers.coinPriceConversions.priceinEth(ETHPrice, coin.Price);
-               dbContext.Add(ph);
-           }
-           return await dbContext.SaveChangesAsync() > 0;
-        }
-
+                foreach (var coin in coinlist)
+                {
+                    PriceHistory ph = new PriceHistory();
+                    ph.coinid = coin.CoinID;
+                    ph.DateTime = DateTime.Now;
+                    ph.PriceUSD = coin.Price;
+                    ph.priceBTC = Helpers.coinPriceConversions.priceinBTC(BTCPrice, coin.Price);
+                    ph.priceETH = Helpers.coinPriceConversions.priceinEth(ETHPrice, coin.Price);
+                    dbContext.Add(ph);
+                }
+                return await dbContext.SaveChangesAsync() > 0;
+                }
         }
 
         static string makeAPICall()

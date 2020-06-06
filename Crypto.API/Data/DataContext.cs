@@ -26,7 +26,7 @@ namespace Crypto.API.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
            // switch for production ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   Swap this to live
-            optionsBuilder.UseSqlServer("Server=localhost; Database=cryfolioapp4; User Id=sa; Password=Star1234;MultipleActiveResultSets=true");
+           optionsBuilder.UseSqlServer("Server=localhost; Database=cryfolioapp4; User Id=sa; Password=Star1234;MultipleActiveResultSets=true");
            // optionsBuilder.UseSqlServer("Server=cryfolio.database.windows.net; Database=Cryfolio; User Id=appuser; Password=Star1234;MultipleActiveResultSets=true");     
         }
 

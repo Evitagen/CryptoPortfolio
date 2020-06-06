@@ -189,25 +189,16 @@ namespace Crypto.API.Data
 
         public async Task<List<int>> GetCoinNamesList()
         {
-
             var coinsList = new List<int>();
 
             try
             {
-            // var Portfolio = await _context.Portfolio
-            // .Include(c => c.coinsHodle)
-            // .FirstOrDefaultAsync(p => p.PortfolioID == 1);
-
-            var coins_In_Database =  _context.CoinNames
-                .ToList();
-
-           
-            coinsList.Clear();
-            foreach (var item in coins_In_Database)
-            {
-                coinsList.Add(item.Coinid);
-            }
-               
+                var coins_In_Database =  _context.CoinNames.ToList();
+                coinsList.Clear();
+                foreach (var item in coins_In_Database)
+                {
+                    coinsList.Add(item.Coinid);
+                }       
             }
             catch (Exception e)
             {
@@ -215,68 +206,68 @@ namespace Crypto.API.Data
              return coinsList;
             }
 
-    return coinsList;
+        return coinsList;
 
         }
 
-        public async Task<bool> AddCoinName(List<coins> coinlist)
-        {
+        // public async Task<bool> AddCoinName(List<coins> coinlist)
+        // {
 
-            var coins_In_Database = _context.CoinNames;
-            var blnCoinExists = false;
+        //     var coins_In_Database = _context.CoinNames;
+        //     var blnCoinExists = false;
 
-            foreach (var coin_in_list in coinlist)
-            {
-                blnCoinExists = false;
+        //     foreach (var coin_in_list in coinlist)
+        //     {
+        //         blnCoinExists = false;
 
-                foreach (var coin_in_db in coins_In_Database)
-                {
-                    if (coin_in_db.Coinid == coin_in_list.CoinID)
-                    {
-                        blnCoinExists = true;
-                    }
-                }
+        //         foreach (var coin_in_db in coins_In_Database)
+        //         {
+        //             if (coin_in_db.Coinid == coin_in_list.CoinID)
+        //             {
+        //                 blnCoinExists = true;
+        //             }
+        //         }
 
-                if (!blnCoinExists)
-                {
-                      CoinNames coinNames = new CoinNames();
-                      coinNames.Coinid = coin_in_list.CoinID;
-                      coinNames.CoinName = coin_in_list.Name;   
-                      _context.CoinNames.Add(coinNames);
-                }
-            } 
-             return await _context.SaveChangesAsync() > 0;
-        }
+        //         if (!blnCoinExists)
+        //         {
+        //               CoinNames coinNames = new CoinNames();
+        //               coinNames.Coinid = coin_in_list.CoinID;
+        //               coinNames.CoinName = coin_in_list.Name;   
+        //               _context.CoinNames.Add(coinNames);
+        //         }
+        //     } 
+        //      return await _context.SaveChangesAsync() > 0;
+        // }
 
-        public async Task<bool> AddPriceHistory(List<coins> coinlist)
-        {
-           decimal BTCPrice = 0;
-           decimal ETHPrice = 0;
+        // public async Task<bool> AddPriceHistory(List<coins> coinlist)
+        // {
+        //    decimal BTCPrice = 0;
+        //    decimal ETHPrice = 0;
 
-           foreach (var coin in coinlist)
-           {
-               if (coin.CoinID == 1)
-               {
-                   BTCPrice = coin.Price;
-               }
-               if (coin.CoinID == 1027)
-               {
-                   ETHPrice = coin.Price;
-               }
-           }
+        //    foreach (var coin in coinlist)
+        //    {
+        //        if (coin.CoinID == 1)
+        //        {
+        //            BTCPrice = coin.Price;
+        //        }
+        //        if (coin.CoinID == 1027)
+        //        {
+        //            ETHPrice = coin.Price;
+        //        }
+        //    }
 
-           foreach (var coin in coinlist)
-           {
-               PriceHistory ph = new PriceHistory();
-               ph.coinid = coin.CoinID;
-               ph.DateTime = DateTime.Now;
-               ph.PriceUSD = coin.Price;
-               ph.priceBTC = Helpers.coinPriceConversions.priceinBTC(BTCPrice, coin.Price);
-               ph.priceETH = Helpers.coinPriceConversions.priceinEth(ETHPrice, coin.Price);
-               _context.PriceHistory.Add(ph);
-           }
-           return await _context.SaveChangesAsync() > 0;
-        }
+        //    foreach (var coin in coinlist)
+        //    {
+        //        PriceHistory ph = new PriceHistory();
+        //        ph.coinid = coin.CoinID;
+        //        ph.DateTime = DateTime.Now;
+        //        ph.PriceUSD = coin.Price;
+        //        ph.priceBTC = Helpers.coinPriceConversions.priceinBTC(BTCPrice, coin.Price);
+        //        ph.priceETH = Helpers.coinPriceConversions.priceinEth(ETHPrice, coin.Price);
+        //        _context.PriceHistory.Add(ph);
+        //    }
+        //    return await _context.SaveChangesAsync() > 0;
+        // }
     }
 
 }
