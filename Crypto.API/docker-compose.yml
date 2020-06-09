@@ -1,0 +1,15 @@
+version: '3'
+services:
+    ms-sql-server:
+        image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+        environment: 
+            ACCEPT_EULA: "Y"
+            SA_PASSWORD: "Star1234"
+            MSSQL_PID: Express
+        ports: 
+            - "1401:1401"
+    crypto-api:
+        build: .
+        ports: 
+            - "8080:80"
+            

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -34,24 +35,46 @@ namespace Crypto.API
 
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
+
+                   var server =Configuration["DBServer"] ?? "192.168.1.137";  // "ms-sql-server";    // put ip address of host
+                   var port = Configuration["DBPort"] ?? "1401";
+                   var user = Configuration["DBUser"] ?? "SA";
+                   var password = Configuration["DBPassword"] ?? "Star1234";
+                   var database = Configuration["Database"] ?? "Cryfolio";
+
+                 services.AddDbContext<DataContext>(options => options.UseSqlServer($"Server={server},{port};Initial Catalog={database};User ID={user};Password={password}"));
+
+
             //   services.AddDbContext<DataContext>(x => {
             //        // x.UseLazyLoadingProxies();
             //         x.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             //   });
 
-            services.AddDbContext<DataContext>(x => {
-                x.UseSqlServer(Configuration.GetConnectionString("CryfolioConnection"));    
-            });
+            // services.AddDbContext<DataContext>(x => {
+            //     x.UseSqlServer(Configuration.GetConnectionString("CryfolioConnection"));    
+            // });
 
             ConfigureServices(services);
         }
 
         public void ConfigureProductionServices(IServiceCollection services)
         {
-              services.AddDbContext<DataContext>(x => {
-                   // x.UseLazyLoadingProxies();
-                    x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-              });
+
+                   var server =Configuration["DBServer"] ?? "192.168.1.137";  // "ms-sql-server";    // put ip address of host
+                   var port = Configuration["DBPort"] ?? "1401";
+                   var user = Configuration["DBUser"] ?? "SA";
+                   var password = Configuration["DBPassword"] ?? "Star1234";
+                   var database = Configuration["Database"] ?? "Cryfolio";
+
+                 services.AddDbContext<DataContext>(options => options.UseSqlServer($"Server={server},{port};Initial Catalog={database};User ID={user};Password={password}"));
+
+
+
+            //   services.AddDbContext<DataContext>(x => {
+            //        // x.UseLazyLoadingProxies();
+            //         x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            //   });
+
               ConfigureServices(services);
         }
 
