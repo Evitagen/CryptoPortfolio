@@ -9,6 +9,37 @@ namespace Crypto.API.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "CoinNames",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Coinid = table.Column<int>(nullable: false),
+                    CoinName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CoinNames", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PriceHistory",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    coinid = table.Column<int>(nullable: false),
+                    DateTime = table.Column<DateTime>(nullable: false),
+                    PriceUSD = table.Column<decimal>(nullable: false),
+                    priceBTC = table.Column<decimal>(nullable: false),
+                    priceETH = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PriceHistory", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -105,6 +136,12 @@ namespace Crypto.API.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CoinNames");
+
+            migrationBuilder.DropTable(
+                name: "PriceHistory");
+
             migrationBuilder.DropTable(
                 name: "Transactions");
 

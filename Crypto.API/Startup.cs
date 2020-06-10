@@ -36,13 +36,13 @@ namespace Crypto.API
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
 
-                   var server =Configuration["DBServer"] ?? "192.168.1.137";  // "ms-sql-server";    // put ip address of host
-                   var port = Configuration["DBPort"] ?? "1401";
+                   var server =Configuration["DBServer"] ?? "ms-sql-server";  // "ms-sql-server";    // put ip address of host
+                   var port = Configuration["DBPort"] ?? "1433";
                    var user = Configuration["DBUser"] ?? "SA";
-                   var password = Configuration["DBPassword"] ?? "Star1234";
+                   var password = Configuration["DBPassword"] ?? "1Secure*Password1";
                    var database = Configuration["Database"] ?? "Cryfolio";
 
-                 services.AddDbContext<DataContext>(options => options.UseSqlServer($"Server={server},{port};Initial Catalog={database};User ID={user};Password={password}"));
+                 services.AddDbContext<DataContext>(options => options.UseSqlServer($"Server={server},{port};Database={database};User ID={user};Password={password};MultipleActiveResultSets=true"));
 
 
             //   services.AddDbContext<DataContext>(x => {
@@ -60,13 +60,13 @@ namespace Crypto.API
         public void ConfigureProductionServices(IServiceCollection services)
         {
 
-                   var server =Configuration["DBServer"] ?? "192.168.1.137";  // "ms-sql-server";    // put ip address of host
-                   var port = Configuration["DBPort"] ?? "1401";
+                   var server =Configuration["DBServer"] ?? "ms-sql-server";  // "ms-sql-server";    // put ip address of host
+                   var port = Configuration["DBPort"] ?? "1433";
                    var user = Configuration["DBUser"] ?? "SA";
-                   var password = Configuration["DBPassword"] ?? "Star1234";
+                   var password = Configuration["DBPassword"] ?? "1Secure*Password1";
                    var database = Configuration["Database"] ?? "Cryfolio";
 
-                 services.AddDbContext<DataContext>(options => options.UseSqlServer($"Server={server},{port};Initial Catalog={database};User ID={user};Password={password}"));
+                 services.AddDbContext<DataContext>(options => options.UseSqlServer($"Server={server},{port};Database={database};User ID={user};Password={password};MultipleActiveResultSets=true"));
 
 
 
