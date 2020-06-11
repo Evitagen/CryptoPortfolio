@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Crypto.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200518160014_added price history")]
-    partial class addedpricehistory
+    [Migration("20200610181610_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

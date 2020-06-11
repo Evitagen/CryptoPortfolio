@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -30,28 +31,50 @@ namespace Crypto.API
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+     
 
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
+
+                   var server =Configuration["DBServer"] ?? API_KEY_COINMCAP.serverName;     
+                   var port = Configuration["DBPort"] ?? API_KEY_COINMCAP.port;
+                   var user = Configuration["DBUser"] ?? API_KEY_COINMCAP.user;
+                   var password = Configuration["DBPassword"] ?? API_KEY_COINMCAP.password;
+                   var database = Configuration["Database"] ?? API_KEY_COINMCAP.database;
+
+                 services.AddDbContext<DataContext>(options => options.UseSqlServer($"Server={server},{port};Database={database};User ID={user};Password={password};MultipleActiveResultSets=true"));
+
+
             //   services.AddDbContext<DataContext>(x => {
             //        // x.UseLazyLoadingProxies();
             //         x.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             //   });
 
-            services.AddDbContext<DataContext>(x => {
-                x.UseSqlServer(Configuration.GetConnectionString("CryfolioConnection"));    
-            });
+            // services.AddDbContext<DataContext>(x => {
+            //     x.UseSqlServer(Configuration.GetConnectionString("CryfolioConnection"));    
+            // });
 
             ConfigureServices(services);
         }
 
         public void ConfigureProductionServices(IServiceCollection services)
         {
-              services.AddDbContext<DataContext>(x => {
-                   // x.UseLazyLoadingProxies();
-                    x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-              });
+
+                   var server =Configuration["DBServer"] ?? API_KEY_COINMCAP.serverName; 
+                   var port = Configuration["DBPort"] ?? API_KEY_COINMCAP.port;
+                   var user = Configuration["DBUser"] ?? API_KEY_COINMCAP.user;
+                   var password = Configuration["DBPassword"] ?? API_KEY_COINMCAP.password;
+                   var database = Configuration["Database"] ?? API_KEY_COINMCAP.database;
+
+                   services.AddDbContext<DataContext>(options => options.UseSqlServer($"Server={server},{port};Database={database};User ID={user};Password={password};MultipleActiveResultSets=true"));
+
+
+
+            //   services.AddDbContext<DataContext>(x => {
+            //        // x.UseLazyLoadingProxies();
+            //         x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            //   });
+
               ConfigureServices(services);
         }
 

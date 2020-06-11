@@ -1,0 +1,17 @@
+version: '3'
+services:
+    ms-sql-server:
+        image: mcr.microsoft.com/mssql/server:2017-latest
+        environment: 
+            ACCEPT_EULA: "Y"
+            SA_PASSWORD: "Star1234Star1234Star1234"
+            MSSQL_PID: Express
+        ports: 
+            - "1433:1433"
+    crypto-api:
+        build: .
+        environment: 
+            DBServer: "ms-sql-server"
+        ports: 
+            - "8080:80"
+            

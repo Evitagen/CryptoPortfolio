@@ -1,4 +1,5 @@
 using System.IO;
+using Crypto.API.Helpers;
 using Crypto.API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -25,23 +26,18 @@ namespace Crypto.API.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-           // switch for production ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   Swap this to live
-            optionsBuilder.UseSqlServer("Server=localhost; Database=cryfolioapp4; User Id=sa; Password=Star1234;MultipleActiveResultSets=true");
-           // optionsBuilder.UseSqlServer("Server=cryfolio.database.windows.net; Database=Cryfolio; User Id=appuser; Password=Star1234;MultipleActiveResultSets=true");     
+  
+            var server = API_KEY_COINMCAP.serverName; 
+            var port = API_KEY_COINMCAP.port;
+            var user = API_KEY_COINMCAP.user;
+            var password = API_KEY_COINMCAP.password;
+            var database = API_KEY_COINMCAP.database;
+
+
+            optionsBuilder.UseSqlServer($"Server={server},{port};Database={database};User ID={user};Password={password};MultipleActiveResultSets=true");
+
         }
 
-        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        // {
-        //     if (!optionsBuilder.IsConfigured)
-        //     {
-        //         IConfigurationRoot configuration = new ConfigurationBuilder()
-        //         .SetBasePath(Directory.GetCurrentDirectory())
-        //         .AddJsonFile("appsettings.Development.json")
-        //         .Build();
-        //         var connectionString = configuration.GetConnectionString("DbCoreConnectionString");
-        //         optionsBuilder.UseSqlServer(connectionString);
-        //     }
-        // }
       
     }
 

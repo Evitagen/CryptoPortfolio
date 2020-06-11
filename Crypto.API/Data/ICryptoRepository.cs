@@ -24,16 +24,7 @@ namespace Crypto.API.Data
          Task<Transactions> GetTransactions(User user);
 
 
-
-
-
          Task<List<int>> GetCoinNamesList();
-
-        Task<bool> AddCoinName(List<coins> coinlist);
-
-        Task<bool> AddPriceHistory(List<coins> coinlist);
-
-
 
 
 
