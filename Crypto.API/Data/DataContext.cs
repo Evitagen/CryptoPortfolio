@@ -26,12 +26,19 @@ namespace Crypto.API.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-  
-            var server = API_KEY_COINMCAP.serverName; 
-            var port = API_KEY_COINMCAP.port;
-            var user = API_KEY_COINMCAP.user;
-            var password = API_KEY_COINMCAP.password;
-            var database = API_KEY_COINMCAP.database;
+            // Swap for dev
+
+            // var server = API_KEY_COINMCAP.serverName; 
+            // var port = API_KEY_COINMCAP.port;
+            // var user = API_KEY_COINMCAP.user;
+            // var password = API_KEY_COINMCAP.password;
+            // var database = API_KEY_COINMCAP.database;
+
+            var server = API_KEY_COINMCAP.serverNameDev; 
+            var port = API_KEY_COINMCAP.portDev;
+            var user = API_KEY_COINMCAP.userDev;
+            var password = API_KEY_COINMCAP.passwordDev;
+            var database = API_KEY_COINMCAP.databaseDev;
 
 
             optionsBuilder.UseSqlServer($"Server={server},{port};Database={database};User ID={user};Password={password};MultipleActiveResultSets=true");
