@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Crypto.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200610181610_initial")]
+    [Migration("20200622143540_initial ")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,8 +41,6 @@ namespace Crypto.API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name");
 
                     b.Property<int?>("PortfolioID");
 
@@ -105,9 +103,15 @@ namespace Crypto.API.Migrations
 
                     b.Property<double>("AmountSell");
 
+                    b.Property<int>("Coinid");
+
                     b.Property<int?>("CoinsHodleId");
 
                     b.Property<DateTime>("Date");
+
+                    b.Property<decimal>("fee");
+
+                    b.Property<decimal>("priceWhenBoughtSold");
 
                     b.HasKey("Id");
 

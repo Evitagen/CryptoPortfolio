@@ -49,14 +49,14 @@ namespace Crypto.API.Models
                 {
                     coins coin = new coins();
                     coin.Name = item.slug.ToString();    
-                    coin.Price = (decimal)item.quote.USD.price;
-                    coin.Volume = (decimal)item.quote.USD.volume_24h;
-                    coin.circulating = (decimal)item.circulating_supply;
-                    coin.Marketcap = (decimal)item.quote.USD.market_cap;
-                    coin.TotalSupply = (decimal)item.total_supply;
-                    coin.PercentChange1hr = (decimal)item.quote.USD.percent_change_1h;
-                    coin.PercentChange24hr = (decimal)item.quote.USD.percent_change_24h;
-                    coin.PercentChange7day = (decimal)item.quote.USD.percent_change_7d;
+                    if (!item.quote.USD.price.Equals(null)) { coin.Price = (decimal)item.quote.USD.price; } else { coin.Price = 0; }
+                    if (!item.quote.USD.volume_24h.Equals(null)) { coin.Volume = (decimal)item.quote.USD.volume_24h; } else { coin.Volume = 0; }
+                    if (!item.circulating_supply.Equals(null)) { coin.circulating = (decimal)item.circulating_supply; } else { coin.circulating = 0; }
+                    if (!item.quote.USD.market_cap.Equals(null)) { coin.Marketcap = (decimal)item.quote.USD.market_cap; } else { coin.Marketcap = 0; }
+                    if (!item.total_supply.Equals(null)) { coin.TotalSupply = (decimal)item.total_supply; } else { coin.TotalSupply = 0; }
+                    if (!item.quote.USD.percent_change_1h.Equals(null)) { coin.PercentChange1hr = (decimal)item.quote.USD.percent_change_1h; } else { coin.PercentChange1hr = 0; }
+                    if (!item.quote.USD.percent_change_24h.Equals(null)) { coin.PercentChange24hr = (decimal)item.quote.USD.percent_change_24h; } else { coin.PercentChange24hr = 0; }
+                    if (!item.quote.USD.percent_change_7d.Equals(null)) { coin.PercentChange7day = (decimal)item.quote.USD.percent_change_7d; } else { coin.PercentChange7day = 0; }
                     coin.CoinMcapRank = item.cmc_rank;
                     coin.CoinID = item.id;
 
@@ -76,7 +76,9 @@ namespace Crypto.API.Models
 
 
 
-
+        ///
+        /// if there are new coins in coinmarketcap list that don't exist then add them
+        ///
         public async Task<bool> AddCoinName(List<coins> coinlist)
         {
             try
@@ -191,6 +193,12 @@ namespace Crypto.API.Models
         }
     }
 
+
+
+
+
+
+
     public class coins
     {
         public coins()
@@ -238,12 +246,12 @@ namespace Crypto.API.Models
 
     public class USD
     {
-        public double price { get; set; }
-        public double volume_24h { get; set; }
-        public double percent_change_1h { get; set; }
-        public double percent_change_24h { get; set; }
-        public double percent_change_7d { get; set; }
-        public double market_cap { get; set; }
+        public double? price { get; set; }
+        public double? volume_24h { get; set; }
+        public double? percent_change_1h { get; set; }
+        public double? percent_change_24h { get; set; }
+        public double? percent_change_7d { get; set; }
+        public double? market_cap { get; set; }
         public DateTime last_updated { get; set; }
     }
 

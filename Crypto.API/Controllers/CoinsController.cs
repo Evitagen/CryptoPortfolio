@@ -19,20 +19,12 @@ namespace Crypto.API.Controllers
     {
         private DataContext _context;
         private ICryptoRepository _repo;
-        // private GetCoinsInterval _coinsInterval;
         private CoinList _coinlist;
 
-
-
-        // private IServiceCollection _services;
 
         public CoinsController(DataContext context, ICryptoRepository repo, CoinList coinlist)
         {
               _repo = repo;
-            // // _context = context;
-            // _coinsInterval = coinsInterval;
-           //  _coinlist = coinlist;
-            //  _services = services;
         }
 
 
@@ -41,31 +33,11 @@ namespace Crypto.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCoins()
         {
-        //   CoinList coinmcap = new CoinList(_repo);
-
-         List<int> coins = new List<int>();
-         coins = await _repo.GetCoinNamesList();
-        
-        
-        //   coinmcap = await GetCoinsInterval.GetCoinList();
-         _coinlist = await GetCoinsInterval.GetCoinList_API(coins);
-
-  
-         return Ok(_coinlist);
+            List<int> coins = new List<int>();
+            coins = await _repo.GetCoinNamesList();
+            _coinlist = await GetCoinsInterval.GetCoinList_API(coins);      // call to set timer going that runs continuasly 
+            return Ok(_coinlist);
         }
-
-        //      // GET api/values
-        // [AllowAnonymous]
-        // [HttpGet("Mcap/")]
-        // public async Task<IActionResult> GetMarketCapString()
-        // {
-        //  CoinList coinmcap = new CoinList();
-
-        //  coinmcap = await GetCoinsInterval.GetCoinList();
-  
-        //  return Ok(coinmcap);
-        // }
-
 
     }
 }

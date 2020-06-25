@@ -15,7 +15,7 @@ namespace Crypto.API.Data
 
          Task<CoinsHodle> GetCoinsHodle(int id);
 
-         Task<Transactions> GetTransactions(int coinHodleId);
+         Task<List<Transactions>> GetTransactions(string coinHodleIds);
 
          Task<Portfolio> GetPortfolio(int id);
 
@@ -30,13 +30,18 @@ namespace Crypto.API.Data
 
          Task<bool> AddPortfolio(string name, User user);
 
-         Task<bool> AddCoinToPortfolio(int coinid, string name, Portfolio portfolio);
+         Task<bool> AddCoinToPortfolio(int coinid, int coinidno, Portfolio portfolio);
          
-         Task<bool> AddTransaction(CoinsHodle coinHodleID, decimal quantity, string datetime);
+         Task<bool> AddTransaction(CoinsHodle coinHodleID, decimal quantity, string datetime, decimal fee, decimal priceWhenBoughtSold, int coinid);
 
-         Task<bool> UpdateCoinHodleAmount(CoinsHodle coinHodleID);
+         Task<double> Get_Total_Coin_In_Portfolio(CoinsHodle coinHodleID, int coinid);
+ 
+         Task<double> Get_Total_Coin_In_All_Portfolio(User user, int coinid);
 
-         Task GetUser(object userid);
+
+        //  Task<bool> UpdateCoinHodleAmount(CoinsHodle coinHodleID);      // maybe get rid of this
+
+        //  Task GetUser(object userid);
         
     }
 }

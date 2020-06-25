@@ -80,7 +80,6 @@ namespace Crypto.API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
                     Quantity = table.Column<decimal>(nullable: false),
                     coinID = table.Column<int>(nullable: false),
                     PortfolioID = table.Column<int>(nullable: true)
@@ -105,6 +104,9 @@ namespace Crypto.API.Migrations
                     Date = table.Column<DateTime>(nullable: false),
                     AmountBuy = table.Column<double>(nullable: false),
                     AmountSell = table.Column<double>(nullable: false),
+                    Coinid = table.Column<int>(nullable: false),
+                    fee = table.Column<decimal>(nullable: false),
+                    priceWhenBoughtSold = table.Column<decimal>(nullable: false),
                     CoinsHodleId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>

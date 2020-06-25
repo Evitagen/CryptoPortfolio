@@ -7,6 +7,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Crypto.API.Models;
 using System;
+using System.Collections.Generic;
 
 namespace Crypto.API.Controllers
 {
@@ -27,6 +28,11 @@ namespace Crypto.API.Controllers
         }
 
 
+
+        //////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////// GET Portfolio
+        //////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPortfolio(int id)
         {
@@ -35,6 +41,9 @@ namespace Crypto.API.Controllers
 
              //var PortfolioToReturn = _mapper.Map<PortFoliosForDetailedDto>(Portfolio);
 
+             // go through all coins in portfolio and update the coin holdings from transaction
+             
+
              //
              // must check only users portfolios are returned not other users
              //
@@ -42,6 +51,10 @@ namespace Crypto.API.Controllers
              return Ok(Portfolio);
 
         }
+
+        //////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////// GET ALL PortfolioS
+         //////////////////////////////////////////////////////////////////////////////////////////
 
         [HttpGet("All/{id}")]
         public async Task<IActionResult> GetAllPortfolio(int id)
@@ -63,14 +76,30 @@ namespace Crypto.API.Controllers
              return Ok(Portfolios);
         }
 
-        [HttpGet("Transactions/{PortfolioID}/{Coin}")]
-        public async Task<IActionResult> GetTransactions(int PortfolioID, string Coin)
+        //////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////// GET All TRANSACTIONS
+         //////////////////////////////////////////////////////////////////////////////////////////
+
+
+        [HttpGet("AllTran/{ids}")]
+        public async Task<IActionResult> GetAllTran(string ids)
         {
-          //   var Transactions = await _repo.GetTransactions()
-
-
-              return Ok();
+            try 
+            {
+              var Transactions = await _repo.GetTransactions(ids);
+              return Ok(Transactions);
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine(e.ToString());
+                return BadRequest("Failed to get transactions");
+            }
+ 
         }
+
+        //////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////// ADD PORTFOLIO
+        //////////////////////////////////////////////////////////////////////////////////////////
 
          [HttpPost("Add/{name}/{id}")]
          public async Task<IActionResult> Add(string name, int id)
@@ -87,35 +116,63 @@ namespace Crypto.API.Controllers
          }
 
 
-         [HttpPost("AddCoin/{name}/{portFolioid}")]
-          public async Task<IActionResult> AddCoin(int coinid, string name, int portFolioid)            // need to add coinid aswell
+        //////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////// ADD COIN TO PORTFOLIO
+         //////////////////////////////////////////////////////////////////////////////////////////
+
+         [HttpPost("AddCoin/{coinidno}/{portFolioid}")]
+          public async Task<IActionResult> AddCoin(int coinid, int coinidno, int portFolioid)            // need to add coinid aswell
          { 
              System.Console.WriteLine("add coin");
             // must check the id passing in is match for id from jwt token as somone could hack other users
             Portfolio portfolio = await _repo.GetPortfolio(portFolioid);
 
-            if (await _repo.AddCoinToPortfolio(coinid, name, portfolio))
+            if (await _repo.AddCoinToPortfolio(coinid, coinidno, portfolio))
                return Ok();
   
             return BadRequest("Failed to add Coin");
          }
 
 
-         [HttpPut("AddTransaction/{coinname}/{coinhodleid}/{quantity}/{fee}/{datatime}/{priceWhenBoughtSold}")]
-         public async Task<IActionResult> AddTransaction(string coinname, int coinhodleid, decimal quantity, decimal fee, string datatime, decimal priceWhenBoughtSold)
+
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////// ADD TRANSACTION
+        //////////////////////////////////////////////////////////////////////////////////////////
+
+         [HttpPost("AddTransaction/{coinname}/{coinhodleid}/{quantity}/{fee}/{datatime}/{priceWhenBoughtSold}/{coinid}")]
+         public async Task<IActionResult> AddTransaction(string coinname, int coinhodleid, decimal quantity, decimal fee, string datatime, decimal priceWhenBoughtSold, int coinid)
          {
 
-            CoinsHodle coinsHodle = await _repo.GetCoinsHodle(coinhodleid);
-
-            //Transactions transactions = await _repo.GetTransactions(coinsHodle.Id);
-
-            if (await _repo.AddTransaction(coinsHodle, quantity, datatime))
+            try 
             {
-                if (await _repo.UpdateCoinHodleAmount(coinsHodle))
-                 return Ok();
-            }
+                CoinsHodle coinsHodle = await _repo.GetCoinsHodle(coinhodleid);
+
+                //Transactions transactions = await _repo.GetTransactions(coinsHodle.Id);
+
+
+
+                if (await _repo.AddTransaction(coinsHodle, quantity, datatime, fee, priceWhenBoughtSold, coinid))
+                {
+                   // var total = await _repo.Get_Total_Coin_In_Portfolio(coinsHodle, coinid);                     // replace 1 with coinid
+
+
+                    // if (await _repo.UpdateCoinHodleAmount(coinsHodle))              // maybe better way of doing this
+
+                    //return Ok(total);
+                    return Ok();
+                }
                
-           return BadRequest("Failed to add Transaction");
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine(e.ToString());
+            }
+
+
+               
+            return BadRequest("Failed to add Transaction");
              
          }
 

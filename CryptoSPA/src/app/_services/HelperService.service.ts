@@ -59,7 +59,7 @@ loadPieChart(coins: CoinsHodle[]) {
 
     }
   }
-debugger;
+
     this.PieChart = new Chart('pieChart', {
     type: 'pie',
     data: {

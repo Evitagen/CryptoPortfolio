@@ -8,6 +8,10 @@ namespace Crypto.API.Models
         public DateTime Date { get; set; }
         public double AmountBuy { get; set; }
         public double AmountSell { get; set; }
+        public int Coinid { get; set; }
+        public decimal fee { get; set; }
+        public decimal priceWhenBoughtSold { get; set; }
         public virtual CoinsHodle CoinsHodle{ get; set; }
+
     }
 }

@@ -5,7 +5,8 @@ namespace Crypto.API.Models
     public class CoinsHodle
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        
+        // public string Name { get; set; }
         public decimal Quantity { get; set; } 
         public int coinID { get; set; }  
         public Portfolio Portfolio { get; set; }

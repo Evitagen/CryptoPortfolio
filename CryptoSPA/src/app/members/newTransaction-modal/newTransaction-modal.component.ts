@@ -30,6 +30,9 @@ export class NewTransactionModalComponent implements OnInit {
   transDateISO: string;
   bsConfig: Partial<BsDatepickerConfig>;  // partial - makes all properties in type optional
   TotalSell: number;
+  TotalAfterTransaction: number;
+  coins: any;
+
 
 
   // public now: Date = new Date();
@@ -59,45 +62,51 @@ export class NewTransactionModalComponent implements OnInit {
 
   TransactionAdd() {
     if (this.coinTransForm.valid) {
-        this.transaction = Object.assign({}, this.coinTransForm.value);
 
-        const ddate = new Date(this.transaction.dateTransaction);
-
-        this.transDateISO = ddate.toISOString();
-
-        console.log(this.transaction.QtyModel);
-        if (this.TransactionModel === 'Sell') {
-          this.TotalSell = this.transaction.QtyModel - this.transaction.QtyModel - this.transaction.QtyModel;
+      this.user.getCoinPrices().subscribe(async Response => {
+        this.coins = Response;
 
 
-          this.user.addCoinTransaction(this.coin.name, this.coin.id, this.TotalSell,
-            this.transaction.TransactionFee, this.transDateISO, this.transaction.PriceWhenBought).subscribe(data => {
-              console.log('success!!!!');
+            this.transaction = Object.assign({}, this.coinTransForm.value);
+            const ddate = new Date(this.transaction.dateTransaction);
+            this.transDateISO = ddate.toISOString();
 
-            }, error => {
-              console.log('fail');
-            });
+  
 
+            if (this.TransactionModel === 'Sell') {                                                                           // Sell
+              this.TotalSell = this.transaction.QtyModel - this.transaction.QtyModel - this.transaction.QtyModel;
 
-        } else {
+              this.user.addCoinTransaction(this.coin.name, this.coin.id, this.TotalSell,
+                this.transaction.TransactionFee, this.transDateISO, this.transaction.PriceWhenBought, this.coin.coinID).subscribe(data => {
+                  this.TotalAfterTransaction = this.coin.quantity - this.transaction.QtyModel;
+                  this.addTransaction.emit(this.TotalAfterTransaction);
+                  console.log('success!!!!');
 
-          this.user.addCoinTransaction(this.coin.name, this.coin.id, this.transaction.QtyModel,
-            this.transaction.TransactionFee, this.transDateISO, this.transaction.PriceWhenBought).subscribe(data => {
-              console.log('success!!!!');
-
-            }, error => {
-              console.log('fail');
-            });
-
-        }
+                }, error => {
+                  console.log('fail');
+                });
 
 
+            } else {                                                                                                          // Buy
 
+            this.user.addCoinTransaction(this.coin.name, this.coin.id, this.transaction.QtyModel,
+                this.transaction.TransactionFee, this.transDateISO, this.transaction.PriceWhenBought, this.coin.coinID).subscribe(data => {
+                this.TotalAfterTransaction = this.coin.quantity + this.transaction.QtyModel;
+                this.addTransaction.emit(this.TotalAfterTransaction);
+                console.log('success!!!!');
 
-      // emits more than 1 parameter
-      // this.addTransaction.emit({Quantity: this.QtyModel, Fee: this.TransModel, Date: this.DateModel, PriceBought: this.PriceModel});
-      this.addTransaction.emit(true);
-      this.bsModalRef.hide();
+                }, error => {
+                  console.log('fail');
+                });
+
+            }
+
+          // emits more than 1 parameter
+          // this.addTransaction.emit({Quantity: this.QtyModel, Fee: this.TransModel, Date: this.DateModel, PriceBought: this.PriceModel});
+          
+          this.bsModalRef.hide();
+    });
+
     }
     console.log('done');
 

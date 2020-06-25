@@ -39,9 +39,30 @@ namespace Crypto.API.Data
             return coinsHodle;
         }
 
-        public async Task<Transactions> GetTransactions(int coinHodleId)
+        public async Task<List<Transactions>> GetTransactions(string coinHodleIds)
         {
-            var transactions = await _context.Transactions.FirstOrDefaultAsync(p => p.CoinsHodle.Id == coinHodleId);
+
+            var transactions = new List<Transactions>();
+            var listofids = new List<string>();
+            listofids = coinHodleIds.Split(',').ToList();
+
+            foreach (var id in listofids)
+            {
+                if (id.Length > 0)
+                {
+                        var intid = int.Parse(id);
+
+                        var trans = await _context.Transactions
+                        .Where(t => t.CoinsHodle.Id == intid)
+                        .Include(c => c.CoinsHodle)
+                        .ToListAsync();
+
+                        foreach (var item in trans)
+                        {
+                            transactions.Add(item);
+                        }
+                }
+            }
             return transactions;
         }
         public async Task<User> GetUser(int id)
@@ -90,12 +111,12 @@ namespace Crypto.API.Data
              return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> AddCoinToPortfolio(int coinid, string name, Portfolio portfolio)
+        public async Task<bool> AddCoinToPortfolio(int coinid, int coinidno, Portfolio portfolio)
         {
             CoinsHodle newCoinsHodle = new CoinsHodle();
 
-            newCoinsHodle.Name = name;
-            newCoinsHodle.coinID = coinid;
+            // newCoinsHodle.Name = name;
+            newCoinsHodle.coinID = coinidno;
             newCoinsHodle.Quantity = 0;
             newCoinsHodle.Portfolio = portfolio;
 
@@ -105,7 +126,7 @@ namespace Crypto.API.Data
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> AddTransaction(CoinsHodle coinHodleID, decimal quantity, string datetime)
+        public async Task<bool> AddTransaction(CoinsHodle coinHodleID, decimal quantity, string datetime, decimal fee, decimal priceWhenBoughtSold, int coinid)
         {
 
             
@@ -127,6 +148,9 @@ namespace Crypto.API.Data
             }
            
            transaction.CoinsHodle = coinHodleID;
+           transaction.fee = fee;
+           transaction.Coinid = coinid;
+           transaction.priceWhenBoughtSold = priceWhenBoughtSold;
            
             if (transaction.AmountBuy != 0 || transaction.AmountSell != 0)
             {
@@ -137,26 +161,60 @@ namespace Crypto.API.Data
 
         }
 
-        public async Task<bool> UpdateCoinHodleAmount(CoinsHodle coinHodleID)
+        public async Task<double> Get_Total_Coin_In_Portfolio(CoinsHodle coinHodleID, int coinid)
         {
+             var coinsHodle = await _context.CoinsHodle
+             .Include(t => t.Transactions)                       
+             .FirstOrDefaultAsync(p => p.Id == coinHodleID.Id);
 
-                double totalBuy = 0;
-                double totalSell = 0;
-                double total = 0;
+             var totalbuys = from Transaction in coinsHodle.Transactions
+                                where  Transaction.Coinid == coinid
+                                select Transaction.AmountBuy;
 
-                foreach (var coinTrans in coinHodleID.Transactions)
-                {
-                    totalBuy += coinTrans.AmountBuy;
-                    totalSell += coinTrans.AmountSell;      
-                }
-                total = totalBuy - totalSell;
+             var totalsells = from Transaction in coinHodleID.Transactions
+                                where Transaction.Coinid == coinid
+                                select Transaction.AmountSell;
 
-                coinHodleID.Quantity = Convert.ToDecimal(total);
+            var totalBuy = totalbuys.Sum();
+            var totalSell = totalsells.Sum();
 
-                _context.CoinsHodle.Update(coinHodleID);
-
-                return await _context.SaveChangesAsync() > 0;
+            return totalBuy - totalSell;
         }
+
+        public async Task<double> Get_Total_Coin_In_All_Portfolio(User user, int coinid)
+        {
+            var allPorfolios = await _context.Portfolio
+                .Include(c => c.coinsHodle)
+                .FirstOrDefaultAsync(u => u.User.Id == user.Id);
+
+            foreach (var item in allPorfolios.coinsHodle)
+            {
+                
+            }
+
+            return 0;
+        }
+
+        // public async Task<bool> UpdateCoinHodleAmount(CoinsHodle coinHodleID)
+        // {
+
+        //         double totalBuy = 0;
+        //         double totalSell = 0;
+        //         double total = 0;
+
+        //         foreach (var coinTrans in coinHodleID.Transactions)
+        //         {
+        //             totalBuy += coinTrans.AmountBuy;
+        //             totalSell += coinTrans.AmountSell;      
+        //         }
+        //         total = totalBuy - totalSell;
+
+        //         coinHodleID.Quantity = Convert.ToDecimal(total);
+
+        //         _context.CoinsHodle.Update(coinHodleID);
+
+        //         return await _context.SaveChangesAsync() > 0;
+        // }
 
         public async Task<bool> SaveAll()
         {
@@ -181,6 +239,7 @@ namespace Crypto.API.Data
         public Task<Transactions> GetTransactions(User user)
         {
             throw new NotImplementedException();
+            
         }
 
 

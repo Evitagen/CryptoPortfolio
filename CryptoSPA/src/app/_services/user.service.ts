@@ -51,6 +51,12 @@ export class UserService {
     return this.http.get(this.baseUrl + 'portfolio/All/' + userId);
   }
 
+  getTransactions(ids: string) {
+    return this.http.get(this.baseUrl + 'portfolio/AllTran/' + ids);
+  }
+
+
+
   addPortfolio(name: string, userId: number) {
     return this.http.post(this.baseUrl + 'portfolio/add/' + name + '/' + userId, {});
   }
@@ -59,24 +65,24 @@ export class UserService {
   //  Coins
   //
 
-  addPortfolioCoin(coin: string, portfolioId: number) {
-    return this.http.post(this.baseUrl + 'portfolio/addcoin/' + coin + '/' + portfolioId, {});
+  addPortfolioCoin(coinid: number, portfolioId: number) {
+    return this.http.post(this.baseUrl + 'portfolio/addcoin/' + coinid + '/' + portfolioId, {});
   }
 
   //
   // Transactions
   //
 
-  addCoinTransaction(coin: string, coinhodleid: number, quantity: number, fee: number, date: string, priceWhenBoughtSold: number) {
+ addCoinTransaction(coin: string, coinhodleid: number, quantity: number, fee: number,
+   date: string, priceWhenBoughtSold: number, coinid: number) {
     // tslint:disable-next-line:max-line-length
     // this.deletethis = this.baseUrl + 'portfolio/addtransaction/' + coin + '/' + portfolioId + '/' + quantity + '/' + fee + '/' + date + '/' + priceWhenBoughtSold;
     // tslint:disable-next-line:max-line-length
-    return this.http.put(this.baseUrl + 'portfolio/addtransaction/' + coin + '/' + coinhodleid + '/' + quantity + '/' + fee + '/' + date + '/' + priceWhenBoughtSold, {});
+
+    return this.http.post(this.baseUrl + 'portfolio/addtransaction/' + coin + '/' + coinhodleid + '/' + quantity + '/' + fee + '/' + date + '/' + priceWhenBoughtSold + '/' + coinid, {});
   }
 
-  getTransactions() {
-    return this.http.get(this.baseUrl + '');
-  }
+
 
 
 

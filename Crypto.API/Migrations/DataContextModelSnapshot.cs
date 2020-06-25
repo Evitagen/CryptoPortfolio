@@ -40,8 +40,6 @@ namespace Crypto.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name");
-
                     b.Property<int?>("PortfolioID");
 
                     b.Property<decimal>("Quantity");
@@ -103,9 +101,15 @@ namespace Crypto.API.Migrations
 
                     b.Property<double>("AmountSell");
 
+                    b.Property<int>("Coinid");
+
                     b.Property<int?>("CoinsHodleId");
 
                     b.Property<DateTime>("Date");
+
+                    b.Property<decimal>("fee");
+
+                    b.Property<decimal>("priceWhenBoughtSold");
 
                     b.HasKey("Id");
 

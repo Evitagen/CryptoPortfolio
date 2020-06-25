@@ -87,6 +87,7 @@ export class AllCoinsComponent implements OnInit, OnDestroy {
 
     this.userService.getAllPortfolioCoins(user.id).subscribe((portfolios: Portfolio[]) => {
 
+      debugger;
       for (const portfolio of portfolios) {                   // loop through each portfolio
         if (portfolio && portfolio.coinsHodle.length > 0) {   // if there are coins in that portfolio
           for (const co of portfolio.coinsHodle) {            // loop through each coin in that portfolio

@@ -14,6 +14,8 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { Chart } from 'chart.js';
 import { CurrencyPipe } from '@angular/common';
 import { HelperServiceService } from "./../../_services/HelperService.service";
+import { exit } from 'process';
+import { Transaction } from 'src/app/_models/Transaction';
 
 
 @Component({
@@ -30,6 +32,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
   coinsDropDown: any;
   subscription: any;
   portfolio: Portfolio;
+  transactions: any;
   bsModalRef: any;
   coinsnImageList: CoinsHodle[] = [];
   allowRefresh = true;
@@ -45,6 +48,9 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
   total: number;
   exists: Boolean = false;
   id: number;
+  coinidselected: number;
+  coinids: string = '';
+  totalcoinholdings: number = 0;
 
 
   async ngOnInit() {
@@ -55,12 +61,12 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
     this.loadPortfolio(this.id);
 
     // put delay
-    await this.delay(100);
+    await this.delay(50);
     this.getValues();
     // this.loadUsers(this.portfolio.userid);
     // this.pageRefresh();
 
-    await this.delay(1000);
+    await this.delay(800);
     this.helperService.loadPieChart(this.coinsnImageList);
     }
 
@@ -87,33 +93,58 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
     // Gets the total
     this.total = 0.00;
 
+
     this.userService.getCoinPrices().subscribe(async Response => {
     this.coins = Response;
-
 
     if (this.coinsLoaded === false) {
       this.coinsDropDown = this.coins;
       this.coinsLoaded = true;
     }
 
-      // gets the total
-      for (const coin of this.coins) {
-        if (this.portfolio && this.portfolio.coinsHodle.length > 0) {
-          for (const co of this.portfolio.coinsHodle) {
-            if (co.name === coin.name) {
-              co.price = coin.price;
-              if (co.price > 0 && co.quantity > 0) {
-                this.total = this.total + (coin.price * co.quantity);
+
+      // gets all transactions in portfolio
+      this.coinids = '';
+      for (const co of this.portfolio.coinsHodle) {
+          this.coinids = this.coinids + co.id + ',';
+      }
+
+      this.userService.getTransactions(this.coinids).subscribe(async Response => {
+          this.transactions = Response;
+
+
+          // gets the total
+          for (const coin of this.coins) {
+            if (this.portfolio && this.portfolio.coinsHodle.length > 0) {
+              for (const co of this.portfolio.coinsHodle) {
+
+                if (co.coinID === coin.coinID) {
+
+                  this.totalcoinholdings = 0;
+                  co.price = coin.price;
+                  co.name = coin.name;
+
+                  for (const transaction of this.transactions) {             // get transactions loop through and add to get total holdings
+                      if (transaction.coinsHodle.coinID === co.coinID) {
+
+                        this.totalcoinholdings = this.totalcoinholdings + transaction.amountBuy;
+                        this.totalcoinholdings = this.totalcoinholdings - transaction.amountSell;
+                      }
+                  }
+  
+                  co.quantity = this.totalcoinholdings;
+                  if (co.price > 0 && this.totalcoinholdings > 0) {
+                    this.total = this.total + (coin.price * this.totalcoinholdings);
+                  }
+                }
               }
             }
           }
-        }
-      }
-
-
 
       this.AddCoinImages();
       this.FormatNumbers();
+
+    });
 
     }, error => {
       console.log(error);
@@ -172,7 +203,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
 
     const initialState = {
       coin,
-      portfolio
+      portfolio,
     };
 
     this.bsModalRef = this.modalService.show(NewTransactionModalComponent, {initialState});
@@ -181,9 +212,13 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
 
     this.bsModalRef.content.addTransaction.subscribe(async (values: string[]) => {
 
-      await this.delay(500);
-      this.loadPortfolio(this.id);
-      await this.delay(500);
+      console.log(values);
+      debugger;
+      this.bsModalRef.content.coin.quantity = values;
+
+      // await this.delay(500);
+      // this.loadPortfolio(this.id);
+      // await this.delay(500);
       this.getValues();
       await this.delay(1000);
       this.helperService.loadPieChart(this.coinsnImageList);
@@ -194,6 +229,8 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
 
   onBtnAdd() {
 
+
+
     this.exists = false;
     for (const coin of this.portfolio.coinsHodle) {
       if (this.coinSelected === coin.name) {
@@ -203,7 +240,17 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
     }
 
     if (this.exists === false && this.coinSelected != null) {
-      this.userService.addPortfolioCoin(this.coinSelected, this.portfolio.portfolioID).subscribe(data => {
+
+      // add coinid
+      for (const coin of this.coins) {
+        if (this.coinSelected == coin.name) {
+          this.coinidselected = coin.coinID;
+          break;
+        }
+      }
+
+  
+      this.userService.addPortfolioCoin(this.coinidselected, this.portfolio.portfolioID).subscribe(data => {
         this.alertify.success('Added ' + this.coinSelected);
         this.ngOnInit();
       }, error => {
