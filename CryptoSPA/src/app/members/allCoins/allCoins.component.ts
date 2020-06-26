@@ -25,6 +25,8 @@ export class AllCoinsComponent implements OnInit, OnDestroy {
   AllcoinsnImageList: CoinsHodle[] = [];
   coinFound = false;
   subscription: any;
+  coinhodleids: string = '';
+  transactions: any;
 
   PieChart = [];
 
@@ -87,56 +89,73 @@ export class AllCoinsComponent implements OnInit, OnDestroy {
 
     this.userService.getAllPortfolioCoins(user.id).subscribe((portfolios: Portfolio[]) => {
 
-      debugger;
-      for (const portfolio of portfolios) {                   // loop through each portfolio
-        if (portfolio && portfolio.coinsHodle.length > 0) {   // if there are coins in that portfolio
-          for (const co of portfolio.coinsHodle) {            // loop through each coin in that portfolio
+
+       this.coinhodleids = '';                                                                         //  gets all the coinhodle ids
+       for (const portfolio of portfolios) {                                                      //  in all the portfolios
+        if (portfolio && portfolio.coinsHodle.length > 0) {                                       //
+          for (const co of portfolio.coinsHodle) {                                                //
+             this.coinhodleids = this.coinhodleids + co.id + ',';                                  //
             this.coinFound = false;
 
-                for (let i = 0; i < this.AllcoinsList.length; i++) {                             // loop through each AllcoinsList
-                  if (co.name === this.AllcoinsList[i].name) {                                   // if the name matches
-                    this.coinFound = true;
-                    this.AllcoinsList[i].quantity = this.AllcoinsList[i].quantity + co.quantity; // add quantity to existing in AllcoinsList
 
-                        for (let j = 0; j < this.coins.length; j++) {                     // loop through each
-                          if (co.name === this.coins[j].name) {                           //
-                            this.AllcoinsList[i].price = this.coins[j].price;             //
-                          }
-                        }
-                  }
-                }
 
-                if (this.coinFound === false) {       // if coin not found
-                    for (let i = 0; i < this.coins.length; i++) {
-                      if (co.name === this.coins[i].name) {
-                        co.price = this.coins[i].price;
-                      }
-                    }
-                    this.AllcoinsList.push(co);       // add coin and qty to Allcoins list
+            for (let i = 0; i < this.AllcoinsList.length; i++) {                                  // loop through each AllcoinsList
+              if (co.coinID === this.AllcoinsList[i].coinID) {                                    // if the name matches
+                this.coinFound = true;
+              }
+            }
+
+            if (this.coinFound === false) {
+              for (let i = 0; i < this.coins.length; i++) {
+                if (co.coinID === this.coins[i].coinID) {
+                  co.price = this.coins[i].price;
+                  co.name = this.coins[i].name;
                 }
-          }
+              }
+              this.AllcoinsList.push(co);                                                         // add coin and qty to Allcoins list
+            }
+
+          }                                                                                       //
+        }                                                                                         //
+       }                                                                                          //
+
+
+       this.userService.getTransactions(this.coinhodleids).subscribe(async Response => {
+        this.transactions = Response;
+ 
+        for (let i = 0; i < this.AllcoinsList.length; i++) {
+ 
+           for (const transaction of this.transactions) {
+             if (transaction.coinsHodle.coinID === this.AllcoinsList[i].coinID) {
+               this.AllcoinsList[i].quantity = this.AllcoinsList[i].quantity + transaction.amountBuy;     //  sets quantity
+               this.AllcoinsList[i].quantity = this.AllcoinsList[i].quantity - transaction.amountSell;    //
+             }
+           }
+ 
         }
-      }
+
+
+                // copy portfolio coins into coinsnImageList
+                for (let i = 0; i < this.AllcoinsList.length; i++) {
+                  const coinHodle = this.AllcoinsList[i];
+                  this.AllcoinsnImageList.push(coinHodle);
+                }
+            
+                for (let i = 0; i < this.AllcoinsnImageList.length; i++) {                                                  //
+                  this.AllcoinsnImageList[i].imageLocation = 'assets/images/' + this.AllcoinsnImageList[i].name + '.png';   // images
+                }
+
+              for (const AllCoin of this.AllcoinsList) {                                //
+                  if (AllCoin.price > 0 && AllCoin.quantity > 0) {                      // Totals 00000
+                    this.total = this.total + (AllCoin.price * AllCoin.quantity);       //
+                  }
+              }
+
+      });
 
          this.FormatNumbers();
 
-        // copy portfolio coins into coinsnImageList
-        for (let i = 0; i < this.AllcoinsList.length; i++) {
-          const coinHodle = this.AllcoinsList[i];
-          this.AllcoinsnImageList.push(coinHodle);
-        }
-        // gets the icon location and puts in coinsnImageList
-        for (let i = 0; i < this.AllcoinsnImageList.length; i++) {
-          this.AllcoinsnImageList[i].imageLocation = 'assets/images/' + this.AllcoinsnImageList[i].name + '.png';
-          // console.log(this.AllcoinsnImageList[i].imageLocation);
-        }
 
-
-      for (const AllCoin of this.AllcoinsList) {
-          if (AllCoin.price > 0 && AllCoin.quantity > 0) {
-            this.total = this.total + (AllCoin.price * AllCoin.quantity);
-          }
-      }
 
     }, error => {
       this.alertify.error(error);

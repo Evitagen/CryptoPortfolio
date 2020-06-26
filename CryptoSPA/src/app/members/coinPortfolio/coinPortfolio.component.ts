@@ -49,7 +49,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
   exists: Boolean = false;
   id: number;
   coinidselected: number;
-  coinids: string = '';
+  coinHodleids: string = '';
   totalcoinholdings: number = 0;
 
 
@@ -104,12 +104,12 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
 
 
       // gets all transactions in portfolio
-      this.coinids = '';
+      this.coinHodleids = '';
       for (const co of this.portfolio.coinsHodle) {
-          this.coinids = this.coinids + co.id + ',';
+          this.coinHodleids = this.coinHodleids + co.id + ',';
       }
 
-      this.userService.getTransactions(this.coinids).subscribe(async Response => {
+      this.userService.getTransactions(this.coinHodleids).subscribe(async Response => {
           this.transactions = Response;
 
 
@@ -131,7 +131,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
                         this.totalcoinholdings = this.totalcoinholdings - transaction.amountSell;
                       }
                   }
-  
+
                   co.quantity = this.totalcoinholdings;
                   if (co.price > 0 && this.totalcoinholdings > 0) {
                     this.total = this.total + (coin.price * this.totalcoinholdings);
