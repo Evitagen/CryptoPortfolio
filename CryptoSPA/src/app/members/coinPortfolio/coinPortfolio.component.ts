@@ -36,6 +36,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
   bsModalRef: any;
   coinsnImageList: CoinsHodle[] = [];
   allowRefresh = true;
+  bitcoinPrice: number;
 
   PieChart = [];
 
@@ -96,6 +97,13 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
 
     this.userService.getCoinPrices().subscribe(async Response => {
     this.coins = Response;
+
+    for (let i = 0; i < this.coins.length; i++) {
+      if (this.coins[i].coinID === 1) {
+        this.bitcoinPrice = this.coins[i].price;
+      }
+    }
+    debugger;
 
     if (this.coinsLoaded === false) {
       this.coinsDropDown = this.coins;
@@ -163,7 +171,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
 
     // gets the icon location and puts in coinsnImageList
     for (let i = 0; i < this.coinsnImageList.length; i++) {
-      this.coinsnImageList[i].imageLocation = 'assets/images/' + this.coinsnImageList[i].name + '.png';
+      this.coinsnImageList[i].imageLocation = 'assets/images/' + this.coinsnImageList[i].coinID + '.png';
       // console.log(this.coinsnImageList[i].imageLocation);
     }
 

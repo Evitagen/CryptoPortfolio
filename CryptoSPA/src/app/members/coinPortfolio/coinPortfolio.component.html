@@ -14,9 +14,8 @@
 
 <div style="display: block">
 
-<h4 align="center" *ngIf="total > 0" >   
-      Total Value - {{total | currency}}
-</h4> 
+<h4 align="center" *ngIf="total > 0" > Total Value - {{total | currency}}</h4>
+<h4 align="center"> Total BTC Value -  {{total / bitcoinPrice | number:'1.3-3'}}</h4>
 
 
 

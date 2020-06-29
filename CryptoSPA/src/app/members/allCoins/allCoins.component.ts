@@ -71,7 +71,7 @@ export class AllCoinsComponent implements OnInit, OnDestroy {
     this.userService.getCoinPrices().subscribe(Response => {
       this.coins = Response;
       for (let i = 0; i < this.coins.length; i++) {
-        if (this.coins[i].name === 'bitcoin') {
+        if (this.coins[i].coinID === 1) {
           this.bitcoinPrice = this.coins[i].price;
         }
       }
@@ -142,7 +142,7 @@ export class AllCoinsComponent implements OnInit, OnDestroy {
                 }
             
                 for (let i = 0; i < this.AllcoinsnImageList.length; i++) {                                                  //
-                  this.AllcoinsnImageList[i].imageLocation = 'assets/images/' + this.AllcoinsnImageList[i].name + '.png';   // images
+                  this.AllcoinsnImageList[i].imageLocation = 'assets/images/' + this.AllcoinsnImageList[i].coinID + '.png';   // images
                 }
 
               for (const AllCoin of this.AllcoinsList) {                                //
