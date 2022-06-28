@@ -1,41 +1,34 @@
 ﻿<Properties StartupConfiguration="{9E12E6B1-C181-4983-B3AD-6F73212054B8}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Helpers/GetCoinsInterval.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Helpers/API_KEY_COINMCAP.cs">
     <Files>
       <File FileName="Controllers/CoinsController.cs" Line="1" Column="1" />
-      <File FileName="Helpers/GetCoinsInterval.cs" Line="80" Column="2" />
-      <File FileName="Models/CoinList.cs" Line="44" Column="1" />
+      <File FileName="Helpers/GetCoinsInterval.cs" Line="11" Column="1" />
+      <File FileName="Models/CoinList.cs" Line="83" Column="1" />
+      <File FileName="Helpers/API_KEY_COINMCAP.cs" Line="17" Column="18" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Crypto.API" expanded="True">
             <Node name="Crypto.API" expanded="True">
+              <Node name="ConnectedServicesFolder" selected="True" />
               <Node name="Controllers" expanded="True" />
               <Node name="Data" expanded="True" />
               <Node name="Dtos" expanded="True" />
-              <Node name="Helpers" expanded="True">
-                <Node name="GetCoinsInterval.cs" selected="True" />
-              </Node>
+              <Node name="Helpers" expanded="True" />
               <Node name="Models" expanded="True" />
             </Node>
           </Node>
         </State>
       </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
-      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.Crypto.API PreferredExecutionTarget="/Applications/Firefox.app" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
-    <Watch file="../../../Helpers/GetCoinsInterval.cs" line="74" column="45" endLine="74" endColumn="54" offsetX="-1" offsetY="-1" expression="_coinlist" liveUpdate="False" />
-  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/timschofield/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs" relfile="Models/CoinList.cs" line="77" column="1" />
       <Breakpoint file="/Users/timschofield/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Helpers/GetCoinsInterval.cs" relfile="Helpers/GetCoinsInterval.cs" line="75" column="1" />
-      <Breakpoint file="/Users/timschofield/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs" relfile="Models/CoinList.cs" line="72" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />

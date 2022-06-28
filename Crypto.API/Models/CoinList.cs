@@ -162,7 +162,7 @@ namespace Crypto.API.Models
         static string makeAPICall()
         {
 
-             var URL = new UriBuilder("https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest");
+            var URL = new UriBuilder("https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest");
             // var URL = new UriBuilder("https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest");
 
             var queryString = HttpUtility.ParseQueryString(string.Empty);
@@ -175,8 +175,8 @@ namespace Crypto.API.Models
             var client = new WebClient();
 
             // swap top (Live) with below (test)    ////////////////////////////////////////////////////////////////////////////////////////////////  swap this one
-            // client.Headers.Add("X-CMC_PRO_API_KEY", API_KEY_COINMCAP.API_KEY);
-            client.Headers.Add("X-CMC_PRO_API_KEY", API_KEY_COINMCAP.API_KEY_TEST);
+             client.Headers.Add("X-CMC_PRO_API_KEY", API_KEY_COINMCAP.API_KEY);
+            // client.Headers.Add("X-CMC_PRO_API_KEY", API_KEY_COINMCAP.API_KEY_TEST);
             // client.Headers.Add("X-CMC_PRO_API_KEY", API_KEY_COINMCAP.SANDBOX_API_KEY);
 
 
