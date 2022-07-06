@@ -72,20 +72,17 @@ namespace Crypto.API.Models
                 {
                     coins coin = new coins();
                     coin.Name = item.name.ToString();
-
-coin.Price = item.current_price;
-coin.Volume = item.total_volume;
-coin.circulating = item.circulating_supply;
-coin.Marketcap = item.market_cap_change_24h;
-coin.TotalSupply = 0;
-coin.PercentChange1hr = 0;
-coin.PercentChange24hr = 0;
-coin.PercentChange7day = 0;
-coin.CoinMcapRank = 0;
-coin.CoinID = 0;
-
-
-
+                    coin.Price = item.current_price;
+                    coin.Volume = item.total_volume;
+                    coin.circulating = item.circulating_supply;
+                    coin.Marketcap = item.market_cap_change_24h;
+                    coin.TotalSupply = 0;
+                    coin.PercentChange1hr = item.price_change_percentage_1h_in_currency;
+                    coin.PercentChange24hr = item.price_change_percentage_24h_in_currency;
+                    coin.PercentChange7day = item.price_change_percentage_7d_in_currency;
+                    coin.CoinMcapRank = item.market_cap_rank;
+                    //coin.CoinID = item.id;
+                    Console.WriteLine(item.id);
                     coins.Add(coin);
                 }
 
