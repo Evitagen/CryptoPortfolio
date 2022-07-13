@@ -33,7 +33,7 @@ namespace Crypto.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCoins()
         {
-            List<int> coins = new List<int>();
+            List<string> coins = new List<string>();
             coins = await _repo.GetCoinNamesList();
             _coinlist = await GetCoinsInterval.GetCoinList_API(coins);      // call to set timer going that runs continuasly 
             return Ok(_coinlist);

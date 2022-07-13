@@ -22,7 +22,7 @@ namespace Crypto.API.Models
 
         internal ICryptoRepository _repo;
         public List<coins> listofCoins = new List<coins>();
-        public List<int> _CoinsInDB { get; set; }
+        public List<string> _CoinsInDB { get; set; }
 
 
         public async void loadcoinMCapData()
@@ -42,7 +42,7 @@ namespace Crypto.API.Models
 
                 var responseG = makeAPICallCoinGecko();
 
-                System.Console.WriteLine(responseG);
+               // System.Console.WriteLine(responseG);
 
                 //var CoinMCap = JsonConvert.DeserializeObject<RootObject>(responseC);
                var CoinGecko = JsonConvert.DeserializeObject<List<coinGeckojson>>(responseG);
@@ -72,17 +72,20 @@ namespace Crypto.API.Models
                 {
                     coins coin = new coins();
                     coin.Name = item.name.ToString();
-                    coin.Price = item.current_price;
-                    coin.Volume = item.total_volume;
-                    coin.circulating = item.circulating_supply;
-                    coin.Marketcap = item.market_cap_change_24h;
+                    if (!item.current_price.Equals(null)) { coin.Price = item.current_price; } else { coin.Price = 0; }
+                    if (!item.total_volume.Equals(null)) { coin.Volume = item.total_volume; } else { coin.Volume = 0; }
+                    if (!item.circulating_supply.Equals(null)) { coin.circulating = item.circulating_supply; } else { coin.circulating = 0; }
+                    if (!item.market_cap_change_24h.Equals(null)) { coin.Marketcap = item.market_cap_change_24h; } else { coin.Marketcap = 0; }
                     coin.TotalSupply = 0;
-                    coin.PercentChange1hr = item.price_change_percentage_1h_in_currency;
-                    coin.PercentChange24hr = item.price_change_percentage_24h_in_currency;
-                    coin.PercentChange7day = item.price_change_percentage_7d_in_currency;
-                    coin.CoinMcapRank = item.market_cap_rank;
-                    //coin.CoinID = item.id;
-                    Console.WriteLine(item.id);
+                    if (!item.price_change_percentage_1h_in_currency.Equals(null)) {coin.PercentChange1hr = item.price_change_percentage_1h_in_currency; } else { coin.PercentChange1hr = 0; }
+                    if (!item.price_change_percentage_24h_in_currency.Equals(null)) {coin.PercentChange24hr = item.price_change_percentage_24h_in_currency; } else { coin.PercentChange24hr = 0; }
+                    if (!item.price_change_percentage_7d_in_currency.Equals(null)) {coin.PercentChange7day = item.price_change_percentage_7d_in_currency; } else { coin.PercentChange7day = 0; }
+                    if (!item.market_cap_rank.Equals(null)) { coin.CoinMcapRank = item.market_cap_rank; } else { coin.CoinMcapRank = 0; }
+                    if (!item.id.Equals(null)) { coin.CoinID = item.id; } else { coin.CoinID = ""; }
+               
+                    coin.ImageUrl = item.image.ToString();
+                    Console.WriteLine(coin.ImageUrl); 
+                    // Console.WriteLine(item.id);
                     coins.Add(coin);
                 }
 
@@ -134,6 +137,26 @@ namespace Crypto.API.Models
                             coinNames.CoinName = coin_in_list.Name;   
                             dbContextin.Add(coinNames);
                             _CoinsInDB.Add(coin_in_list.CoinID);
+
+                            
+
+
+                                // using (WebClient webClient = new WebClient()) 
+                                // {
+                                //     byte [] data = webClient.DownloadData(coin_in_list.image);
+
+                                // using (MemoryStream mem = new MemoryStream(data)) 
+                                // {
+                                //     using (var yourImage = Image.FromStream(mem)) 
+                                //     { 
+                                //         // If you want it as Png
+                                //         yourImage.Save("/images/" + coin_in_list.coinID, ImageFormat.Png) ; 
+
+                                //     }
+                                // } 
+
+                                // }
+
                         }
                     } 
 
@@ -158,11 +181,11 @@ namespace Crypto.API.Models
                 {
                 foreach (var coin in coinlist)
                 {
-                    if (coin.CoinID == 1)
+                    if (coin.CoinID == "bitcoin")
                     {
                         BTCPrice = coin.Price;
                     }
-                    if (coin.CoinID == 1027)
+                    if (coin.CoinID == "ethereum")
                     {
                         ETHPrice = coin.Price;
                     }

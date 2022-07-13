@@ -38,7 +38,8 @@ namespace Crypto.API.Models
         public decimal PercentChange24hr { get; set; }
         public decimal PercentChange7day { get; set; }
         public int CoinMcapRank { get; set; }
-        public int CoinID { get; set; }
+        public string CoinID { get; set; }
+        public string ImageUrl { get; set; }
         public DateTime LastUpdated { get; set; }
 
     }

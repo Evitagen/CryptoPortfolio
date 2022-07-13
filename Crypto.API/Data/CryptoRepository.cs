@@ -111,7 +111,7 @@ namespace Crypto.API.Data
              return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> AddCoinToPortfolio(int coinid, int coinidno, Portfolio portfolio)
+        public async Task<bool> AddCoinToPortfolio(int coinid, string coinidno, Portfolio portfolio)
         {
             CoinsHodle newCoinsHodle = new CoinsHodle();
 
@@ -126,7 +126,7 @@ namespace Crypto.API.Data
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> AddTransaction(CoinsHodle coinHodleID, decimal quantity, string datetime, decimal fee, decimal priceWhenBoughtSold, int coinid)
+        public async Task<bool> AddTransaction(CoinsHodle coinHodleID, decimal quantity, string datetime, decimal fee, decimal priceWhenBoughtSold, string coinid)
         {
 
             
@@ -161,7 +161,7 @@ namespace Crypto.API.Data
 
         }
 
-        public async Task<double> Get_Total_Coin_In_Portfolio(CoinsHodle coinHodleID, int coinid)
+        public async Task<double> Get_Total_Coin_In_Portfolio(CoinsHodle coinHodleID, string coinid)
         {
              var coinsHodle = await _context.CoinsHodle
              .Include(t => t.Transactions)                       
@@ -181,7 +181,7 @@ namespace Crypto.API.Data
             return totalBuy - totalSell;
         }
 
-        public async Task<double> Get_Total_Coin_In_All_Portfolio(User user, int coinid)
+        public async Task<double> Get_Total_Coin_In_All_Portfolio(User user, string coinid)
         {
             var allPorfolios = await _context.Portfolio
                 .Include(c => c.coinsHodle)
@@ -246,9 +246,9 @@ namespace Crypto.API.Data
 
 
 
-        public async Task<List<int>> GetCoinNamesList()
+        public async Task<List<string>> GetCoinNamesList()
         {
-            var coinsList = new List<int>();
+            var coinsList = new List<string>();
 
             try
             {

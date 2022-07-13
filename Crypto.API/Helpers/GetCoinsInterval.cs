@@ -19,7 +19,7 @@ namespace Crypto.API.Helpers
 
 
 
-        internal static async Task<CoinList> GetCoinList_API(List<int> coinsInDb)
+        internal static async Task<CoinList> GetCoinList_API(List<string> coinsInDb)
         {
             try 
             {
@@ -28,7 +28,7 @@ namespace Crypto.API.Helpers
                     _coinlist = new CoinList();
                     _coinlist._CoinsInDB = coinsInDb;
                      blnStarted = true;
-                     aTimer = new System.Timers.Timer(5000);  // every 300 seconds / 5 mins
+                     aTimer = new System.Timers.Timer(10000);  // every 300 seconds / 5 mins
                      Timer();  
                     _coinlist = await Task.Run(() => _coinlist.getCoinPrices_APIAsync());     
                 }

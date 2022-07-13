@@ -24,19 +24,19 @@ namespace Crypto.API.Data
          Task<Transactions> GetTransactions(User user);
 
 
-         Task<List<int>> GetCoinNamesList();
+         Task<List<string>> GetCoinNamesList();
 
 
 
          Task<bool> AddPortfolio(string name, User user);
 
-         Task<bool> AddCoinToPortfolio(int coinid, int coinidno, Portfolio portfolio);
+         Task<bool> AddCoinToPortfolio(int coinid, string coinidno, Portfolio portfolio);
          
-         Task<bool> AddTransaction(CoinsHodle coinHodleID, decimal quantity, string datetime, decimal fee, decimal priceWhenBoughtSold, int coinid);
+         Task<bool> AddTransaction(CoinsHodle coinHodleID, decimal quantity, string datetime, decimal fee, decimal priceWhenBoughtSold, string coinid);
 
-         Task<double> Get_Total_Coin_In_Portfolio(CoinsHodle coinHodleID, int coinid);
+         Task<double> Get_Total_Coin_In_Portfolio(CoinsHodle coinHodleID, string coinid);
  
-         Task<double> Get_Total_Coin_In_All_Portfolio(User user, int coinid);
+         Task<double> Get_Total_Coin_In_All_Portfolio(User user, string coinid);
 
 
         //  Task<bool> UpdateCoinHodleAmount(CoinsHodle coinHodleID);      // maybe get rid of this

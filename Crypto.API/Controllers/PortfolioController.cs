@@ -121,7 +121,7 @@ namespace Crypto.API.Controllers
          //////////////////////////////////////////////////////////////////////////////////////////
 
          [HttpPost("AddCoin/{coinidno}/{portFolioid}")]
-          public async Task<IActionResult> AddCoin(int coinid, int coinidno, int portFolioid)            // need to add coinid aswell
+          public async Task<IActionResult> AddCoin(int coinid, string coinidno, int portFolioid)            // need to add coinid aswell
          { 
              System.Console.WriteLine("add coin");
             // must check the id passing in is match for id from jwt token as somone could hack other users
@@ -142,7 +142,7 @@ namespace Crypto.API.Controllers
         //////////////////////////////////////////////////////////////////////////////////////////
 
          [HttpPost("AddTransaction/{coinname}/{coinhodleid}/{quantity}/{fee}/{datatime}/{priceWhenBoughtSold}/{coinid}")]
-         public async Task<IActionResult> AddTransaction(string coinname, int coinhodleid, decimal quantity, decimal fee, string datatime, decimal priceWhenBoughtSold, int coinid)
+         public async Task<IActionResult> AddTransaction(string coinname, int coinhodleid, decimal quantity, decimal fee, string datatime, decimal priceWhenBoughtSold, string coinid)
          {
 
             try 

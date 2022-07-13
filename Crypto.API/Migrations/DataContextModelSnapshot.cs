@@ -27,7 +27,7 @@ namespace Crypto.API.Migrations
 
                     b.Property<string>("CoinName");
 
-                    b.Property<int>("Coinid");
+                    b.Property<string>("Coinid");
 
                     b.HasKey("id");
 
@@ -44,7 +44,7 @@ namespace Crypto.API.Migrations
 
                     b.Property<decimal>("Quantity");
 
-                    b.Property<int>("coinID");
+                    b.Property<string>("coinID");
 
                     b.HasKey("Id");
 
@@ -80,7 +80,7 @@ namespace Crypto.API.Migrations
 
                     b.Property<decimal>("PriceUSD");
 
-                    b.Property<int>("coinid");
+                    b.Property<string>("coinid");
 
                     b.Property<decimal>("priceBTC");
 
@@ -101,7 +101,7 @@ namespace Crypto.API.Migrations
 
                     b.Property<double>("AmountSell");
 
-                    b.Property<int>("Coinid");
+                    b.Property<string>("Coinid");
 
                     b.Property<int?>("CoinsHodleId");
 

@@ -4,7 +4,7 @@ namespace Crypto.API.Models
     {
 
         public int id { get; set; }
-        public int Coinid { get; set; }
+        public string Coinid { get; set; }
         public string CoinName { get; set; }
         
     }

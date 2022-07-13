@@ -6,7 +6,7 @@ namespace Crypto.API.Models
     {
         public int Id { get; set; }
 
-        public int coinid { get; set; }
+        public string coinid { get; set; }
 
         public DateTime DateTime { get; set; }
 

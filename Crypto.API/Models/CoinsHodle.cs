@@ -8,7 +8,7 @@ namespace Crypto.API.Models
         
         // public string Name { get; set; }
         public decimal Quantity { get; set; } 
-        public int coinID { get; set; }  
+        public string coinID { get; set; }  
         public Portfolio Portfolio { get; set; }
         public virtual ICollection<Transactions> Transactions { get; set; }
     }
