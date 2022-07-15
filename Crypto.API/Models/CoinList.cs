@@ -84,8 +84,8 @@ namespace Crypto.API.Models
                     if (!item.id.Equals(null)) { coin.CoinID = item.id; } else { coin.CoinID = ""; }
                
                     coin.ImageUrl = item.image.ToString();
-                    Console.WriteLine(coin.ImageUrl); 
-                    // Console.WriteLine(item.id);
+                    //Console.WriteLine(coin.ImageUrl); 
+                     Console.WriteLine(item.id);
                     coins.Add(coin);
                 }
 
@@ -138,8 +138,12 @@ namespace Crypto.API.Models
                             dbContextin.Add(coinNames);
                             _CoinsInDB.Add(coin_in_list.CoinID);
 
-                            
+                            using (StreamWriter writer = System.IO.File.AppendText("logfile.txt"))
+                            {
+                                 writer.WriteLine("downloadImageFromURL('" + coin_in_list.ImageUrl + "', '" + coin_in_list.CoinID + ".png');");
+                            }
 
+                            // downloadImageFromURL('https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579', 'bitcoin.png');
 
                                 // using (WebClient webClient = new WebClient()) 
                                 // {
@@ -162,6 +166,8 @@ namespace Crypto.API.Models
 
                 return await dbContextin.SaveChangesAsync() > 0;
                 } 
+
+
 
             }
             catch (Exception e)
