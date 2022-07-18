@@ -2,5 +2,4 @@
 bin
 obj
 *.db
-wwwroot
 API_KEY_COINMCAP.cs
