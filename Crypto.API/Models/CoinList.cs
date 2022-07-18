@@ -35,6 +35,9 @@ namespace Crypto.API.Models
 
         internal async Task<CoinList> getCoinPrices_APIAsync()
         {
+
+            try 
+            {
                 List<coins> coins = new List<coins>();
 
                 //var responseC = makeAPICallCoinMarketCap();
@@ -85,7 +88,7 @@ namespace Crypto.API.Models
                
                     coin.ImageUrl = item.image.ToString();
                     //Console.WriteLine(coin.ImageUrl); 
-                     Console.WriteLine(item.id);
+                    // Console.WriteLine(item.id);
                     coins.Add(coin);
                 }
 
@@ -97,6 +100,12 @@ namespace Crypto.API.Models
                 await AddPriceHistory(listofCoins);
 
                 return this;
+
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
 

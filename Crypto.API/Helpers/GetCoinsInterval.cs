@@ -50,7 +50,10 @@ namespace Crypto.API.Helpers
 
         private static async void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
-            _coinlist = await Task.Run(() => _coinlist.getCoinPrices_APIAsync());
+            if (_coinlist != null)
+            {
+                _coinlist = await Task.Run(() => _coinlist.getCoinPrices_APIAsync());
+            }         
         }
 
 
