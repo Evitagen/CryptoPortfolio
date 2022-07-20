@@ -6,7 +6,7 @@
                 "description": "Package version 1.0.0",
 
                 "files": [
-                    "Crypto.API/bin/Release/netcoreapp2.2/publish/**"
+                    "Crypto.API/bin/Release/net6.0/publish/**"
                 ]
             }
         ],
@@ -22,7 +22,7 @@
 
                 "dir": "/var/cryptoapp",
                 "mappings": {
-                    "Crypto.API/bin/Release/netcoreapp2.2/publish/**": "/"
+                    "Crypto.API/bin/Release/net6.0/publish/**": "/"
                 }
             }
         ]

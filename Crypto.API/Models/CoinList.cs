@@ -88,7 +88,7 @@ namespace Crypto.API.Models
                
                     coin.ImageUrl = item.image.ToString();
                     //Console.WriteLine(coin.ImageUrl); 
-                    // Console.WriteLine(item.id);
+                    Console.WriteLine(item.id);
                     coins.Add(coin);
                 }
 

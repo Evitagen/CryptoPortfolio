@@ -15,7 +15,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/Crypto.API/bin/Debug/netcoreapp2.2/Crypto.API.dll",
+            "program": "${workspaceFolder}/Crypto.API/bin/Debug/net6.0/Crypto.API.dll",
             "args": [],
             "cwd": "${workspaceFolder}/Crypto.API",
             "stopAtEntry": false,
