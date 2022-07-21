@@ -48,7 +48,14 @@ namespace Crypto.API.Models
                // System.Console.WriteLine(responseG);
 
                 //var CoinMCap = JsonConvert.DeserializeObject<RootObject>(responseC);
-               var CoinGecko = JsonConvert.DeserializeObject<List<coinGeckojson>>(responseG);
+                
+                var settings = new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore,
+                    MissingMemberHandling = MissingMemberHandling.Ignore
+                };
+
+               var CoinGecko = JsonConvert.DeserializeObject<List<coinGeckojson>>(responseG, settings);
                
 
                 listofCoins.Clear();
@@ -104,6 +111,10 @@ namespace Crypto.API.Models
             }
             catch (Exception e)
             {
+                using (StreamWriter writer = System.IO.File.AppendText("errorlog.txt"))
+                {
+                    writer.WriteLine("Error - " + e.ToString());
+                }
                 return null;
             }
         }

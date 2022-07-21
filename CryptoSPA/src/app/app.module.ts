@@ -4,7 +4,8 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { BsDropdownModule, ModalModule, ButtonsModule, BsDatepickerModule } from 'ngx-bootstrap';
+import { BsDropdownModule, ModalModule, ButtonsModule } from 'ngx-bootstrap';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker'
 import { JwtModule } from '@auth0/angular-jwt';
 
 
@@ -23,6 +24,7 @@ import { NewTransactionModalComponent } from './members/newTransaction-modal/new
 import { AllCoinsComponent } from './members/allCoins/allCoins.component';
 import { TransactionsComponent } from './members/transactions/transactions.component';
 
+// export { BsDatepickerModule } from '../../node_modules/ngx-bootstrap/datepicker/bs-datepicker.module';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
