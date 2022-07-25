@@ -4,7 +4,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { User } from 'src/app/_models/user';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { RouterLink, Router } from '@angular/router';
-import { BsModalService } from 'ngx-bootstrap';
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { NewPortfolioModalComponent } from '../newPortfolio-modal/newPortfolio-modal.component';
 import { Portfolio } from 'src/app/_models/portfolio';
 import { CoinsHodle } from 'src/app/_models/coinsHodle';

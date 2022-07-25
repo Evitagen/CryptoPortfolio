@@ -4,7 +4,13 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { BsDropdownModule, ModalModule, ButtonsModule } from 'ngx-bootstrap';
+
+//import { BsDropdownModule, ModalModule, ButtonsModule } from 'ngx-bootstrap';
+
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown'
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker'
 import { JwtModule } from '@auth0/angular-jwt';
 

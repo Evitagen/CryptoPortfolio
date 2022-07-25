@@ -6,7 +6,10 @@ import { UserService } from '../../_services/user.service';
 import { AlertifyService } from '../../_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { Portfolio } from 'src/app/_models/portfolio';
-import { BsModalService, TabHeadingDirective } from 'ngx-bootstrap';
+//import { BsModalService, TabHeadingDirective } from 'ngx-bootstrap';
+
+import { BsModalService } from 'ngx-bootstrap/modal';
+
 import { CoinsHodle } from 'src/app/_models/coinsHodle';
 import { NewTransactionModalComponent } from '../newTransaction-modal/newTransaction-modal.component';
 import { CoinList } from 'src/app/_models/coinList';

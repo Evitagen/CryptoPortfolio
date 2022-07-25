@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Directive, ElementRef, Input, HostListener } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap';
+
+
+//import { BsModalRef } from 'ngx-bootstrap';
 import { CoinsHodle } from 'src/app/_models/coinsHodle';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Transaction } from '../../_models/Transaction';
@@ -7,7 +9,9 @@ import { UserService } from 'src/app/_services/user.service';
 import { Portfolio } from 'src/app/_models/portfolio';
 import { moment } from 'ngx-bootstrap/chronos/test/chain';
 import { formatDate } from '@angular/common';
-import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { BsModalRef } from 'ngx-bootstrap/modal';
+
 
 
 @Component({
