@@ -31,48 +31,44 @@ export function tokenGetter() {
   }
 
 @NgModule({
-   declarations: [
-      AppComponent,
-      CoinlistComponent,
-      NavComponent,
-      RegisterComponent,
-      CoindetailComponent,
-      CoinPortfolioComponent,
-      SelectPortfolioComponent,
-      NewPortfolioModalComponent,
-      NewTransactionModalComponent,
-      AllCoinsComponent,
-      TransactionsComponent
-   ],
-   imports: [
-      BrowserModule,
-      BrowserAnimationsModule,
-      HttpClientModule,
-      FormsModule,
-      ReactiveFormsModule,
-      ButtonsModule.forRoot(),
-      RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
-      ModalModule.forRoot(),
-      BsDropdownModule.forRoot(),
-      BsDatepickerModule.forRoot(),
-      JwtModule.forRoot({
-         config: {
-           tokenGetter: tokenGetter,
-           whitelistedDomains: ['localhost:5000'],
-           blacklistedRoutes: ['localhost:5000/api/auth']
-         }
-       })
-   ],
-   providers: [
-      AuthService,
-      AuthGuard
-   ],
-   entryComponents: [
-      NewPortfolioModalComponent,
-      NewTransactionModalComponent
-   ],
-   bootstrap: [
-      AppComponent
-   ]
+    declarations: [
+        AppComponent,
+        CoinlistComponent,
+        NavComponent,
+        RegisterComponent,
+        CoindetailComponent,
+        CoinPortfolioComponent,
+        SelectPortfolioComponent,
+        NewPortfolioModalComponent,
+        NewTransactionModalComponent,
+        AllCoinsComponent,
+        TransactionsComponent
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ButtonsModule.forRoot(),
+        RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
+        ModalModule.forRoot(),
+        BsDropdownModule.forRoot(),
+        BsDatepickerModule.forRoot(),
+        JwtModule.forRoot({
+            config: {
+                tokenGetter: tokenGetter,
+                whitelistedDomains: ['localhost:5000'],
+                blacklistedRoutes: ['localhost:5000/api/auth']
+            }
+        })
+    ],
+    providers: [
+        AuthService,
+        AuthGuard
+    ],
+    bootstrap: [
+        AppComponent
+    ]
 })
 export class AppModule { }
