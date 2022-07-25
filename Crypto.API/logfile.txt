@@ -604,3 +604,6 @@ downloadImageFromURL('https://assets.coingecko.com/coins/images/25244/large/OP.j
 downloadImageFromURL('https://assets.coingecko.com/coins/images/14899/large/RwdVsGcw_400x400.jpg?1618923851', 'kyber-network-crystal.png');
 downloadImageFromURL('https://assets.coingecko.com/coins/images/794/large/Voyager-vgx.png?1575693595', 'ethos.png');
 downloadImageFromURL('https://assets.coingecko.com/coins/images/13915/large/4.png?1612838831', 'dao-maker.png');
+downloadImageFromURL('https://assets.coingecko.com/coins/images/20210/large/8glAYOTM_400x400.jpg?1636667919', 'vvs-finance.png');
+downloadImageFromURL('https://assets.coingecko.com/coins/images/13928/large/PSigc4ie_400x400.jpg?1612875614', 'raydium.png');
+downloadImageFromURL('https://assets.coingecko.com/coins/images/12811/large/barnbridge.jpg?1602728853', 'barnbridge.png');

@@ -252,7 +252,7 @@ namespace Crypto.API.Data
 
             try
             {
-                var coins_In_Database =  _context.CoinNames.ToList();
+                var coins_In_Database = _context.CoinNames.ToList();
                 coinsList.Clear();
                 foreach (var item in coins_In_Database)
                 {
