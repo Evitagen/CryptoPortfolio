@@ -51,7 +51,7 @@ export function tokenGetter() {
       FormsModule,
       ReactiveFormsModule,
       ButtonsModule.forRoot(),
-      RouterModule.forRoot(appRoutes),
+      RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
       ModalModule.forRoot(),
       BsDropdownModule.forRoot(),
       BsDatepickerModule.forRoot(),
