@@ -14,7 +14,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { Chart } from 'chart.js';
 import { CurrencyPipe } from '@angular/common';
 import { HelperServiceService } from "./../../_services/HelperService.service";
-import { exit } from 'process';
+//import { exit } from 'process';
 import { Transaction } from 'src/app/_models/Transaction';
 
 
