@@ -52,7 +52,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
   total: number;
   exists: Boolean = false;
   id: number;
-  coinidselected: number;
+  coinidselected: string;
   coinHodleids: string = '';
   totalcoinholdings: number = 0;
 
@@ -102,7 +102,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
     this.coins = Response;
 
     for (let i = 0; i < this.coins.length; i++) {
-      if (this.coins[i].coinID === 1) {
+      if (this.coins[i].coinID === "bitcoin") {
         this.bitcoinPrice = this.coins[i].price;
       }
     }

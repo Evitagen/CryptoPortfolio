@@ -65,7 +65,7 @@ export class UserService {
   //  Coins
   //
 
-  addPortfolioCoin(coinid: number, portfolioId: number) {
+  addPortfolioCoin(coinid: string, portfolioId: number) {
     return this.http.post(this.baseUrl + 'portfolio/addcoin/' + coinid + '/' + portfolioId, {});
   }
 
@@ -74,7 +74,7 @@ export class UserService {
   //
 
  addCoinTransaction(coin: string, coinhodleid: number, quantity: number, fee: number,
-   date: string, priceWhenBoughtSold: number, coinid: number) {
+   date: string, priceWhenBoughtSold: number, coinid: string) {
     // tslint:disable-next-line:max-line-length
     // this.deletethis = this.baseUrl + 'portfolio/addtransaction/' + coin + '/' + portfolioId + '/' + quantity + '/' + fee + '/' + date + '/' + priceWhenBoughtSold;
     // tslint:disable-next-line:max-line-length

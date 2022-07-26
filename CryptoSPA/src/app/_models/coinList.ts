@@ -10,7 +10,7 @@ export interface CoinList {
     percentChange24hr: number;
     percentChange7day: number;
     coinMcapRank: number;
-    coinID: number;
+    coinID: string;
     lastUpdated: Date;
     imagelocation: string;
 }

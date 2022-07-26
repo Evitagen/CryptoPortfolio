@@ -2,7 +2,7 @@ export interface CoinsHodle {
     id: number;
     price: number;
     name: string;
-    coinID: number;
+    coinID: string;
     quantity: number;
     portfolioID: number;
     imageLocation: string;
