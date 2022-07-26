@@ -10,6 +10,7 @@ import { CoinList } from 'src/app/_models/coinList';
 })
 export class CoinlistComponent implements OnInit, OnDestroy {
   coins: CoinList;
+  coinsPrev: CoinList;
   coinsnImage: CoinList;
   // coinImageLinks: string[] = [];
   coinsnImageList: CoinList[] = [];
@@ -28,10 +29,13 @@ export class CoinlistComponent implements OnInit, OnDestroy {
   }
 
   getValues() {
+    debugger;
+    this.coinsPrev = this.coins;
     this.userService.getCoinPrices().subscribe((coins: CoinList) => {
       this.coins = coins;
       this.AddCoinImages();
       this.FormatNumbers();
+      this.CompareBullBear();
     }, error => {
       console.log(error);
     });
@@ -47,7 +51,6 @@ export class CoinlistComponent implements OnInit, OnDestroy {
   }
 
   AddCoinImages() {
-
     this.coinsnImageList = [];
 
     for (let i = 0; i < this.coins.length; i++) {
@@ -56,7 +59,6 @@ export class CoinlistComponent implements OnInit, OnDestroy {
     }
 
     for (let i = 0; i < this.coinsnImageList.length; i++) {
-      debugger;
       this.coinsnImageList[i].imagelocation = 'assets/images/' + this.coinsnImageList[i].coinID + '.png';
       console.log(this.coinsnImageList[i].imagelocation);
     }
@@ -91,6 +93,16 @@ export class CoinlistComponent implements OnInit, OnDestroy {
       this.coinsnImageList[i].percentChange24hr = Number(this.coinsnImageList[i].percentChange24hr.toFixed(2));
       this.coinsnImageList[i].percentChange7day = Number(this.coinsnImageList[i].percentChange7day.toFixed(2));
 
+    }
+
+  }
+
+  CompareBullBear() {
+
+    for (let i = 0; i < this.coins.length; i++) {
+
+
+      
     }
 
   }

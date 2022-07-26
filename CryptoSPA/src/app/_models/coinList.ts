@@ -13,4 +13,5 @@ export interface CoinList {
     coinID: string;
     lastUpdated: Date;
     imagelocation: string;
+    prevPriceHigherLowerSame: number;  // 0 = Same, 1 = Lower, 2 = Higher
 }
