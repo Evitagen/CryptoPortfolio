@@ -608,3 +608,5 @@ downloadImageFromURL('https://assets.coingecko.com/coins/images/20210/large/8glA
 downloadImageFromURL('https://assets.coingecko.com/coins/images/13928/large/PSigc4ie_400x400.jpg?1612875614', 'raydium.png');
 downloadImageFromURL('https://assets.coingecko.com/coins/images/12811/large/barnbridge.jpg?1602728853', 'barnbridge.png');
 downloadImageFromURL('https://assets.coingecko.com/coins/images/11284/large/52954052.png?1589868539', 'nest.png');
+downloadImageFromURL('https://assets.coingecko.com/coins/images/14013/large/radicle.png?1614402918', 'radicle.png');
+downloadImageFromURL('https://assets.coingecko.com/coins/images/4519/large/XYO_Network-logo.png?1547039819', 'xyo-network.png');

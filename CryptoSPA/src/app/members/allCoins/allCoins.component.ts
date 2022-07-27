@@ -71,7 +71,7 @@ export class AllCoinsComponent implements OnInit, OnDestroy {
     this.userService.getCoinPrices().subscribe(Response => {
       this.coins = Response;
       for (let i = 0; i < this.coins.length; i++) {
-        if (this.coins[i].coinID === 1) {
+        if (this.coins[i].coinID === 'bitcoin') {
           this.bitcoinPrice = this.coins[i].price;
         }
       }

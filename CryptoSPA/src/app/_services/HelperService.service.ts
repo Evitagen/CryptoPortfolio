@@ -35,22 +35,25 @@ loadPieChart(coins: CoinsHodle[]) {
     if ((coin.price * coin.quantity) > 0) {
       totals.push(coin.price * coin.quantity);
       names.push(coin.name);
-
-      if (coin.name === 'bitcoin') {
+debugger;
+      if (coin.name === 'Bitcoin') {
         backgroundColors.push('rgba(255, 159, 64, 0.2)');
         borderColors.push('rgba(255, 159, 64, 1)');
-      } else if (coin.name === 'litecoin' || coin.name === 'cardano') {
+      } else if (coin.name === 'Litecoin' || coin.name === 'Cardano' || coin.name === 'Solana') {
         backgroundColors.push('rgba(54, 162, 235, 0.2)');
         borderColors.push('rgba(54, 162, 235, 1)');
-      } else if (coin.name === 'ethereum') {
+      } else if (coin.name === 'Ethereum') {
         backgroundColors.push('rgba(192, 192, 192, 0.2)');
         borderColors.push('rgba(192, 192, 192, 1)');
-      } else if (coin.name === 'bitcoin-cash') {
-        backgroundColors.push('rgba(75, 192, 192, 0.2)');
-        borderColors.push('rgba(75, 192, 192, 1)');
-      } else if (coin.name === 'neo') {
+      } else if (coin.name === 'Bitcoin Cash') {
+        backgroundColors.push('rgba(144, 262, 0, 0.2)');
+        borderColors.push('rgba(144, 262, 0, 1)');
+      } else if (coin.name === 'Neo') {
         backgroundColors.push('rgba(124, 252, 0, 0.2)');
         borderColors.push('rgba(124, 252, 0, 1)');
+      } else if (coin.name === 'Tether') {
+        backgroundColors.push('rgba(0, 172, 0, 0.2)');
+        borderColors.push('rgba(0, 172, 0, 1)');
       } else {
         backgroundColors.push(backgroundcolorsPool[intArraycounter]);
         borderColors.push(bordercolorsPool[intArraycounter]);

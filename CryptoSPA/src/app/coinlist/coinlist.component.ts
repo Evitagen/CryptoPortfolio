@@ -98,13 +98,19 @@ export class CoinlistComponent implements OnInit, OnDestroy {
   }
 
   CompareBullBear() {
-
     for (let i = 0; i < this.coins.length; i++) {
-
-
-      
+        for (let j = 0; j < this.coinsPrev.length; j++) {
+            if (this.coinsPrev.price > this.coins.price) {
+              this.coins.prevPriceHigherLowerSame = 1;
+            }
+            else if (this.coinsPrev.price < this.coins.price) {
+              this.coins.prevPriceHigherLowerSame = 2;
+            }
+            else if (this.coinsPrev.price === this.coins.price) {
+              this.coins.prevPriceHigherLowerSame = 0;
+            }        
+        }
     }
-
   }
 
   pageRefresh() {
