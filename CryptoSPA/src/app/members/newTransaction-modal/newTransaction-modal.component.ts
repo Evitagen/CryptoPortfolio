@@ -11,6 +11,7 @@ import { moment } from 'ngx-bootstrap/chronos/test/chain';
 import { formatDate } from '@angular/common';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { interval } from 'rxjs';
 
 
 
@@ -39,9 +40,13 @@ export class NewTransactionModalComponent implements OnInit {
 
 
 
+
+
   // public now: Date = new Date();
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private user: UserService) { }
+
+  isHidden = false;
 
   ngOnInit() {
     this.bsConfig = {
@@ -64,7 +69,13 @@ export class NewTransactionModalComponent implements OnInit {
     });
   }
 
-  TransactionAdd() {
+  async TransactionAdd() {
+
+    this.isHidden = true;
+   // await this.delay(1000);
+    
+
+
     if (this.coinTransForm.valid) {
 
       this.user.getCoinPrices().subscribe(async Response => {
@@ -98,6 +109,7 @@ export class NewTransactionModalComponent implements OnInit {
                 this.TotalAfterTransaction = this.coin.quantity + this.transaction.QtyModel;
                 this.addTransaction.emit(this.TotalAfterTransaction);
                 console.log('success!!!!');
+                
 
                 }, error => {
                   console.log('fail');
@@ -109,11 +121,11 @@ export class NewTransactionModalComponent implements OnInit {
           // this.addTransaction.emit({Quantity: this.QtyModel, Fee: this.TransModel, Date: this.DateModel, PriceBought: this.PriceModel});
           
           this.bsModalRef.hide();
+          
     });
 
     }
     console.log('done');
-
   }
 
   BuySellChange() {
@@ -126,6 +138,12 @@ export class NewTransactionModalComponent implements OnInit {
       containerClass: 'theme-red'
     };
    }
+  }
+
+
+  
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
 

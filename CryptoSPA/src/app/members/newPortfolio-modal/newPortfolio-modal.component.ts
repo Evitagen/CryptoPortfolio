@@ -18,10 +18,13 @@ export class NewPortfolioModalComponent implements OnInit {
 
   constructor(public bsModalRef: BsModalRef) { }
 
+  isHidden = false;
+
   ngOnInit() {
   }
 
   PortfolioAdd() {
+    this.isHidden = true;
     this.addPortfolio.emit(this.NameModel);
     this.bsModalRef.hide();
   }

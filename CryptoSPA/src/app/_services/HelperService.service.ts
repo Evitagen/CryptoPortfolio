@@ -12,6 +12,8 @@ constructor() { }
 
 PieChart = [];
 
+
+
 loadPieChart(coins: CoinsHodle[]) {
 
   let totals = new Array();
@@ -35,7 +37,6 @@ loadPieChart(coins: CoinsHodle[]) {
     if ((coin.price * coin.quantity) > 0) {
       totals.push(coin.price * coin.quantity);
       names.push(coin.name);
-debugger;
       if (coin.name === 'Bitcoin') {
         backgroundColors.push('rgba(255, 159, 64, 0.2)');
         borderColors.push('rgba(255, 159, 64, 1)');

@@ -1,5 +1,5 @@
 <br><br><br>
-  
+
 <h1 *ngIf="portfolio" align="center">
     {{portfolio.portfolioName}}
 </h1>
@@ -29,8 +29,8 @@
           {{coin.name}}
         </option>
     </select>
-    <button id="GreenB" class="btn btn-success" (click)="onBtnAdd()">Add Coin</button>
-  </div>
+    <button id="GreenB" class="btn btn-success" (click)="onBtnAdd()" [disabled]="isDisabled">Add Coin</button>
+</div>
 
 <br><br>
 

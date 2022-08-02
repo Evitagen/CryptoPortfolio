@@ -109,6 +109,7 @@ export class SelectPortfolioComponent implements OnInit {
 
 
   addPortfolio(user: User) {
+
     const initialState = {
       user
     };

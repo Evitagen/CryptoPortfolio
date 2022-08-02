@@ -56,9 +56,10 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
   coinHodleids: string = '';
   totalcoinholdings: number = 0;
 
+  isDisabled = false;
+
 
   async ngOnInit() {
-
     if (this.loggedIn) {
     // tslint:disable-next-line:radix
     this.id = parseInt(this.route.snapshot.paramMap.get('id'));
@@ -73,6 +74,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
     await this.delay(800);
     this.helperService.loadPieChart(this.coinsnImageList);
     }
+    this.isDisabled = false;
 
   }
 
@@ -106,7 +108,6 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
         this.bitcoinPrice = this.coins[i].price;
       }
     }
-    debugger;
 
     if (this.coinsLoaded === false) {
       this.coinsDropDown = this.coins;
@@ -205,12 +206,15 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
   }
 
   pageRefresh() {
-   this.subscription = interval(1000 * 60).subscribe(x => {
+   this.subscription = interval(1000 * 5).subscribe(x => {
       this.getValues();
     });
   }
 
   addTransaction(coin: CoinsHodle, portfolio: Portfolio) {
+
+    
+
 
     const initialState = {
       coin,
@@ -238,14 +242,17 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
 
   }
 
-  onBtnAdd() {
+  async onBtnAdd() {
 
-
+  this.isDisabled = true;
+  //await this.delay(400);
+  //this.isDisabled = false;
 
     this.exists = false;
     for (const coin of this.portfolio.coinsHodle) {
       if (this.coinSelected === coin.name) {
        this.alertify.warning('Already Exists');
+       this.isDisabled = false;
        this.exists = true;
       }
     }

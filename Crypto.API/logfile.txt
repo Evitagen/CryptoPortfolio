@@ -610,3 +610,8 @@ downloadImageFromURL('https://assets.coingecko.com/coins/images/12811/large/barn
 downloadImageFromURL('https://assets.coingecko.com/coins/images/11284/large/52954052.png?1589868539', 'nest.png');
 downloadImageFromURL('https://assets.coingecko.com/coins/images/14013/large/radicle.png?1614402918', 'radicle.png');
 downloadImageFromURL('https://assets.coingecko.com/coins/images/4519/large/XYO_Network-logo.png?1547039819', 'xyo-network.png');
+downloadImageFromURL('https://assets.coingecko.com/coins/images/14571/large/vDyefsXq_400x400.jpg?1617085003', 'pundi-x-2.png');
+downloadImageFromURL('https://assets.coingecko.com/coins/images/14449/large/4a3IskOf_400x400.png?1616137396', 'btc-standard-hashrate-token.png');
+downloadImageFromURL('https://assets.coingecko.com/coins/images/5163/large/Flux_symbol_blue-white.png?1617192144', 'zelcash.png');
+downloadImageFromURL('https://assets.coingecko.com/coins/images/3476/large/mass-vehicle-ledger.png?1547978299', 'mass-vehicle-ledger.png');
+downloadImageFromURL('https://assets.coingecko.com/coins/images/8365/large/rsr.png?1637983320', 'reserve-rights-token.png');
