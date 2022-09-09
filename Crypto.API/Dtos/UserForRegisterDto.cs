@@ -7,7 +7,7 @@ namespace Crypto.API.Dtos
         [Required]
         public string Username { get; set; }
         [Required]
-        [StringLength(16, MinimumLength = 8, ErrorMessage = "You must specify password between 8 and 16 characters")]
+        [StringLength(300, MinimumLength = 8, ErrorMessage = "You must specify password between 8 and 300 characters")]
         public string Password { get; set; }
     }
 }
