@@ -103,7 +103,7 @@ export class SelectPortfolioComponent implements OnInit {
     });
   }
 
-  viewPortfolio(portfolioID: number) {
+  viewPortfolio(portfolioID: string) {
     this.route.navigate(['/coinportfolio/' + portfolioID]);
   }
 

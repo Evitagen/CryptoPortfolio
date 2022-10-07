@@ -74,7 +74,7 @@ namespace Crypto.API.Data
             return user;
         }
 
-        public async Task<Portfolio> GetPortfolio(int id)
+        public async Task<Portfolio> GetPortfolio(string id)
         {
             var Portfolio = await _context.Portfolio
             .Include(c => c.coinsHodle)
@@ -103,6 +103,9 @@ namespace Crypto.API.Data
         public async Task<bool> AddPortfolio(string name, User user)
         {  
             Portfolio newPortfolio = new Portfolio();
+            string idguid = Guid.NewGuid().ToString();
+            newPortfolio.PortfolioID = idguid;
+
 
             newPortfolio.PortfolioName = name;
             newPortfolio.User = user;

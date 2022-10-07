@@ -1,7 +1,7 @@
 import { CoinsHodle } from './coinsHodle';
 
 export interface Portfolio {
-    portfolioID: number;
+    portfolioID: string;
     portfolioName: string;
     userid: number;
     coinsHodle?: CoinsHodle[];

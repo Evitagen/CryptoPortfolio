@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+#nullable disable
+
 namespace Crypto.API.Migrations
 {
     [DbContext(typeof(DataContext))]
@@ -15,19 +17,24 @@ namespace Crypto.API.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "6.0.9")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("Crypto.API.Models.CoinNames", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
-                    b.Property<string>("CoinName");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
 
-                    b.Property<string>("Coinid");
+                    b.Property<string>("CoinName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Coinid")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
 
@@ -38,13 +45,18 @@ namespace Crypto.API.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
-                    b.Property<int?>("PortfolioID");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<decimal>("Quantity");
+                    b.Property<string>("PortfolioID")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("coinID");
+                    b.Property<decimal>("Quantity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("coinID")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -55,13 +67,14 @@ namespace Crypto.API.Migrations
 
             modelBuilder.Entity("Crypto.API.Models.Portfolio", b =>
                 {
-                    b.Property<int>("PortfolioID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("PortfolioID")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("PortfolioName");
+                    b.Property<string>("PortfolioName")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId");
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("PortfolioID");
 
@@ -74,17 +87,24 @@ namespace Crypto.API.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("DateTime");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<decimal>("PriceUSD");
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("coinid");
+                    b.Property<decimal>("PriceUSD")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("priceBTC");
+                    b.Property<string>("coinid")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("priceETH");
+                    b.Property<decimal>("priceBTC")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("priceETH")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -95,21 +115,30 @@ namespace Crypto.API.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
-                    b.Property<double>("AmountBuy");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<double>("AmountSell");
+                    b.Property<double>("AmountBuy")
+                        .HasColumnType("float");
 
-                    b.Property<string>("Coinid");
+                    b.Property<double>("AmountSell")
+                        .HasColumnType("float");
 
-                    b.Property<int?>("CoinsHodleId");
+                    b.Property<string>("Coinid")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Date");
+                    b.Property<int?>("CoinsHodleId")
+                        .HasColumnType("int");
 
-                    b.Property<decimal>("fee");
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
 
-                    b.Property<decimal>("priceWhenBoughtSold");
+                    b.Property<decimal>("fee")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("priceWhenBoughtSold")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -122,13 +151,18 @@ namespace Crypto.API.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
-                    b.Property<byte[]>("PasswordHash");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<byte[]>("PasswordSalt");
+                    b.Property<byte[]>("PasswordHash")
+                        .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("Username");
+                    b.Property<byte[]>("PasswordSalt")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -140,6 +174,8 @@ namespace Crypto.API.Migrations
                     b.HasOne("Crypto.API.Models.Portfolio", "Portfolio")
                         .WithMany("coinsHodle")
                         .HasForeignKey("PortfolioID");
+
+                    b.Navigation("Portfolio");
                 });
 
             modelBuilder.Entity("Crypto.API.Models.Portfolio", b =>
@@ -147,6 +183,8 @@ namespace Crypto.API.Migrations
                     b.HasOne("Crypto.API.Models.User", "User")
                         .WithMany("Portfolio")
                         .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Crypto.API.Models.Transactions", b =>
@@ -154,6 +192,23 @@ namespace Crypto.API.Migrations
                     b.HasOne("Crypto.API.Models.CoinsHodle", "CoinsHodle")
                         .WithMany("Transactions")
                         .HasForeignKey("CoinsHodleId");
+
+                    b.Navigation("CoinsHodle");
+                });
+
+            modelBuilder.Entity("Crypto.API.Models.CoinsHodle", b =>
+                {
+                    b.Navigation("Transactions");
+                });
+
+            modelBuilder.Entity("Crypto.API.Models.Portfolio", b =>
+                {
+                    b.Navigation("coinsHodle");
+                });
+
+            modelBuilder.Entity("Crypto.API.Models.User", b =>
+                {
+                    b.Navigation("Portfolio");
                 });
 #pragma warning restore 612, 618
         }

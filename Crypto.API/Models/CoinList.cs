@@ -158,27 +158,27 @@ namespace Crypto.API.Models
                             dbContextin.Add(coinNames);
                             _CoinsInDB.Add(coin_in_list.CoinID);
 
-                            using (StreamWriter writer = System.IO.File.AppendText("logfile.txt"))
+                            string filePath = $@"/wwwroot/";
+
+                            using (StreamWriter writer = System.IO.File.AppendText("wwwroot/assets/images/server.js"))
                             {
                                  writer.WriteLine("downloadImageFromURL('" + coin_in_list.ImageUrl + "', '" + coin_in_list.CoinID + ".png');");
                             }
 
+                            // this is now done in node - run server.js in the images folder
                             // downloadImageFromURL('https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579', 'bitcoin.png');
 
                                 // using (WebClient webClient = new WebClient()) 
                                 // {
                                 //     byte [] data = webClient.DownloadData(coin_in_list.image);
-
                                 // using (MemoryStream mem = new MemoryStream(data)) 
                                 // {
                                 //     using (var yourImage = Image.FromStream(mem)) 
                                 //     { 
                                 //         // If you want it as Png
                                 //         yourImage.Save("/images/" + coin_in_list.coinID, ImageFormat.Png) ; 
-
                                 //     }
                                 // } 
-
                                 // }
 
                         }
@@ -216,207 +216,6 @@ namespace Crypto.API.Models
                         ETHPrice = coin.Price;
                     }
                 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                 foreach (var coin in coinlist)
                 {

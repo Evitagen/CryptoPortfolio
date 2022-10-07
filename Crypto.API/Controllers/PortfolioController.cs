@@ -34,7 +34,7 @@ namespace Crypto.API.Controllers
         //////////////////////////////////////////////////////////////////////////////////////////
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetPortfolio(int id)
+        public async Task<IActionResult> GetPortfolio(string id)
         {
 
              var Portfolio = await _repo.GetPortfolio(id);
@@ -121,7 +121,7 @@ namespace Crypto.API.Controllers
          //////////////////////////////////////////////////////////////////////////////////////////
 
          [HttpPost("AddCoin/{coinidno}/{portFolioid}")]
-          public async Task<IActionResult> AddCoin(int coinid, string coinidno, int portFolioid)            // need to add coinid aswell
+          public async Task<IActionResult> AddCoin(int coinid, string coinidno, string portFolioid)            // need to add coinid aswell
          { 
              System.Console.WriteLine("add coin");
             // must check the id passing in is match for id from jwt token as somone could hack other users

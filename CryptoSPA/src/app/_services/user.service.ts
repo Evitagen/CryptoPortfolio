@@ -32,7 +32,7 @@ export class UserService {
   }
 
   getCoinPrices() {
-    return this.http.get(this.baseUrl + 'coins');
+      return this.http.get(this.baseUrl + 'coins');
   }
 
   getPCoinPrices_StringManip() {
@@ -65,7 +65,7 @@ export class UserService {
   //  Coins
   //
 
-  addPortfolioCoin(coinid: string, portfolioId: number) {
+  addPortfolioCoin(coinid: string, portfolioId: string) {
     return this.http.post(this.baseUrl + 'portfolio/addcoin/' + coinid + '/' + portfolioId, {});
   }
 

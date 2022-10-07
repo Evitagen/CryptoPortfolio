@@ -63,7 +63,7 @@ export class TransactionsComponent implements OnInit {
       name: '**** ALL ****',
       coinID: "",
       quantity: 0,
-      portfolioID: 0,
+      portfolioID: "",
       imageLocation: '',
       userId: 0
     };

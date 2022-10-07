@@ -17,7 +17,7 @@ namespace Crypto.API.Data
 
          Task<List<Transactions>> GetTransactions(string coinHodleIds);
 
-         Task<Portfolio> GetPortfolio(int id);
+         Task<Portfolio> GetPortfolio(string id);
 
          Task<List<Portfolio>> GetAllPortfolios(User user);
 

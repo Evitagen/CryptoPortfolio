@@ -4,7 +4,7 @@ namespace Crypto.API.Dtos
 {
     public class PortFoliosForDetailedDto
     {
-        public int PortfolioID { get; set; }
+        public string PortfolioID { get; set; }
         public string PortfolioName { get; set; }
         public ICollection<CoinsForDetailedDto> Coins { get; set; }
     }
