@@ -34,6 +34,7 @@ export class AllCoinsComponent implements OnInit, OnDestroy {
     private alertify: AlertifyService, public helperService: HelperServiceService) { }
 
   async ngOnInit() {
+    await this.delay(1200);
     if (this.loggedIn) {
        this.loadUser(this.authService.decodedToken.nameid);
        await this.delay(1000);
@@ -61,7 +62,7 @@ export class AllCoinsComponent implements OnInit, OnDestroy {
     this.subscription = interval(500 * 60).subscribe(async x => {
       if (this.loggedIn) {
         this.loadUser(this.authService.decodedToken.nameid);
-        await this.delay(1000);
+        await this.delay(2000);
         this.helperService.loadPieChart(this.AllcoinsList);
       }
      });

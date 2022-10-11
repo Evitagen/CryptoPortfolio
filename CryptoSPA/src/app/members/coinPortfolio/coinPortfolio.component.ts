@@ -51,7 +51,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
      public helperService: HelperServiceService) { }
   total: number;
   exists: Boolean = false;
-  id: number;
+  id: string;
   coinidselected: string;
   coinHodleids: string = '';
   totalcoinholdings: number = 0;
@@ -62,7 +62,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     if (this.loggedIn) {
     // tslint:disable-next-line:radix
-    this.id = parseInt(this.route.snapshot.paramMap.get('id'));
+    this.id = (this.route.snapshot.paramMap.get('id'));
     this.loadPortfolio(this.id);
 
     // put delay
@@ -80,7 +80,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
 
 
 
-  loadPortfolio(id: number) {
+  loadPortfolio(id: string) {
     this.userService.getPortfolioCoins(id).subscribe((portfolio: Portfolio) => {
       this.portfolio = portfolio;
     }, error => {
@@ -243,7 +243,7 @@ export class CoinPortfolioComponent implements OnInit, OnDestroy {
   }
 
   async onBtnAdd() {
-
+debugger;
   this.isDisabled = true;
   //await this.delay(400);
   //this.isDisabled = false;
