@@ -28,7 +28,7 @@ namespace Crypto.API.Helpers
                     _coinlist = new CoinList();
                     _coinlist._CoinsInDB = coinsInDb;
                      blnStarted = true;
-                     aTimer = new System.Timers.Timer(5000);  // every 300 seconds / 5 mins / 5000 = every 5 seconds
+                     aTimer = new System.Timers.Timer(30000);  // every 300 seconds / 5 mins / 5000 = every 5 seconds
                      Timer();  
                     _coinlist = await Task.Run(() => _coinlist.getCoinPrices_APIAsync());     
                 }
