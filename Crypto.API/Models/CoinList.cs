@@ -14,6 +14,7 @@ using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
+using System.Net.Http;
 
 namespace Crypto.API.Models
 {
@@ -36,27 +37,27 @@ namespace Crypto.API.Models
         internal async Task<CoinList> getCoinPrices_APIAsync()
         {
 
-            try 
+            try
             {
                 List<coins> coins = new List<coins>();
 
                 //var responseC = makeAPICallCoinMarketCap();
-             
+
 
                 var responseG = makeAPICallCoinGecko();
 
-               // System.Console.WriteLine(responseG);
+                // System.Console.WriteLine(responseG);
 
                 //var CoinMCap = JsonConvert.DeserializeObject<RootObject>(responseC);
-                
+
                 var settings = new JsonSerializerSettings
                 {
                     NullValueHandling = NullValueHandling.Ignore,
                     MissingMemberHandling = MissingMemberHandling.Ignore
                 };
 
-               var CoinGecko = JsonConvert.DeserializeObject<List<coinGeckojson>>(responseG, settings);
-               
+                var CoinGecko = JsonConvert.DeserializeObject<List<coinGeckojson>>(responseG, settings);
+
 
                 listofCoins.Clear();
 
@@ -87,12 +88,12 @@ namespace Crypto.API.Models
                     if (!item.circulating_supply.Equals(null)) { coin.circulating = item.circulating_supply; } else { coin.circulating = 0; }
                     if (!item.market_cap_change_24h.Equals(null)) { coin.Marketcap = item.market_cap_change_24h; } else { coin.Marketcap = 0; }
                     coin.TotalSupply = 0;
-                    if (!item.price_change_percentage_1h_in_currency.Equals(null)) {coin.PercentChange1hr = item.price_change_percentage_1h_in_currency; } else { coin.PercentChange1hr = 0; }
-                    if (!item.price_change_percentage_24h_in_currency.Equals(null)) {coin.PercentChange24hr = item.price_change_percentage_24h_in_currency; } else { coin.PercentChange24hr = 0; }
-                    if (!item.price_change_percentage_7d_in_currency.Equals(null)) {coin.PercentChange7day = item.price_change_percentage_7d_in_currency; } else { coin.PercentChange7day = 0; }
+                    if (!item.price_change_percentage_1h_in_currency.Equals(null)) { coin.PercentChange1hr = item.price_change_percentage_1h_in_currency; } else { coin.PercentChange1hr = 0; }
+                    if (!item.price_change_percentage_24h_in_currency.Equals(null)) { coin.PercentChange24hr = item.price_change_percentage_24h_in_currency; } else { coin.PercentChange24hr = 0; }
+                    if (!item.price_change_percentage_7d_in_currency.Equals(null)) { coin.PercentChange7day = item.price_change_percentage_7d_in_currency; } else { coin.PercentChange7day = 0; }
                     if (!item.market_cap_rank.Equals(null)) { coin.CoinMcapRank = item.market_cap_rank; } else { coin.CoinMcapRank = 0; }
                     if (!item.id.Equals(null)) { coin.CoinID = item.id; } else { coin.CoinID = ""; }
-               
+
                     coin.ImageUrl = item.image.ToString();
                     //Console.WriteLine(coin.ImageUrl); 
                     Console.WriteLine(item.id);
@@ -130,8 +131,8 @@ namespace Crypto.API.Models
             try
             {
 
-                using(DbContext dbContextin = new DataContext())
-                {     
+                using (DbContext dbContextin = new DataContext())
+                {
                     var blnCoinExists = false;
 
                     foreach (var coin_in_list in coinlist)
@@ -154,7 +155,7 @@ namespace Crypto.API.Models
                         {
                             CoinNames coinNames = new CoinNames();
                             coinNames.Coinid = coin_in_list.CoinID;
-                            coinNames.CoinName = coin_in_list.Name;   
+                            coinNames.CoinName = coin_in_list.Name;
                             dbContextin.Add(coinNames);
                             _CoinsInDB.Add(coin_in_list.CoinID);
 
@@ -162,30 +163,30 @@ namespace Crypto.API.Models
 
                             using (StreamWriter writer = System.IO.File.AppendText("wwwroot/assets/images/server.js"))
                             {
-                                 writer.WriteLine("downloadImageFromURL('" + coin_in_list.ImageUrl + "', '" + coin_in_list.CoinID + ".png');");
+                                writer.WriteLine("downloadImageFromURL('" + coin_in_list.ImageUrl + "', '" + coin_in_list.CoinID + ".png');");
                             }
 
                             // this is now done in node - run server.js in the images folder
                             // downloadImageFromURL('https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579', 'bitcoin.png');
 
-                                // using (WebClient webClient = new WebClient()) 
-                                // {
-                                //     byte [] data = webClient.DownloadData(coin_in_list.image);
-                                // using (MemoryStream mem = new MemoryStream(data)) 
-                                // {
-                                //     using (var yourImage = Image.FromStream(mem)) 
-                                //     { 
-                                //         // If you want it as Png
-                                //         yourImage.Save("/images/" + coin_in_list.coinID, ImageFormat.Png) ; 
-                                //     }
-                                // } 
-                                // }
+                            // using (WebClient webClient = new WebClient()) 
+                            // {
+                            //     byte [] data = webClient.DownloadData(coin_in_list.image);
+                            // using (MemoryStream mem = new MemoryStream(data)) 
+                            // {
+                            //     using (var yourImage = Image.FromStream(mem)) 
+                            //     { 
+                            //         // If you want it as Png
+                            //         yourImage.Save("/images/" + coin_in_list.coinID, ImageFormat.Png) ; 
+                            //     }
+                            // } 
+                            // }
 
                         }
-                    } 
+                    }
 
-                return await dbContextin.SaveChangesAsync() > 0;
-                } 
+                    return await dbContextin.SaveChangesAsync() > 0;
+                }
 
 
 
@@ -199,12 +200,12 @@ namespace Crypto.API.Models
 
         public async Task<bool> AddPriceHistory(List<coins> coinlist)
         {
-                decimal BTCPrice = 0;
-                decimal ETHPrice = 0;
+            decimal BTCPrice = 0;
+            decimal ETHPrice = 0;
 
 
-                using(DbContext dbContext = new DataContext())
-                {
+            using (DbContext dbContext = new DataContext())
+            {
                 foreach (var coin in coinlist)
                 {
                     if (coin.CoinID == "bitcoin")
@@ -228,15 +229,34 @@ namespace Crypto.API.Models
                     dbContext.Add(ph);
                 }
                 return await dbContext.SaveChangesAsync() > 0;
-                }
+            }
         }
 
 
         static string makeAPICallCoinGecko()
         {
-          var URL = new UriBuilder("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=200&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d");
-          var client = new WebClient();
-          return client.DownloadString(URL.ToString());
+            //   var URL = new UriBuilder("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=200&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d");
+            //   var client = new WebClient();
+            //   return client.DownloadString(URL.ToString());
+
+            // using var httpClient = new HttpClient();
+            // var response = await httpClient.GetAsync("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=200&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d");
+            // response.EnsureSuccessStatusCode();
+            // return await response.Content.ReadAsStringAsync();
+
+            var request = (HttpWebRequest)WebRequest.Create("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=200&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d");
+            request.Method = "GET";
+            request.ContentType = "application/json";
+            request.UserAgent = "MyApplication/1.0"; // Set a custom user agent string
+
+            using (var response = (HttpWebResponse)request.GetResponse())
+            {
+                var responseStream = response.GetResponseStream();
+                using (var streamReader = new StreamReader(responseStream))
+                {
+                    return streamReader.ReadToEnd();
+                }
+            }
         }
 
 

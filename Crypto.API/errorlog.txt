@@ -1048,3 +1048,131 @@ Error - System.Net.WebException: An error occurred while sending the request.
    at System.Net.WebClient.DownloadString(Uri address)
    at Crypto.API.Models.CoinList.makeAPICallCoinGecko() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 239
    at Crypto.API.Models.CoinList.getCoinPrices_APIAsync() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 46
+Error - System.Net.WebException: The remote server returned an error: (403) Forbidden.
+   at System.Net.HttpWebRequest.GetResponse()
+   at System.Net.WebClient.GetWebResponse(WebRequest request)
+   at System.Net.WebClient.DownloadBits(WebRequest request, Stream writeStream)
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   at System.Net.WebClient.DownloadString(Uri address)
+   at System.Net.WebClient.DownloadString(String address)
+   at Crypto.API.Models.CoinList.makeAPICallCoinGecko() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 239
+   at Crypto.API.Models.CoinList.getCoinPrices_APIAsync() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 46
+Error - System.Net.WebException: The remote server returned an error: (403) Forbidden.
+   at System.Net.HttpWebRequest.GetResponse()
+   at System.Net.WebClient.GetWebResponse(WebRequest request)
+   at System.Net.WebClient.DownloadBits(WebRequest request, Stream writeStream)
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   at System.Net.WebClient.DownloadString(Uri address)
+   at System.Net.WebClient.DownloadString(String address)
+   at Crypto.API.Models.CoinList.makeAPICallCoinGecko() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 239
+   at Crypto.API.Models.CoinList.getCoinPrices_APIAsync() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 46
+Error - System.Net.WebException: The remote server returned an error: (403) Forbidden.
+   at System.Net.HttpWebRequest.GetResponse()
+   at System.Net.WebClient.GetWebResponse(WebRequest request)
+   at System.Net.WebClient.DownloadBits(WebRequest request, Stream writeStream)
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   at System.Net.WebClient.DownloadString(Uri address)
+   at System.Net.WebClient.DownloadString(String address)
+   at Crypto.API.Models.CoinList.makeAPICallCoinGecko() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 239
+   at Crypto.API.Models.CoinList.getCoinPrices_APIAsync() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 46
+Error - System.Net.WebException: The remote server returned an error: (403) Forbidden.
+   at System.Net.HttpWebRequest.GetResponse()
+   at System.Net.WebClient.GetWebResponse(WebRequest request)
+   at System.Net.WebClient.DownloadBits(WebRequest request, Stream writeStream)
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   at System.Net.WebClient.DownloadString(Uri address)
+   at System.Net.WebClient.DownloadString(String address)
+   at Crypto.API.Models.CoinList.makeAPICallCoinGecko() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 239
+   at Crypto.API.Models.CoinList.getCoinPrices_APIAsync() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 46
+Error - System.Net.WebException: The remote server returned an error: (403) Forbidden.
+   at System.Net.HttpWebRequest.GetResponse()
+   at System.Net.WebClient.GetWebResponse(WebRequest request)
+   at System.Net.WebClient.DownloadBits(WebRequest request, Stream writeStream)
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   at System.Net.WebClient.DownloadString(Uri address)
+   at System.Net.WebClient.DownloadString(String address)
+   at Crypto.API.Models.CoinList.makeAPICallCoinGecko() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 239
+   at Crypto.API.Models.CoinList.getCoinPrices_APIAsync() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 46
+Error - System.AggregateException: One or more errors occurred. (Response status code does not indicate success: 403 (Forbidden).)
+ ---> System.Net.Http.HttpRequestException: Response status code does not indicate success: 403 (Forbidden).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at Crypto.API.Models.CoinList.makeAPICallCoinGecko() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 243
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at Crypto.API.Models.CoinList.getCoinPrices_APIAsync() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 47
+Error - System.AggregateException: One or more errors occurred. (Response status code does not indicate success: 403 (Forbidden).)
+ ---> System.Net.Http.HttpRequestException: Response status code does not indicate success: 403 (Forbidden).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at Crypto.API.Models.CoinList.makeAPICallCoinGecko() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 243
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at Crypto.API.Models.CoinList.getCoinPrices_APIAsync() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 47
+Error - System.AggregateException: One or more errors occurred. (Response status code does not indicate success: 403 (Forbidden).)
+ ---> System.Net.Http.HttpRequestException: Response status code does not indicate success: 403 (Forbidden).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at Crypto.API.Models.CoinList.makeAPICallCoinGecko() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 243
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at Crypto.API.Models.CoinList.getCoinPrices_APIAsync() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 47
+Error - System.Net.WebException: The remote server returned an error: (403) Forbidden.
+   at System.Net.HttpWebRequest.GetResponse()
+   at Crypto.API.Models.CoinList.makeAPICallCoinGecko() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 251
+   at Crypto.API.Models.CoinList.getCoinPrices_APIAsync() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 47
+Error - System.Net.WebException: The operation has timed out.
+   at System.Net.HttpWebRequest.GetResponse()
+   at Crypto.API.Models.CoinList.makeAPICallCoinGecko() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 251
+   at Crypto.API.Models.CoinList.getCoinPrices_APIAsync() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 47
+Error - System.Net.WebException: The operation has timed out.
+   at System.Net.HttpWebRequest.GetResponse()
+   at Crypto.API.Models.CoinList.makeAPICallCoinGecko() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 251
+   at Crypto.API.Models.CoinList.getCoinPrices_APIAsync() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 47
+Error - System.Net.WebException: The SSL connection could not be established, see inner exception.
+ ---> System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.
+ ---> System.IO.IOException:  Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.ReceiveBlobAsync[TIOAdapter](TIOAdapter adapter)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](TIOAdapter adapter, Boolean receiveFirst, Byte[] reAuthenticationData, Boolean isApm)
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(HttpRequestMessage request)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellation(CancellationToken cancellationToken)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.GetHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.SocketsHttpHandler.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageInvoker.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.Send(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at System.Net.HttpWebRequest.SendRequest(Boolean async)
+   at System.Net.HttpWebRequest.GetResponse()
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetResponse()
+   at Crypto.API.Models.CoinList.makeAPICallCoinGecko() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 251
+   at Crypto.API.Models.CoinList.getCoinPrices_APIAsync() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 47
+Error - System.Net.WebException: The remote server returned an error: (403) Forbidden.
+   at System.Net.HttpWebRequest.GetResponse()
+   at Crypto.API.Models.CoinList.makeAPICallCoinGecko() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 251
+   at Crypto.API.Models.CoinList.getCoinPrices_APIAsync() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 47
+Error - System.Net.WebException: The remote server returned an error: (403) Forbidden.
+   at System.Net.HttpWebRequest.GetResponse()
+   at Crypto.API.Models.CoinList.makeAPICallCoinGecko() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 251
+   at Crypto.API.Models.CoinList.getCoinPrices_APIAsync() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 47
+Error - System.Net.WebException: The remote server returned an error: (403) Forbidden.
+   at System.Net.HttpWebRequest.GetResponse()
+   at Crypto.API.Models.CoinList.makeAPICallCoinGecko() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 251
+   at Crypto.API.Models.CoinList.getCoinPrices_APIAsync() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 47
+Error - System.Net.WebException: The remote server returned an error: (403) Forbidden.
+   at System.Net.HttpWebRequest.GetResponse()
+   at Crypto.API.Models.CoinList.makeAPICallCoinGecko() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 251
+   at Crypto.API.Models.CoinList.getCoinPrices_APIAsync() in /Users/tim/Documents/dotnetcore/Crypto/CryptoPortfolio/Crypto.API/Models/CoinList.cs:line 47

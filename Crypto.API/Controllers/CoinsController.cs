@@ -12,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Crypto.API.Controllers
 {
-    [Authorize] // authorise so have to be logged in
+    //[Authorize] // authorise so have to be logged in
     [Route("api/[controller]")]
     [ApiController]
     public class CoinsController : ControllerBase
@@ -24,7 +24,7 @@ namespace Crypto.API.Controllers
 
         public CoinsController(DataContext context, ICryptoRepository repo, CoinList coinlist)
         {
-              _repo = repo;
+            _repo = repo;
         }
 
 
