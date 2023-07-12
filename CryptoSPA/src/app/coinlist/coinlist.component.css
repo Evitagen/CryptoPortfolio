@@ -1,33 +1,58 @@
-p.coin {
-    padding-left: 50px;
+.table-container {
+    padding: 0 85px; /* Adjust the values to your needs */
 }
 
-.containersmall {
-    padding-left: 100px;
+table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-.circulating {
-    color: rgb(17, 134, 173);
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #363636;
 }
 
-.Volume {
-    color: rgb(124, 222, 255);
+tr:hover {background-color: #363636;}
+
+@media (max-width: 1148px) {
+    .marketcap {
+        display: none;
+    }
 }
 
-.price {
-    color: rgb(183, 255, 251)
+@media (max-width: 1200px) {
+    .circulating {
+        display: none;
+    }
 }
 
-.image {
-    padding-right: 5px;
+/* Hide volume column when width less than 768px (948px - 180px) */
+@media (max-width: 868px) {
+    .volume {
+        display: none;
+    }
 }
 
-.positive_percent {
-    color: lightgreen;
+/* Hide 1hr column when width less than 708px (768px - 60px) */
+@media (max-width: 708px) {
+    .hour1 {
+        display: none;
+    }
 }
 
-.negative_percent {
-    color: rgb(194, 23, 0);
+/* Hide 7d column when width less than 648px (708px - 60px) */
+@media (max-width: 648px) {
+    .day7 {
+        display: none;
+    }
+}
+
+/* Reduce side padding when width less than 600px */
+@media (max-width: 600px) {
+    .table-container {
+        padding: 0 1px;
+    }
 }
 
 .img-container {
@@ -36,10 +61,14 @@ p.coin {
     float: centre;
 }
 
-
-#parent{
-    display: grid;
-    grid-template-columns: 20px 1fr;
+.circulating {
+    color: rgb(17, 134, 173);
 }
 
+.volume {
+    color: rgb(124, 222, 255);
+}
 
+.price {
+    color: rgb(183, 255, 251)
+}

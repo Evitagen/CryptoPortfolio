@@ -1,0 +1,76 @@
+.portfolio-container {
+    margin: 0 auto;
+    width: 80%;
+    background-color: #272727;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .portfolio-title {
+    padding-bottom: 10px;
+  }
+  
+  .portfolio-summary {
+    margin-bottom: 20px;
+  }
+  
+  .coin-row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .headings {
+    padding: 10px 0;
+  }
+  
+  .coin-row:last-child {
+    border-bottom: none;
+  }
+  
+.coin-info, .coin-price, .coin-holdings, .coin-total {
+  flex: 1;
+  text-align: left;
+}
+  
+  .coin-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .coin-image {
+    margin-right: 10px;
+  }
+  
+  .view-btn {
+    background-color: #007BFF;
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+  
+  .view-btn:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid #007BFF;
+  }
+  
+  .chart-container {
+    margin-top: 20px;
+    height: 550px; /* Set the height here */
+    display: block;
+  }
+  
+  @media (max-width: 650px) {
+    .coin-price {
+      display: none;
+    }
+  }
